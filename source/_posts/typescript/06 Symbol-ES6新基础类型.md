@@ -1,6 +1,7 @@
 ---
 title: 6 Symbol-ES6新基础类型
 categories: 
+  - typescript
   - 零基础学透TypeScript
 tags: 
   - typescript
