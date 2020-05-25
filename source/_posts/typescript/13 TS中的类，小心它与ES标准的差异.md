@@ -405,16 +405,21 @@ class Food extends FoodAbstractClass {
 class A {
   protected name: string;
 }
-interface I extends A {}
+interface I extends A {
+  type: string
+}
 class B implements I {} // error Property 'name' is missing in type 'B' but required in type 'I'
 class C implements I {
   // error 属性“name”受保护，但类型“C”并不是从“A”派生的类
   name: string;
 }
-class D extends A implements I {
+class D extends A implements I {//Property 'type' is missing in type 'D' but required in type 'I'
   getName() {
     return this.name;
   }
+}
+class E extends A implements I{
+  type: string
 }
 ```
 
