@@ -7,9 +7,7 @@ tags:
   - typescript
 ---
 
-在 JavaScript 中，this
-可以用来获取对全局对象、类实例对象、构建函数实例等的引用，在 TypeScript
-中，this 也是一种类型，我们先来看个计算器 Counter 的例子：
+在 JavaScript 中，this可以用来获取对全局对象、类实例对象、构建函数实例等的引用，在TypeScript中，this 也是一种类型，我们先来看个计算器 Counter 的例子：
 
 ``` {.language-typescript}
 class Counter {
@@ -29,11 +27,8 @@ counter.add(5).subtract(2);
 console.log(counter.count); // 13
 ```
 
-我们给 Counter 类定义几个方法，每个方法都返回 this，这个 this
-即指向实例，这样我们就可以通过链式调用的形式来使用这些方法。这个是没有问题的，但是如果我们要通过类继承的形式丰富这个
-Counter 类，添加一些方法，依然返回
-this，然后采用链式调用的形式调用，在过去版本的 TypeScript
-中是有问题的，先来看我们继承的逻辑：
+我们给 Counter 类定义几个方法，每个方法都返回 this，这个 this即指向实例，这样我们就可以通过链式调用的形式来使用这些方法。这个是没有问题的，但是如果我们要通过类继承的形式丰富这个
+Counter 类，添加一些方法，依然**返回this，然后采用链式调用的形式调用**，在过去版本的 TypeScript 中是有问题的，先来看我们继承的逻辑：
 
 ``` {.language-typescript}
 class PowCounter extends Counter {
@@ -46,21 +41,16 @@ class PowCounter extends Counter {
   }
 }
 let powcounter = new PowCounter(2);
-powCounter
+powcounter
   .pow(3)
   .subtract(3)
   .add(1);
-console.log(powCounter.count); // 6
+console.log(powcounter.count); // 6
 ```
 
-我们定义了 PowCounter 类，它继承 Counter 类，新增了 pow
-方法用来求值的幂次方，这里我们使用了 ES7 新增的幂运算符`**`。我们使用
-PowCounter 创建了实例 powcounter，它的类型自然是
-PowCounter，在该实例上调用继承来的 subtract 和 add
-方法。如果是在过去，就会报错，因为创建实例 powcounter 的类 PowCounter
-没有定义这两个方法，所以会报没有这两个方法的错误。但是在 1.7
-版本中增加了 this 类型，TypeScript 会对方法返回的 this
-进行判断，就不会报错了。
+我们定义了 PowCounter 类，它继承 Counter 类，新增了 pow方法用来求值的幂次方，这里我们使用了 ES7 新增的幂运算符`**`。我们使用PowCounter 创建了实例 powcounter，它的类型自然是
+PowCounter，在该实例上调用继承来的 subtract 和 add 方法。如果是在过去，就会报错，因为创建实例 powcounter 的类 PowCounter 没有定义这两个方法，所以会报没有这两个方法的错误。但是在 1.7
+版本中增加了 this 类型，TypeScript 会对方法返回的 this 进行判断，就不会报错了。
 
 对于对象来说，对象的属性值可以是一个函数，那么这个函数也称为方法，在方法内如果访问this，默认情况下是对这个对象的引用，this类型也就是这个对象的字面量类型，如下：
 
@@ -69,9 +59,17 @@ PowCounter，在该实例上调用继承来的 subtract 和 add
 let info = {
   name: 'Lison',
   getName () {
-      return this.name // "Lison" 这里this的类型为 { name: string; getName(): string; }
+    return this.name // "Lison" 这里this的类型为 { name: string; getName(): string; }
+    //我感觉默认的方式 对this没有类型限制
   }
 }
+let obj = {
+  age: 20,
+  name: 'ss'
+}
+info.getName.call(obj) //对的
+info.getName.call(null) //对的
+info.getName() //对的
 ```
 
 但是如果显式地指定了this的类型，那么this的类型就改变了，如下：
@@ -80,24 +78,27 @@ let info = {
 // 例3.7.2
 let info = {
   name: "Lison",
-  getName(this: { age: number }) {
+  getName(this: { age: number }) { //这里并不是一个参数，而是限定this的类型
     this; // 这里的this的类型是{ age: number }
   }
 };
+let obj = {
+  age: 20
+}
+info.getName.call(obj) //对的
+info.getName(obj) //err 应有 0 个参数，但获得 1 个
 ```
 
-如果我们在 tsconfig.json 里将 noImplicitThis 设为
-true，这时候有两种不同的情况：
+如果我们在 tsconfig.json 里将 noImplicitThis 设为true，这时候有两种不同的情况：
 
-​(1) 对象字面量具有 ThisType\<T\> 指定的类型，此时 this 的类型为
-T，来看例子：
-
+​(1) 对象字面量具有 ThisType\<T\> 指定的类型，此时 this 的类型为T，来看例子：
+ThisType是一个内置的接口，用来在对象字面量中键入this
 ``` {.language-typescript}
 type ObjectDescriptor<D, M> = { // 使用类型别名定义一个接口，这里用了泛型，两个泛型变量D和M
   data?: D; // 这里指定data为可选字段，类型为D
   // 这里指定methods为可选字段，类型为M和ThisType<D & M>组成的交叉类型；  
   // ThisType是一个内置的接口，用来在对象字面量中键入this，这里指定this的类型为D & M  
-  methods?: M & ThisType<D & M>;  
+  methods?: M & ThisType<D & M>;  //仅留下D也是可以的，或者说更加准确
 }
 
 // 这里定义一个mackObject函数，参数desc的类型为ObjectDescriptor<D, M>
@@ -123,11 +124,7 @@ obj.y = 20;
 obj.moveBy(5, 5);
 ```
 
-​(2) 不包含 ThisType\<T\> 指定的上下文类型，那么此时 this
-具有上下文类型，也就是普通的情况。你可以试着把上面使用了 ThisType\<T\>
-的例子中，ObjectDescriptor\<D, M\>类型中指定methods的类型中的
-`& ThisType<D & M>` 去掉，你会发现 `moveBy` 方法中 `this.x` 和 `this.y`
-报错了，因为此时 `this` 的类型是`methods` 这个对象字面量的类型。
+​(2) 不包含 ThisType\<T\> 指定的上下文类型，那么此时 this具有上下文类型，也就是普通的情况。你可以试着把上面使用了 ThisType\<T\>的例子中，ObjectDescriptor\<D, M\>类型中指定methods的类型中的 `& ThisType<D & M>` 去掉，你会发现 `moveBy` 方法中 `this.x` 和 `this.y` 报错了，因为此时 `this` 的类型是`methods` 这个对象字面量的类型。
 
 ### 本节小结
 
@@ -145,15 +142,3 @@ obj.moveBy(5, 5);
 
 下个小节我们将学习索引类型，这里说的索引类型，并不是前面我们讲接口的时候，给接口中字段名设置类型，我们将学习获取索引类型和索引值类型。\
  ![图片描述](http://img.mukewang.com/5d0345f40001410d16000296.jpg)
-
-[](/read/35/article/356)
-
-**
-
-19 使用可辨识联合并保证每个case都被处理
-
-[](/read/35/article/358)
-
-21 索引类型：获取索引类型和索引值类型
-
-**

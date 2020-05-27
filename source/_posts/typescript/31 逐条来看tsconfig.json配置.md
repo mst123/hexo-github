@@ -126,7 +126,7 @@ sourceMap 的值为 true 或 false，用来指定编译时是否生成.map 文�
 
 outFile
 用于指定将输出文件合并为一个文件，它的值为一个文件路径名，比如设置为`"./dist/main.js"`，则输出的文件为一个
-main.js 文件。但是要注意，只有设置 module 的值为 amd 和 system
+main.js 文件。但是要注意，只有设置 module 的值为 amd 和 system
 模块时才支持这个配置。
 
 -   outDir

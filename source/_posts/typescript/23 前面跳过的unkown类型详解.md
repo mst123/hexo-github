@@ -7,8 +7,7 @@ tags:
   - typescript
 ---
 
-学习完交叉类型、联合类型、类型断言、映射类型、索引后，我们就可以补充一个基础类型中没有讲的知识了，就是
-TS 在 3.0 版本新增的顶级类型 unknown。它相对于 any 来说是安全的。关于
+学习完交叉类型、联合类型、类型断言、映射类型、索引后，我们就可以补充一个基础类型中没有讲的知识了，就是TS 在 3.0 版本新增的顶级类型 unknown。它相对于 any 来说是安全的。关于
 unknown 类型，有如下几点需要注意，我们来逐个讲解和举例学习：
 
 **(1) 任何类型的值都可以赋值给 unknown 类型：**
@@ -19,8 +18,7 @@ value1 = "a";
 value1 = 123;
 ```
 
-**(2) 如果没有类型断言或基于控制流的类型细化时 unknown
-不可以赋值给其它类型，此时它只能赋值给 unknown 和 any 类型：**
+**(2) 如果没有类型断言或基于控制流的类型细化时 unknown不可以赋值给其它类型，此时它只能赋值给 unknown 和 any 类型：**
 
 ``` {.language-typescript}
 let value2: unknown;
@@ -28,8 +26,7 @@ let value3: string = value2; // error 不能将类型“unknown”分配给类�
 value1 = value2;
 ```
 
-**(3)
-如果没有类型断言或基于控制流的类型细化，则不能在它上面进行任何操作：**
+**(3)如果没有类型断言或基于控制流的类型细化，则不能在它上面进行任何操作：**
 
 ``` {.language-typescript}
 let value4: unknown;
@@ -45,8 +42,7 @@ type type3 = unknown & unknown; // type3 => unknown
 type type4 = unknown & string[]; // type4 => string[]
 ```
 
-**(5) unknown 与任何其它类型组成的联合类型，都等于 unknown
-类型，但只有any例外，unknown与any组成的联合类型等于any)：**
+**(5) unknown 与任何其它类型组成的联合类型，都等于 unknown类型，但只有any例外，unknown与any组成的联合类型等于any)：**
 
 ``` {.language-typescript}
 type type5 = string | unknown; // type5 => unknown
@@ -54,12 +50,30 @@ type type6 = any | unknown; // type6 => any
 type type7 = number[] | unknown; // type7 => unknown
 ```
 
-**(6) never 类型是 unknown 的子类型：**
+**(6) never 类型是 unknown 的子类型：**(疑似extends新用法)
 
 ``` {.language-typescript}
 type type8 = never extends unknown ? true : false; // type8 => true
 ```
+**extends新用法(判断类型从属关系)**
 
+```
+interface a {
+  name: string
+  age: number
+}
+
+interface b {
+  name: string
+  age: number
+  role: string
+}
+
+type flag = b extends a ? string : number
+let a:flag 
+a = 'aa'  //right
+a = 22    //error
+```
 **(7) keyof unknown 等于类型 never：**
 
 ``` {.language-typescript}
@@ -91,30 +105,12 @@ type type10 = Types<any>; // type10 => { [x: string]: number }
 type type11 = Types<unknown>; // type10 => {}
 ```
 
-我们在实际使用中，如果有类型无法确定的情况，要尽量避免使用 any，因为 any
-会丢失类型信息，一旦一个类型被指定为
-any，那么在它上面进行任何操作都是合法的，所以会有意想不到的情况发生。因此如果遇到无法确定类型的情况，要先考虑使用
-unknown。
+我们在实际使用中，如果有类型无法确定的情况，要尽量避免使用 any，因为 any 会丢失类型信息，一旦一个类型被指定为 any，那么在它上面进行任何操作都是合法的，所以会有意想不到的情况发生。因此如果遇到无法确定类型的情况，要先考虑使用 unknown 。
 
 ### 本节小结
 
-本小节我们详细学习了 unknown 类型，它和 any
-有相似的特点，就是制定一个类型是任意的，但是区别在于制定一个类型为 any
-的话，可以在这个值上做任意操作，而 unknown
-类型则不允许在没有类型断言或基于控制流的类型细化时对 unknown
-类型的值做任何操作。
+本小节我们详细学习了 unknown 类型，它和 any 有相似的特点，就是制定一个类型是任意的，但是区别在于制定一个类型为 any 的话，可以在这个值上做任意操作，而 unknown 类型则不允许在没有类型断言或基于控制流的类型细化时对 unknown 类型的值做任何操作。
 
-下个小节我们将学习条件类型，它看起来像是三元操作符的写法，其实效果确实很像，只不过它判断的是类型，返回的结果也是类型。\
+下个小节我们将学习条件类型，它看起来像是三元操作符的写法，其实效果确实很像，只不过它判断的是类型，返回的结果也是类型。
  ![图片描述](http://img.mukewang.com/5d03463300011cf516000466.jpg)
 
-[](/read/35/article/359)
-
-**
-
-22 使用映射类型得到新的类型
-
-[](/read/35/article/361)
-
-24 条件类型，它不是三元操作符的写法吗？
-
-**
