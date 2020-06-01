@@ -11,12 +11,7 @@ tags:
 
 ![图片描述](http://img.mukewang.com/5d22b5ab0001232118020932.png)
 
-接下来我们继续上个小节的节奏进行。在开始之前我们需要安装一个UI组件库，[Ant
-Design
-Vue](https://vue.ant.design/docs/vue/introduce-cn/)，它是React版本的Ant
-Design组件库的Vue版本，因为Ant
-Design是使用TypeScript编写的，类型声明文件较为完善，而Ant Design
-Vue延用这些声明文件，所以可以更好地在TypeScript环境下使用。首先来安装它：`npm install ant-design-vue`。
+接下来我们继续上个小节的节奏进行。在开始之前我们需要安装一个UI组件库，[Ant Design Vue](https://vue.ant.design/docs/vue/introduce-cn/)，它是React版本的Ant Design组件库的Vue版本，因为Ant Design是使用TypeScript编写的，类型声明文件较为完善，而Ant Design Vue延用这些声明文件，所以可以更好地在TypeScript环境下使用。首先来安装它：`npm install ant-design-vue`。
 
 接下来我们在入口文件引入组件库及其样式，并且全局注册它：
 
@@ -441,22 +436,3 @@ export default class TMain extends Vue {
 
 到这里，我们本小节的内容就讲完了。下个小节，我们将结合echarts和其他插件，封装几个组件，来搭建一个好看而且实用的仪表盘首页。
 
-[](/read/35/article/373)
-
-**
-
-实现登录页并用Mock响应请求
-
-[](/read/35/article/375)
-
-使用TypeScript开发Vue组件和使用Vue组件
-
-**
-
-精选留言 0
-
-欢迎在这里发表留言，作者筛选后可公开显示
-
-**
-
-目前暂无任何讨论
