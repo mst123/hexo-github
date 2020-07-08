@@ -13,16 +13,14 @@ tags:
 
 如果你还没有使用过VSCode，当然先要去[官网](https://code.visualstudio.com/)下载了，下载安装我就不多说了，安装好之后，我们先来配置几个基本的插件。
 
-#### （1）汉化  { #（1）汉化 style="font-size: 26px;"}
+#### （1）汉化
 
-如果你英语不是很好，配置中文版界面是很有必要的，安装个插件就可以了。打开VSCode之后在编辑器左侧找到这个拓展按钮，点击，然后在搜索框内搜索关键字"Chinese"，这里图中第一个插件就是。直接点击install安装，安装完成后重启VSCode即可。\
- ![图片描述](http://img.mukewang.com/5cef927600018ad013200730.png)
+如果你英语不是很好，配置中文版界面是很有必要的，安装个插件就可以了。打开VSCode之后在编辑器左侧找到这个拓展按钮，点击，然后在搜索框内搜索关键字"Chinese"，这里图中第一个插件就是。直接点击install安装，安装完成后重启VSCode即可。
+![图片描述](http://img.mukewang.com/5cef927600018ad013200730.png)
 
-#### （2）编辑器配置  { #（2）编辑器配置 style="font-size: 26px;"}
+#### （2）编辑器配置
 
-有一些编辑器相关配置，需要在项目根目录下创建一个`.vscode`文件夹，然后在这个文件夹创建一个`settings.json`文件，编辑器的配置都放在这里，并且你还需要安装一个插件[EditorConfig
-for VS
-Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)这样配置才会生效。配置文件里我们来看几个简单而且使用的配置：
+有一些编辑器相关配置，需要在项目根目录下创建一个`.vscode`文件夹，然后在这个文件夹创建一个`settings.json`文件，编辑器的配置都放在这里，并且你还需要安装一个插件[EditorConfig for VSCode](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)这样配置才会生效。配置文件里我们来看几个简单而且使用的配置：
 
 ``` {.language-json}
 {
@@ -38,21 +36,18 @@ Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorCon
 
 `tslint.formatOnSave`设为true则编辑器会对格式在保存的时候进行整理。
 
-#### （3）TypeScript相关插件  { #（3）typescript相关插件 style="font-size: 26px;"}
-
+#### （3）TypeScript相关插件
 [TSLint(deprecated)](https://marketplace.visualstudio.com/items?itemName=eg2.tslint)是一个通过tslint.json配置在你写TypeScript代码时，对你的代码风格进行检查和提示的插件。关于TSLint的配置，我们会在后面讲解如何配置，它的错误提示效果在我们之前的例子已经展示过了。
 
-[TSLint
-Vue](https://marketplace.visualstudio.com/items?itemName=prograhammer.tslint-vue)加强了对Vue中的TypeScript语法语句进行检查的能力。如果你使用TypeScript开发Vue项目，而且要使用TSLint对代码质量进行把控，那你应该需要这个插件。
+[TSLintVue](https://marketplace.visualstudio.com/items?itemName=prograhammer.tslint-vue)加强了对Vue中的TypeScript语法语句进行检查的能力。如果你使用TypeScript开发Vue项目，而且要使用TSLint对代码质量进行把控，那你应该需要这个插件。
 
-#### （4）框架相关  { #（4）框架相关 style="font-size: 26px;"}
+#### （4）框架相关 
 
-如果你使用Vue进行项目开发，那Vue相关的插件也是需要的，比如[Vue 2
-Snippets](https://marketplace.visualstudio.com/items?itemName=hollowtree.vue-snippets)。
+如果你使用Vue进行项目开发，那Vue相关的插件也是需要的，比如[Vue 2 Snippets](https://marketplace.visualstudio.com/items?itemName=hollowtree.vue-snippets)。
 
 [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)插件是Vue的开发辅助工具，安装它之后会得到代码高亮、输入辅助等功能。
 
-#### （5）提升开发体验  { #（5）提升开发体验 style="font-size: 26px;"}
+#### （5）提升开发体验 
 
 [Auto Close
 Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-close-tag)插件会自动帮你补充HTML闭合标签，比如你输完`<button>`的后面的尖括号后，插件会自动帮你补充`</button>`；
@@ -71,13 +66,11 @@ Colorizer](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket
 
 ### 1.3.2 常用功能
 
-#### （1）终端  { #（1）终端 style="font-size: 26px;"}
+#### （1）终端
 
-在VSCode中有终端窗口，点击菜单栏的【查看】-【终端】，也可以使用快捷键
-”control+\`“
-打开。这样可以直接在编辑器运行启动命令，启动项目，边写代码边看报错。
+在VSCode中有终端窗口，点击菜单栏的【查看】-【终端】，也可以使用快捷键`control+\`打开。这样可以直接在编辑器运行启动命令，启动项目，边写代码边看报错。
 
-#### （2）用户代码片段  { #（2）用户代码片段 style="font-size: 26px;"}
+#### （2）用户代码片段 
 
 一些经常用到的重复的代码片段，可以使用`用户代码片段`配置，这样每次要输入这段代码就不用一行一行敲了，直接输入几个标示性字符即可。在VSCode左下角有个设置按钮，点击之后选择【用户代码片段】，在弹出的下拉列表中可以选择【新建全局代码片段文件】，这样创建的代码片段是任何项目都可用的；可以选择【新建"项目名"文件夹的代码片段文件】，这样创建的代码片段只在当前项目可用。创建代码片段文件后它是一个类似于json的文件，文件有这样一个示例：
 
@@ -128,7 +121,7 @@ npm install -g tslint
 
 如果这个模块要作为项目依赖安装，去掉-g参数即可。更多关于node的知识，你可以参考[node官方文档](https://nodejs.org/dist/latest-v10.x/docs/api/)或[node中文文档](http://nodejs.cn/api/)，更多关于npm的使用方法，可以参考[npm官方文档](https://docs.npmjs.com/)或[npm中文文档](https://www.npmjs.com.cn/)。
 
-#### （1）初始化项目  { #（1）初始化项目 style="font-size: 26px;"}
+#### （1）初始化项目 
 
 新建一个文件夹“client-side”，作为项目根目录，进入这个文件夹：
 
@@ -184,13 +177,9 @@ tsc --init
 
 > 注意：运行的指令是tsc，不是typescript。
 
-这时你会发现在项目根目录多了一个 tsconfig.json
-文件，里面有很多内容。而且你可能会奇怪，json
-文件里怎么可以使用`//`和`/**/`注释，这个是 TS 在 1.8
-版本支持的，我们后面课程讲重要更新的时候会讲到。
+这时你会发现在项目根目录多了一个 tsconfig.json文件，里面有很多内容。而且你可能会奇怪，json文件里怎么可以使用`//`和`/**/`注释，这个是 TS 在 1.8版本支持的，我们后面课程讲重要更新的时候会讲到。
 
-tsconfig.json 里默认有 4
-项没有注释的配置，有一个需要提前讲下，就是"lib"这个配置项，他是一个数组，他用来配置需要引入的声明库文件，我们后面会用到ES6语法，和DOM相关内容，所以我们需要引入两个声明库文件，需要在这个数组中添加"es6"和"dom"，也就是修改数组为`[“dom”, “es6”]`，其他暂时不用修改，接着往下进行。
+tsconfig.json 里默认有 4项没有注释的配置，有一个需要提前讲下，就是"lib"这个配置项，他是一个数组，他用来配置需要引入的声明库文件，我们后面会用到ES6语法，和DOM相关内容，所以我们需要引入两个声明库文件，需要在这个数组中添加"es6"和"dom"，也就是修改数组为`[“dom”, “es6”]`，其他暂时不用修改，接着往下进行。
 
 然后我们还需要在项目里安装一下typescript，因为我们要搭配使用webpack进行编译和本地开发，不是使用tsc指令，所以要在项目安装一下：
 
@@ -198,7 +187,7 @@ tsconfig.json 里默认有 4
 npm install typescript
 ```
 
-#### （2）配置TSLint  { #（2）配置tslint style="font-size: 26px;"}
+#### （2）配置TSLint 
 
 接下来我们接入TSLint，如果你对代码的风格统一有要求，就需要用到TSLint了，另外TSLint会给你在很多地方起到提示作用，所以还是建议加入的。接下来我们来接入它。
 
@@ -236,18 +225,15 @@ tslint -i
 
 以上就是我们初始化的时候TSLint生成的tslint.json文件初始字段，如果你发现你生成的文件和这里看到的不一样，可能是TSLint版本升级导致的，你可以参照[TSLint配置说明](https://palantir.github.io/tslint/usage/configuration/)了解他们的用途。如果你想要查看某条规则的配置及详情，可以参照[TSLint规则说明](https://palantir.github.io/tslint/rules/)。
 
-#### （3）配置webpack  { #（3）配置webpack style="font-size: 26px;"}
+#### （3）配置webpack
 
-接下来我们要搭配使用 webpack 进行项目的开发和打包，先来安装
-webpack、webpack-cli 和 webpack-dev-server：
+接下来我们要搭配使用 webpack 进行项目的开发和打包，先来安装 webpack、webpack-cli 和 webpack-dev-server：
 
 ``` {.language-shell}
 npm install webpack webpack-cli webpack-dev-server -D
 ```
 
-我们将它们安装在项目中，并且作为开发依赖(-D)安装。接下来添加一个 webpack
-配置文件，放在 build 文件夹下，我们给这个文件起名
-webpack.config.js，然后在 package.json 里指定启动命令：
+我们将它们安装在项目中，并且作为开发依赖(-D)安装。接下来添加一个 webpack配置文件，放在 build 文件夹下，我们给这个文件起名webpack.config.js，然后在 package.json 里指定启动命令：
 
 ``` {.language-json}
 {
@@ -257,9 +243,7 @@ webpack.config.js，然后在 package.json 里指定启动命令：
 }
 ```
 
-这里我们用到一个插件"cross-env"，并且后面跟着一个参数
-NODE\_ENV=development，这个用来在 webpack.config.js 里通过
-process.env.NODE\_ENV 来获取当前是开发还是生产环境，这个插件要安装：
+这里我们用到一个插件"cross-env"，并且后面跟着一个参数NODE\_ENV=development，这个用来在 webpack.config.js 里通过process.env.NODE\_ENV 来获取当前是开发还是生产环境，这个插件要安装：
 
 ``` {.language-shell}
 npm install cross-env
@@ -321,7 +305,7 @@ module.exports = {
 };
 ```
 
-这里我们用到了两个webpack插件，第一个`clean-webpack-plugin`插件用于删除某个文件夹，我们编译项目的时候需要重新清掉上次打包生成的dist文件夹，然后进行重新编译，所以需要用到这个插件将上次打包的dist文件夹清掉。\
+这里我们用到了两个webpack插件，第一个`clean-webpack-plugin`插件用于删除某个文件夹，我们编译项目的时候需要重新清掉上次打包生成的dist文件夹，然后进行重新编译，所以需要用到这个插件将上次打包的dist文件夹清掉。
 
 第二个`html-webpack-plugin`插件用于指定编译的模板，这里我们指定模板为`"./src/template/index.html"`文件，打包时会根据此html文件生成页面入口文件。
 
@@ -359,7 +343,6 @@ document.body.appendChild(h1);
 ```
 
 当我们保存代码的时候，开发服务器重新编译了代码，并且我们的浏览器也更新了。
-
 我们再来配置一下打包命令，在 package.json 的 scripts 里增加 build 指令：
 
 ``` {.language-json}
@@ -378,17 +361,5 @@ document.body.appendChild(h1);
 npm run build
 ```
 
-现在我们前端项目的搭建就大功告成了，我们后面的课程都会在这个基础上进行示例的演示。大家最好都自己操作一遍，把开发环境的搭建流程走一下，如果中间遇到了报错仔细看一下报错信息。下节课开始我们就正式的步入TypeScript的学习中了，我们下节课见。\
- ![图片描述](http://img.mukewang.com/5cf4844b0001e9f716001006.jpg)
-
-[](/read/35/article/339)
-
-**
-
-02 TypeScript应该怎么学
-
-[](/read/35/article/341)
-
-04 八个JS中你见过的类型
-
-**
+现在我们前端项目的搭建就大功告成了，我们后面的课程都会在这个基础上进行示例的演示。大家最好都自己操作一遍，把开发环境的搭建流程走一下，如果中间遇到了报错仔细看一下报错信息。下节课开始我们就正式的步入TypeScript的学习中了，我们下节课见。
+![图片描述](http://img.mukewang.com/5cf4844b0001e9f716001006.jpg)
