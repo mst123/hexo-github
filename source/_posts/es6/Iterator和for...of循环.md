@@ -1,5 +1,5 @@
 ---
-title: 对象的新增方法
+title: Iterator 和 for...of 循环
 categories: 
   - ES6
 tags: 
