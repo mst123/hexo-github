@@ -1,5 +1,5 @@
 ---
-title: 项目中遇到的问题记录
+title: 工作中遇到的-小-问题记录
 categories: 
   - javascript
   - 问题记录
@@ -288,3 +288,41 @@ console.log(c);
 ```
 > 程序会先执行逗号之前的语句，然后把逗号之后的语句赋值
 > 必须要加外层的括号
+
+## error类无法直观的打印，可以借用下列方法
+```
+for (const key of Object.keys(error)) {
+  console.log(error[key]);
+}
+```
+
+## vue中事件绑定的this指向
+下面是从vue单文件中methods方法中截取的代码
+```
+addPointMove() {
+  this.$refs["preview-img"].addEventListener("mousedown", this.mouseDownHandle);
+  document.addEventListener("mouseup", this.mouseUpHandle);
+  this.$refs["preview-img"].onclick = function () {
+    console.log(this);
+  };
+  this.$refs["preview-img"].addEventListener("click", this.ceshi1);
+  this.$refs["preview-img"].addEventListener("click", this.ceshi2);
+  this.$refs["preview-img"].addEventListener("click", this.ceshi3);
+},
+ceshi1() {
+  console.log(this);
+},
+ceshi2: function () {
+  console.log(this);
+},
+ceshi3: () => {
+  console.log(this);
+},
+```
+当点击click后，控制台输出如下
+```
+1 this.$refs["preview-img"]
+2 vue实例
+3 vue实例
+4 undefined
+```
