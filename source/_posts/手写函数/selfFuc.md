@@ -199,7 +199,9 @@ function MyPromise(executor) {
     }
   }
   // 把内部函数resolve, reject作为参数，把传进来的函数执行一遍
-  executor(resolve, reject);
+  setTimeout(() => { // 使用setTimeout 是让resolve晚于then方法赋值
+    executor(resolve, reject)
+  }, 0)
 }
 MyPromise.prototype.then = function (sucess, error) {
   this._successCallBack = sucess;

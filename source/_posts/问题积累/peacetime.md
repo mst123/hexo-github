@@ -326,3 +326,24 @@ ceshi3: () => {
 3 vue实例
 4 undefined
 ```
+
+## async的错误捕捉
+```
+async function main() {
+  try {
+    const val1 = await 1;
+    const val2 = await 2;
+    await Promise.reject(new Error("222"))
+    const val3 = await 3;
+    console.log('Final: ', val3);
+  }
+  catch (err) {
+    console.error(err);
+  }
+  console.log(111);
+}
+main()
+```
+运行至reject，try模块内的代码就停止了，然后运行catch代码块，之后正常运行
+Error: 222  
+111  
