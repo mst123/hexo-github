@@ -18,10 +18,10 @@ micro-task和macro-task就是两种不同的任务队列
 - micro-task:
   - process.nextTick
   - Promise
-  - Object.observe
+  - Object.observe(已废弃)
   - [MutationObserver](https://developer.mozilla.org/zh-CN/docs/Web/API/MutationObserver) (接口提供了监视对DOM树所做更改的能力)  
  
-JS开发人员应该对这些方法都不会太陌生——都是些常见的异步操作。但这些方法在执行时有什么区别呢？通俗来说，macrotasks和microtasks最大的区别在它们会被放置在不同的任务调度队列中。我在网上盗了一张图，如下所示：
+JS开发人员应该对这些方法都不会太陌生——都是些常见的异步操作。但这些方法在执行时有什么区别呢？通俗来说，macrotasks和microtasks最大的区别在它们会被放置在不同的任务调度队列中。我在网上找了一张图，如下所示：
 ![示意图](MacroTask1.jpg)  
 每一次事件循环中，主进程都会先执行一个macroTask任务，这个任务就来自于所谓的MacroTask Queue队列；当该macroTask执行完后，Event loop会立马**调用microTask队列的任务，直到消费完所有的microtask，再继续下一个事件循环**。
 > 管中窥豹，microTask调用优先级较高于macroTask.  
