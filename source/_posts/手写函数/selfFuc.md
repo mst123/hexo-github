@@ -26,9 +26,9 @@ Function.prototype.selfCall = function(context) {
 Function.prototype.selfApply = function (context) {
   const ctx = context || window;
   ctx.fnc = this;
-  const arg = [...arguments].slice(1);
-  // const arg = Array.slice.call(arguments, 1);
-  ctx.fnc(arg)
+  const arg = [...arguments].slice(1)[0];
+  // const arg = Array.slice.call(arguments, 1)[0];
+  ctx.fnc(...arg)
   Reflect.deleteProperty(ctx, "fnc")
 }
 ```

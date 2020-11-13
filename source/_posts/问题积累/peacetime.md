@@ -347,3 +347,20 @@ main()
 运行至reject，try模块内的代码就停止了，然后运行catch代码块，之后正常运行
 Error: 222  
 111  
+## require 一个图片资源出现的问题
+我在项目中书写一个头部组件的时候，需要动态引入背景图片
+```
+backgroundImage: "url(" + require("../assets/rwkb.png") + ")"
+```
+写法是对的，但是死活出不来，我真是百思不得其解、、、后来发现打印出来的资源
+![资源](require1.png)
+***
+然后我抱着试一试的态度多写了一个`.default`竟然成功了
+```
+backgroundImage: "url(" + require("../../assets/img/rwkb.png").default + ")"
+```
+后来我在另一个项目里打印
+```
+console.log(require("@/assets/img/401.png"));
+```
+控制台输出 `/img/401.abca6a5b.png`

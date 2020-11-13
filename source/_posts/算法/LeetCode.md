@@ -199,3 +199,91 @@ const largestRectangleArea = (heights) => {
   return maxArea
 }
 ```
+## 面试中遇到的算法题 两个有序数组合并为一个有序数组  
+两个数组  
+`let arr1  = [0, 3, 5, 8, 15, 19]`  
+`let arr2 =  [1, 2, 7, 13, 16, 17, 18]`  
+结果输出为  
+`[0, 1, 2, 3, 5, 7, 8, 13, 15, 16, 17, 18]`
+假设两个数组都为升序排列  
+
+```
+let arr1  = [-1, 0, 1, 5, 8, 15, 19, 22, 33]
+let arr2 =  [3, 4, 7, 13, 15, 16, 17, 18, 19, 20, 33, 34, 35]
+for (let i = 0; i < arr1.length; i++) {
+  for (let j = 0; j < arr2.length; j++) {
+    if(arr1[i]<arr2[j]){
+      arr2.splice(j, 0, arr1[i]);
+      break;
+    }else if(j === arr2.length -1){
+      arr2.splice(j + 1, 0, arr1[i]);
+    }
+  }
+}
+```  
+引申，如果不让使用for循环、sort  
+**下边这个方法问题不大，测试了很多数据，还拥有优化空间**
+```
+let arr1  = [-1, 0, 1, 5, 8, 15, 19, 22, 33]
+let arr2 =  [3, 4, 7, 13, 15, 16, 17, 18, 19, 20, 33, 34, 35]
+function handle(arr1, arr2) {
+  if(arr1.length === 0){
+    return
+  }else{
+    var v1 = arr1.shift()
+    addPosition(v1, arr2, 0)
+    return handle(arr1, arr2)
+  }
+}
+function addPosition(v1, arr2, index){
+  if(index >= arr2.length){
+    return
+  }else{
+    if(v1 <= arr2[index] && (index === 0 || v1 > arr2[index - 1])){
+      arr2.splice(index, 0, v1)
+      return 
+    } else if(index === arr2.length - 1) {
+      if(v1 > arr2[index]){
+        arr2.splice(index + 1, 0, v1)
+        return
+      }
+    }
+    return addPosition(v1, arr2, index + 1)
+  }
+}
+handle(arr1, arr2)
+console.log(arr2);
+```
+***
+其实升序排列 还隐藏着一些条件，上述代码优化如下
+```
+let arr1  = [-1, 0, 1, 5, 8, 15, 19, 22, 33]
+    let arr2 =  [3, 4, 7, 13, 15, 16, 17, 18, 19, 20, 33, 34, 35]
+    function handle(arr1, arr2) {
+      if(arr1.length === 0){
+        return
+      }else{
+        var v1 = arr1.shift()
+        addPosition(v1, arr2, 0)
+        return handle(arr1, arr2)
+      }
+    }
+    function addPosition(v1, arr2, index){
+      if(index >= arr2.length){
+        return
+      }else{
+        // 优化了下列代码
+        if(v1 <= arr2[index]){
+          arr2.splice(index, 0, v1)
+          return 
+        } else if(index === arr2.length - 1) {
+          arr2.splice(index + 1, 0, v1)
+          return
+        }
+        // 优化结束
+        return addPosition(v1, arr2, index + 1)
+      }
+    }
+    handle(arr1, arr2)
+    console.log(arr2);
+```
