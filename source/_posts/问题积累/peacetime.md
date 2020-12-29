@@ -364,3 +364,10 @@ backgroundImage: "url(" + require("../../assets/img/rwkb.png").default + ")"
 console.log(require("@/assets/img/401.png"));
 ```
 控制台输出 `/img/401.abca6a5b.png`
+
+## element ui form表单动态验证
+![资源](form1.jpg)  
+![资源](form2.jpg)  
+切换某一个选项后，会动态改变表单及需要校验的表单  
+项目中采用v-if v-else方法改变表单，但是form rules验证会失效，解决方法：**给元素添加唯一KEY**  
+> 产生bug的原因在于diff算法的复用
