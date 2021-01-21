@@ -371,3 +371,31 @@ console.log(require("@/assets/img/401.png"));
 切换某一个选项后，会动态改变表单及需要校验的表单  
 项目中采用v-if v-else方法改变表单，但是form rules验证会失效，解决方法：**给元素添加唯一KEY**  
 > 产生bug的原因在于diff算法的复用
+
+## vue 响应式的注意点
+```
+{
+  data(){
+    return {
+      obj1: {
+        a: 1
+      }
+    }
+  }
+}
+```
+ - 没有任何方法能在初始化后添加根级别的响应式
+   
+   - 结合上方代码即无法添加obj1以外的响应式
+   
+ - 向存在的嵌套对象添加新的响应式 property，比如obj1，有下面两种方式
+
+   1. Vue.set(object, propertyName, value)
+
+   2. this.someObject = Object.assign({}, this.someObject, { a: 1, b: 2 })
+
+      > 注意 Object.assign 第一个参数是  { } 
+
+- ### [Vue.delete( target, propertyName/index )](https://cn.vuejs.org/v2/api/#Vue-delete)
+
+  - 不能删除根对象 例如obj1 可以删除obj1.xx

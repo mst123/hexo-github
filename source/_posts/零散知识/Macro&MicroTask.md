@@ -1,4 +1,5 @@
 ---
+---
 title: MacroTask（宏任务）和MicroTask（微任务）
 categories: 
   - 零散知识
@@ -12,6 +13,7 @@ micro-task和macro-task就是两种不同的任务队列
   - setTimeout
   - setInterval
   - setImmediate
+  - MessageChannel（vue nextTick 以前应该是[备选方案](https://cn.vuejs.org/v2/guide/reactivity.html)）
   - I/O
   - UI rendering
   - requestAnimationFrame
