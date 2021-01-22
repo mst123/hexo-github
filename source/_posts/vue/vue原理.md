@@ -1,6 +1,11 @@
-12道vue高频原理面试题,你能答出几道? 
-
-
+---
+title: vue高频原理面试题
+categories: 
+  - vue
+tags: 
+  - vue
+  - 面试
+---
 ## 1. Vue 响应式原理
 
 ![](vue原理/bg1.jpg)

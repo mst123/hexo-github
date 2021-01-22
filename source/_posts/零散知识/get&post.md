@@ -1,7 +1,7 @@
 ---
 title: get post
 categories: 
-  - get&post
+  - 零散知识
 tags: 
   - get
   - post

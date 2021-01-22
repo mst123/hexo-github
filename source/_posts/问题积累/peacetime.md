@@ -399,3 +399,9 @@ console.log(require("@/assets/img/401.png"));
 - ### [Vue.delete( target, propertyName/index )](https://cn.vuejs.org/v2/api/#Vue-delete)
 
   - 不能删除根对象 例如obj1 可以删除obj1.xx
+
+## input事件和change事件的区别
+ - input事件：
+  > input事件在输入框输入的时候回实时响应并触发
+ - change事件：
+  > change事件在input失去焦点才会考虑触发，它的缺点是无法实时响应。与blur事件有着相似的功能，但与blur事件不同的是，change事件在输入框的值未改变时并不会触发，当输入框的值和上一次的值不同，并且输入框失去焦点，就会触发change事件。
