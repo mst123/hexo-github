@@ -405,3 +405,18 @@ console.log(require("@/assets/img/401.png"));
   > input事件在输入框输入的时候回实时响应并触发
  - change事件：
   > change事件在input失去焦点才会考虑触发，它的缺点是无法实时响应。与blur事件有着相似的功能，但与blur事件不同的是，change事件在输入框的值未改变时并不会触发，当输入框的值和上一次的值不同，并且输入框失去焦点，就会触发change事件。
+
+## GC 垃圾回收机制
+- 引用计数 无法解决循环引用 基本上被淘汰了
+- 标记清除 mark and sweep 也存在一定的局限（对象如果有一个属性经常使用，其余属性就无法被回收）
+
+## void 0
+- viod 任何东西都会返回 `undefined`，之所以使用0，是因为void 0 是表达式中最短的  
+- undefined可以被重写，所以用 void 0 比较保险
+- 不少 JavaScript 压缩工具在压缩过程中，正是将 undefined 用 void 0 代替掉了
+
+## URLSearchParams Object.fromEntries
+```
+Object.fromEntries(new URLSearchParams(‘foo=bar&baz=qux’))
+// { foo: “bar”, baz: “qux” }
+```
