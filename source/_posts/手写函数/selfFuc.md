@@ -45,7 +45,30 @@ Function.prototype.selfBind = function (context) {
   }
 } 
 ```
+- bind函数还有合并参数的功能
 
+```
+var a = {
+  a: 1
+}
+function ceShi(x, y){
+  console.log(this.a);
+  console.log(x);
+  console.log(y);
+}
+Function.prototype.myBind = function(ctx) {
+  var context = ctx || window;
+  context.fnc = this;
+  var args = [...arguments].slice(1);
+  return function(){
+    context.fnc(...args.concat([...arguments]))
+  }
+}
+var bindFnc1 = ceShi.bind(a, 2)
+var bindFnc2 = ceShi.myBind(a, 2)
+bindFnc1(3); // 1 2 3
+bindFnc2(3); // 1 2 3
+```
 ## new 操作符
 首先分析一下 new 操作符
 ```
@@ -150,25 +173,22 @@ function newOperator(ctor){
 手写Object.create
 ```
 function ObjCreate(proto, properties) {
-    // 判断类型，第一个参数传入的必须是 object, function
-    if (typeof proto !== "object" && typeof proto !== "function") {
-      throw new TypeError("Object prototype may only be an Object: " + proto);
-    } 
-    // 这个判断可有可无，至少在chrome中是允许传入null的
-    // else if (proto === null) {
-    //   throw new Error(
-    //     "This browser's implementation of Object.create is a shim and doesn't support 'null' as the first argument."
-    //   );
-    // }
-    var func = function() {};
-    func.prototype = proto; // 将fn的原型指向传入的proto
-    if (properties) { // 简单的实现的过程，忽略了properties
-      Object.defineProperties(F, properties)
-    }
-    return new func();  // 返回创建的新对象，这里思考下，new func() 又做了什么事情呢？且往下看！
-  };
+  // 判断类型，第一个参数传入的必须是 object, function
+  if (typeof proto !== "object" && typeof proto !== "function") {
+    throw new TypeError("Object prototype may only be an Object: " + proto);
+  } 
+  // 简单的实现的过程，忽略了properties
+  var func = function() {};
+  func.prototype = proto; // 将fn的原型指向传入的proto
+  return new func();  // 返回创建的新对象，这里思考下，new func() 又做了什么事情呢？且往下看！
+};
 ```
+new func()的作用是创建一个新的对象，其中func是一个构造函数，在这个过程中，主要包含了如下步骤：  
 
+- 创建空对象obj;
+- 将obj的原型设置为构造函数的原型，obj.__proto__= func.prototype;
+- 以obj为上下文执行构造函数，func.call(obj);
+- 返回obj对象。
 ## 手写promise
 所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。
 - 对象的状态不受外界影响。Promise对象代表一个异步操作，有三种状态：pending（进行中）、fulfilled（已成功）和rejected（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。这也是Promise这个名字的由来，它的英语意思就是“承诺”，表示其他手段无法改变。
