@@ -9,7 +9,7 @@ tags:
 
 ### 浏览器渲染流程
 
-![image-20210122101059973](render//image-20210122101059973.png)
+![image-20210122101059973](./render/image-20210122101059973.png)
 
 1. 触发视觉变化（不仅仅是js控制还有可能是css）
 2. 浏览器对样式进行重新计算
@@ -68,7 +68,7 @@ transition: none 0s ease 0s;
 
 一帧的声明周期
 
-![image-20210122121308752](render//image-20210122121308752.png)
+![image-20210122121308752](./render/image-20210122121308752.png)
 
 #### requestAnimationFrame
 
@@ -98,5 +98,5 @@ window.addEventListener("pointermove", () => {
 
 下图是rAF 和 rIF 的不同
 
-![image-20210122142533699](render//image-20210122142533699.png)
+![image-20210122142533699](./render/image-20210122142533699.png)
 

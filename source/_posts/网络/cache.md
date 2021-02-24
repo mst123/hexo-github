@@ -4,7 +4,7 @@ categories:
   - HTTP
 tags: 
   - HTTP
-  - catch
+  - cache
 ---
 
 # 一、浏览器缓存基本认识

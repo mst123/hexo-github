@@ -28,4 +28,6 @@ tags:
 - 降低css对渲染的阻塞
 - 利用gpu完成动画绘制
 - 使用contain属性
+  - [contain介绍](https://www.webhek.com/post/css-contain-property.html)
+  - [MDN-contain](https://developer.mozilla.org/zh-CN/docs/Web/CSS/contain)
 - 使用font-display属性

@@ -32,11 +32,11 @@ tags:
 
 没有启用作用域提升
 
-![image-20210124154018793](webpack//image-20210124154018793.png)
+![image-20210124154018793](./webpack/image-20210124154018793.png)
 
 启用作用域提升之后，会做一个合并
 
-![image-20210124154325923](webpack//image-20210124154325923.png)
+![image-20210124154325923](./webpack/image-20210124154325923.png)
 
 #### code spiliting 代码分割 splitchunks
 

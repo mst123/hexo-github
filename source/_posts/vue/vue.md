@@ -50,8 +50,15 @@ passive这个修饰符会执行默认方法。你们可能会问，明明默认�
 #### 要掌握每个生命周期什么时候被调用
 
 1. beforeCreate 在实例初始化之后，数据观测(data observer) 之前被调用。
+   1. initLifecycle(vm): 主要作用是确认组件的父子关系和初始化某些实例属性。找到父组件实例赋值给`vm.$parent`，将自己`push`给父组件的`$children`；
+   2. initEvents(vm): 主要作用是将父组件使用`v-on`或`@`注册的自定义事件添加到子组件的私有属性`vm._events`中；
+   3. initRender(vm): 主要作用是初始化用来将`render`函数转为`vnode`的两个方法`vm._c` 和`vm.$createElement`。用户自定义的`render`函数的参数`h`就是`vm.$createElement`方法，它可以返回`vnode`。等以上操作全部完成，就会执行`beforeCreate`钩子函数，此时用户可以在函数中通过`this`访问到`vm.$parent`和`vm.$createElement`等有限的属性和方法。
 2. created 实例已经创建完成之后被调用。在这一步，实例已完成以下的配置：数据观测(data observer)，属性和方法的运算，
-   watch/event 事件回调。这里没有$el
+   watch/event 事件回调。这里没有$el。这 3 个初始化方法先初始化`inject`，然后初始化`props/data`状态，最后初始化`provide`，这样做的目的是可以在`props/data`中使用`inject`内所注入的内容。
+   等以上操作全部完成，就会执行`created`钩子函数，此时用户可以在函数中通过`this`访问到`vm`中的`props`，`methods`，`data`，`computed`，`watch`和`inject`等大部分属性和方法。
+   1. initInjections(vm): 初始化`inject`，使得`vm`可以访问到对应的依赖；
+   2. initState(vm): 初始化会被使用到的状态，状态包括`props`，`methods`，`data`，`computed`，`watch`五个选项。调用相应的`init`方法，使用`vm.$options`中提供的选项对这些状态进行初始化，其中`initData`方法会调用`observe(data, true)`，实现对`data`中属性的监听，实际上是使用`Object.defineProperty`方法定义属性的`getter`和`setter`方法；
+   3. initProvide(vm)：初始化`provide`，使得`vm`可以为子组件提供依赖。
 3. beforeMount 在挂载开始之前被调用：相关的 render 函数首次被调用。
 4. mounted el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用该钩子。
 5. beforeUpdate 数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前。
