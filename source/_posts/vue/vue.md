@@ -89,3 +89,12 @@ passive这个修饰符会执行默认方法。你们可能会问，明明默认�
 
 父 beforeDestroy -> 子 beforeDestroy -> 子 destroyed -> 父 destroyed
 
+## 获取初始data
+在某些情况我们可能要重置data上面的某些属性，比如在表单提交后需要清空form
+```
+this.$data // 组件当前data对象
+this.$options.data() // 组件初始化状态下的data对象
+
+Object.assign(this.$data, this.$options.data()) // 重置data对象到初始化状态
+ 
+```
