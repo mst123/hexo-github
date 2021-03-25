@@ -419,4 +419,5 @@ console.log(require("@/assets/img/401.png"));
 ```
 Object.fromEntries(new URLSearchParams(‘foo=bar&baz=qux’))
 // { foo: “bar”, baz: “qux” }
+
 ```

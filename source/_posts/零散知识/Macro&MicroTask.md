@@ -64,3 +64,31 @@ console.log('main end');
 5. 当MicroTask Queue清空后，Event Loop进入下一个循环：执行MacroTask Queue的setTimeout任务，然后得到了第五条输出setTimeout，之后它还会把又一个process.nextTick放入MicroTask Queue
 
 6. 继续如4所示过程，Event Loop在Current MacroTask执行完成后消费MicroTask Queue，这时候我们有了最后一条输出process.nextTick 3
+
+**下面也是一道经常考的面试题,可以更好的理解async await**
+```
+async function async1() {
+  console.log('async1 start'); // 2
+  await async2(); // 微任务 1
+  console.log('async1 end'); // 6
+}
+async function async2() {
+  console.log('async2'); // 3
+}
+
+console.log('script start');  // 1
+
+setTimeout(function() {
+  console.log('setTimeout'); // 宏任务 1 8
+}, 0)
+
+async1(); 
+
+new Promise(function(resolve) {
+  console.log('promise1'); // 4
+  resolve(); // 微任务 2
+}).then(function() {
+  console.log('promise2'); // 7
+});
+console.log('script end'); // 5
+```
