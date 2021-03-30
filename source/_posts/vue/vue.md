@@ -98,3 +98,45 @@ this.$options.data() // 组件初始化状态下的data对象
 Object.assign(this.$data, this.$options.data()) // 重置data对象到初始化状态
  
 ```
+
+## 在不刷新页面的情况下，更新页面
+
+```
+// 先注册一个名为 `redirect` 的路由
+<script>
+export default {
+  beforeCreate() {
+    const { params, query } = this.$route
+    const { path } = params
+    this.$router.replace({ path: '/' + path, query })
+  },
+  render: function(h) {
+    return h() // avoid warning message
+  }
+}
+</script>
+
+
+// 手动重定向页面到 '/redirect' 页面 实现更新页面
+const { fullPath } = this.$route
+this.$router.replace({
+  path: '/redirect' + fullPath
+})
+
+```
+
+当遇到你需要刷新页面的情况，你就手动重定向页面到`redirect`页面，它会将页面重新`redirect`重定向回来，由于页面的 key 发生了变化，从而间接实现了刷新页面组件的效果。
+
+## 动态清除注册的路由
+
+​	那就是动态添加的路由，并不能动态的删除。这就是导致一个问题，当用户权限发生变化的时候，或者说用户登出的时候，我们只能通过刷新页面的方式，才能清空我们之前注册的路由。
+
+```
+function resetRouter() {
+ const newRouter = createRouter()
+ router.matcher = newRouter.matcher // reset router
+}
+```
+
+​	它的原理其实很简单，所有的 vue-router 注册的路由信息都是存放在`matcher`之中的，所以当我们想清空路由的时候，我们只要新建一个空的`Router实例`，将它的`matcher`重新赋值给我们之前定义的路由就可以了。巧妙的实现了动态路由的清除。 现在我们只需要调用`resetRouter`，就能得到一个空的路有实例，之后你就可以重新`addRoutes`你想要的路由了
+
