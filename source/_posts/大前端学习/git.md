@@ -6,7 +6,12 @@ tags:
   - git
 ---
 
+### 学习网址
+
+这可能是学习git操作最好的网址了 --------- [learngit](https://learngitbranching.js.org/?locale=zh_CN)
+
 ### tips
+
 一个本地仓库可以对应多个远端仓库
 git remote add origin xxx.git // 将本地仓库与远端建立联系 origin是仓库别名 可以自定义
 git remote add origin1 xxx.git // 将本地仓库与另一个远端建立联系 
@@ -41,7 +46,119 @@ git config
 git status 工作区 暂存区 远端是否需要拉取等信息
 git restore 指令使得在工作空间但是不在暂存区的文件撤销更改
 git restore --staged 的作用是将暂存区(add)的文件从暂存区撤出，但不会撤销修改
+git commit -m "msg" 暂存区提交到本地仓库
 ```
+
+##### git push
+
+​	**git push** 命令用于从将本地的分支版本上传到远程并合并。 
+
+命令格式如下：远程分支如果不存在，则会创建一个分支
+
+```
+git push <远程主机名> <本地分支名>:<远程分支名>
+```
+
+如果本地分支名与远程分支名相同，则可以省略冒号：
+
+```
+git push <远程主机名> <本地分支名>
+```
+
+如果当前分支与多个主机存在追踪关系，则可以使用 -u 参数指定一个默认主机，这样后面就可以不加任何参数使用git push
+
+```
+git push -u origin master 
+```
+
+当遇到这种情况就是不管是否存在对应的远程分支，将本地的所有分支都推送到远程主机，这时需要 -all 选项
+
+```
+git push --all origin 
+```
+
+**实例演示**
+
+以下命令将本地的 master 分支推送到 origin 主机的 master 分支。
+
+```
+git push origin master
+```
+
+相等于：
+
+```
+git push origin master:master
+```
+
+如果本地版本与远程版本有差异，但又要强制推送可以使用 --force 参数：
+
+```
+git push --force origin master
+```
+
+删除主机的分支可以使用 --delete 参数，以下命令表示删除 origin 主机的 master 分支：
+
+```
+git push origin --delete master
+```
+
+> **略本地分支名，也可以删除指定的远程分支**
+>
+> ```
+> git push origin :master
+> ```
+
+##### Git fetch
+
+简单的来说 git pull = git fetch + git merge
+
+git fetch 命令：
+
+```
+git fetch <远程主机名> //这个命令将某个远程主机的更新全部取回本地
+```
+
+如果只想取回特定分支的更新，可以指定分支名：
+
+```
+git fetch <远程主机名> <分支名> //注意之间有空格
+```
+
+最常见的命令如取回`origin` 主机的`master` 分支：
+
+```
+git fetch origin master
+```
+
+取回更新后，会返回一个`FETCH_HEAD` ，指的是某个branch在服务器上的最新状态，我们可以在本地通过它查看刚取回的更新信息：
+
+```
+git log -p FETCH_HEAD
+```
+
+如图： 
+![img](git/fetch.png)
+
+可以看到返回的信息包括更新的文件名，更新的作者和时间，以及更新的代码（19行红色[删除]和绿色[新增]部分）。我们可以通过这些信息来判断是否产生冲突，以确定是否将更新merge到当前分支。
+
+**代码合并示例**
+
+```
+## 在本地新建一个temp分支，并将远程origin仓库的master分支代码下载到本地temp分支；
+git fetch origin master:temp
+
+## 比较本地代码与刚刚从远程下载下来的代码的区别；
+git diff temp
+
+## 合并temp分支到本地的master分支;
+git merge temp
+
+## 如果不想保留temp分支，删除;
+git branch -D temp
+```
+
+
 
 #### stage暂存区命令
 
@@ -122,6 +239,24 @@ git reset --hard commitID 回退版本 相当于删除中间的版本
 
 <img src="git/image-20210426180149291.png" alt="image-20210426180149291" style="zoom: 50%;" />
 
+> 我们在切换分支，和新建分支的时候，有没有想过，这些操作操作背后的工作原理是怎样的呢？最大的功臣就是.git目录下的HEAD引用,下面有对HEAD的详细解释
+
+##### Git rebase
+
+第二种合并分支的方法是 `git rebase`。Rebase 实际上就是取出一系列的提交记录，“复制”它们，然后在另外一个地方逐个的放下去。
+
+Rebase 的优势就是可以创造更线性的提交历史，这听上去有些难以理解。如果只允许使用 Rebase 的话，代码库的提交历史将会变得异常清晰。
+
+这个用图示比较清晰
+
+<img src="git/image-20210426201823042.png" alt="image-20210426201823042"  />
+
+![image-20210426201909176](git/image-20210426201909176.png)
+
+![image-20210426201938207](git/image-20210426201938207.png)
+
+
+
 ### Git flow
 
 两种常见的模型
@@ -130,3 +265,12 @@ git reset --hard commitID 回退版本 相当于删除中间的版本
 
 <img src="git/image-20210426183643468.png" alt="image-20210426183643468" style="zoom:50%;" />
 
+### git HEAD
+
+
+
+### git checkout
+
+`git checkout`命令用于切换分支或恢复工作树文件，也可以指定HEAD指针的位置
+
+除了分支命令中介绍的使用方法，还可以进行HEAD操作，详细见上一小节
