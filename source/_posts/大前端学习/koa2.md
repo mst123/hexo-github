@@ -9,7 +9,8 @@ tags:
 <img src="koa2/Snipaste_2021-04-23_10-08-28.png" alt="Snipaste_2021-04-23_10-08-28" style="zoom:50%;" />
 
 [koa中文网](https://koa.bootcss.com/#links)  有比较详细的介绍
-
+详细可运行的配置在 [个人git项目](https://github.com/mst123/bfe)
+> 和文章略有出入（很多插件都有更新的版本）
 ## koa常用的中间件
 
 - kao-router 路由相关 接口必备
@@ -48,7 +49,7 @@ tags:
   - @babel/core  
   - @babel/node 
   - @babel/preset-env 
-  - @babel-loader
+  - babel-loader
 
 - 书写webpack.config.js
 
@@ -110,7 +111,7 @@ tags:
   		[
   			"@babel/preset-env",
   			{
-  				target: {
+  				targets: {
   					node: "current"
   				}
   			}
@@ -135,7 +136,7 @@ tags:
 - 拆分webpack配置 对应开发环境及生产环境
   - 需要webpack-merge插件进行webpack配置合并
   - cross-env 设置环境变量，保证跨平台正确的环境变量
-  - terser-webpack-pliugin 压缩代码
+  - terser-webpack-plugin 压缩代码
 - 建立三个webapck.config.env.js文件
 
 ```
