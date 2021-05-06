@@ -1,5 +1,5 @@
 ---
-title: git温故知新
+ title: git温故知新
 categories: 
   - 大前端
 tags: 
@@ -293,7 +293,13 @@ Rebase 的优势就是可以创造更线性的提交历史，这听上去有些�
 
 ![image-20210426201938207](git/image-20210426201938207.png)
 
+##### Git cherry-pick
 
+<img src="git/image-20210427173503159.png" alt="image-20210427173503159" style="zoom:50%;" />
+
+`git cherry-pick C2 C4`
+
+<img src="git/image-20210427174345089.png" alt="image-20210427174345089" style="zoom:50%;" />
 
 ### Git flow
 
@@ -325,23 +331,11 @@ HEAD-->master-->commitID，通常情况下，HEAD会一直跟随着当前分支�
 
 - 丢弃这个匿名分支
   - 直接检出到任何一个别的分支，就相当于放弃了这些提交
-
 - 保留这个匿名分支
   - 创建一个名为newtest的分支来保存这些提交
     - `git branch newtest c7`  这种方式HEAD并未指向newtest，而是指向了C7，仍是指针分离状态
     - `git checkout -b newtest`   HEAD指向了newtest，newtest指向了C7
-
 - 与现存分支，参考分支命令章节
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -350,3 +344,5 @@ HEAD-->master-->commitID，通常情况下，HEAD会一直跟随着当前分支�
 `git checkout`命令用于切换分支或恢复工作树文件，也可以指定HEAD指针的位置
 
 除了分支命令中介绍的使用方法，还可以进行HEAD操作，详细见上一小节
+
+`git checkout --文件名` 放弃工作区文件的修改

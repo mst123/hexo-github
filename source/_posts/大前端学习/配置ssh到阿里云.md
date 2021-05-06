@@ -9,11 +9,15 @@ tags:
 解决方案最好去官网查看
 ## 简短的记录一下步骤
 - 申请阿里云服务器
+
 - 创建秘钥对，然后绑定到实例
+
 - 运行长命令
   - ssh -i {ff6b954c664adf1ba473194b3b620b7d .pem ~/.ssh/alien-linux.pem} {root}@{39.106.100.189}
   - 应该会出现权限问题
+  
 - 运行命令，获取权限 chmod 400 .pem文件的完整路径  chmod 400 ~/.ssh/alien-linux.pem
+
 - 配置config文件 vim ~/.ssh/config
   ```
     Host Aliyun #自定义别名
@@ -22,7 +26,10 @@ tags:
     User root #ssh服务器用户名，默认root
     IdentityFile ~/.ssh/alien-linux.pem #秘钥文件路径
   ```
+  
 - 这样差不多就ok了
+
+> linux 用户名 root 密码Zero40电话266!
 
 ## 在阿里云安装docker
 [docker-install](https://github.com/docker/docker-install)
@@ -60,6 +67,7 @@ docker pull mongo
 ### 运行mongo
 
 `docker run -d --name some-mongo -p 10050:27017 mongo`
+
 - -d 表示后台运行
 - -p 定义端口 10050:27017  容器端口27017映射到宿主机10050
 - --name 命名
@@ -109,7 +117,7 @@ centos：`firewall-cmd --zone=public --add-port=10050/tcp --permanent`  --perman
 
 > 第六、七步可能不需要，试一下npm -v 能不能ok，如果不可以的话，在运行第六步
 
-### docker的基本命令
+## docker的基本命令
 
 一、基本命令
 docker version查看docker版本
@@ -186,3 +194,67 @@ docker attach 容器ID进到容器内
 docker exec 容器ID进到容器内
 docker cp 容器ID:容器内的文件路径 宿主机路径从容器内拷贝文件到宿主机.
 如：docker cp f9e29e8455a5:/tmp/yum.log /root
+
+#### 常用命令
+
+- docker images  查看镜像
+
+- docker ps 查看正在运行的容器
+- docker ps -a 查看所有容器
+- Docker run .....  运行
+- docker start xx 启动容器
+- Docker restart xx  启动
+- docker rm xx
+- docker rm -f xx
+- docker-compose up -d 以doker-compose.yml为配置运行 
+
+#### docker-compose.yml 实例
+
+```
+version: "2"
+services:
+  DOClever:
+    image: lw96/doclever
+    restart: always
+    container_name: "DOClever"
+    ports:
+    - 20080:10000
+    volumes:
+    - /srv/doclever/file:/root/DOClever/data/file
+    - /srv/doclever/img:/root/DOClever/data/img
+    - /srv/doclever/tmp:/root/DOClever/data/tmp
+    environment:
+    - DB_HOST=mongodb://mongo:27017/DOClever
+    - PORT=10000
+    links:
+    - mongo:mongo
+
+  mongo:
+    image: mongo:latest
+    restart: always
+    container_name: "mongodb"
+    ports:
+      - 10050:27017
+    volumes:
+    - /srv/doclever/db:/data/db
+
+```
+
+```
+version: "3"
+services: 
+  redis-test:
+    image: redis
+    restart: always
+    container_name: "redis-test"
+    ports: 
+      - 15001:6379 // 暴露：内部
+    volumes: 
+      - /home/redistest:/data // 持久化存储的目录
+    command: ["redis-server", "--requirepass", "123456"]
+
+```
+
+
+
+​	

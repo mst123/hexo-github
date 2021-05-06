@@ -6,10 +6,94 @@ tags:
   - koa2
 ---
 
+## koa入门
+
+### 一、定义
+
+一个简约、扩展性强，基于Node.js平台的web开发框架。
+
+### 二、安装
+
+```csharp
+yarn add koa
+npm install koa
+```
+
+### 三、koa中间件
+
+##### 1、定义
+
+使用app.use()注册的函数。每次客户端的请求，koa都会调用。
+
+##### 2、基本格式
+
+
+
+```dart
+//ctx：上下文，核心对象
+//next：将处理的控制权转交给下一个中间件
+app.use(async (ctx, next)=>{
+  //...
+  await next()    //等待下个中间件运行结束，才运行当前中间件的后续代码
+  //...
+})
+```
+
+##### 3、基本执行流程
+
+![img](koa2/1169.gif)
+
+![img](koa2/478.jpeg)
+
+> PS：执行流程，好比水分进出洋葱一样，洋葱的每层相当于中间件，水分输入相当于请求，水分输出相当于相应。整个过程中，执行指针需要遍历两次中间件（除了最后一个中间件）。
+
+##### 更加直观的体现洋葱模型
+
+````
+app.use(async (ctx, next) => {
+  console.log("1 top"); // 1
+  next()
+  console.log("1 bottom"); // 8
+})
+app.use(async (ctx, next) => {
+  console.log("2 top"); // 2
+  next()
+  console.log("2 bottom"); // 7
+})
+app.use(async (ctx, next) => {
+  console.log("3 top"); // 3
+  next()
+  console.log("3 bottom"); // 6
+})
+app.use(async (ctx, next) => {
+  console.log("4 top"); // 4
+  next()
+  console.log("4 bottom"); // 5
+})
+输出结果如下
+1 top
+2 top
+3 top
+4 top
+4 bottom
+3 bottom
+2 bottom
+1 bottom
+````
+
+> 个人觉得很像函数推栈出栈的过程 
+
+## koa核心概念
+
 <img src="koa2/Snipaste_2021-04-23_10-08-28.png" alt="Snipaste_2021-04-23_10-08-28" style="zoom:50%;" />
+
+
+
+
 
 [koa中文网](https://koa.bootcss.com/#links)  有比较详细的介绍
 详细可运行的配置在 [个人git项目](https://github.com/mst123/bfe)
+
 > 和文章略有出入（很多插件都有更新的版本）
 ## koa常用的中间件
 

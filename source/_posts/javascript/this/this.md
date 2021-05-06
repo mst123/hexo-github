@@ -1,6 +1,7 @@
 ---
 title: this绑定规则的详解
 categories: 
+  - javascript
   - 作用域
 tags: 
   - 作用域
