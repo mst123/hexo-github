@@ -1,7 +1,6 @@
 ---
 title: 工作中遇到的-小-问题记录
 categories: 
-  - javascript
   - 问题记录
 tags: 
   - 问题记录
