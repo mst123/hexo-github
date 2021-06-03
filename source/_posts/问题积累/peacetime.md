@@ -420,3 +420,55 @@ Object.fromEntries(new URLSearchParams(‘foo=bar&baz=qux’))
 // { foo: “bar”, baz: “qux” }
 
 ```
+
+## node.contains(otherNode)
+node 是否包含otherNode节点, otherNode 是否是node的后代节点
+如果 otherNode 是 node 的后代节点或是 node 节点本身.则返回true , 否则返回 false.
+
+
+## getComputedStyle 和 style的区别
+用法
+let style = window.getComputedStyle(element, [pseudoElt]);
+- element 用于获取计算样式的Element。
+- pseudoElt 可选
+指定一个要匹配的伪元素的字符串，例如'::after'，必须对普通元素省略（或null）。
+
+- 只读与可写
+getComputedStyle方法是只读的，只能获取样式，不能设置；而element.style能读能写，能屈能伸。
+- 获取的对象范围
+getComputedStyle方法获取的是最终应用在元素上的所有CSS属性对象（即使没有CSS代码，也会把默认的祖宗八代都显示出来）；而element.style只能获取元素style属性中的CSS样式。因此对于一个光秃秃的元素<p>，getComputedStyle方法返回对象中length属性值（如果有）就是190+(据我测试FF:192, IE9:195, Chrome:253, 不同环境结果可能有差异), 而element.style就是0。
+- 作用
+getComputedStyle方法有一个很重要的，类似css()方法没有的功能——获取伪类元素样式
+- 兼容性
+getComputedStyle方法IE6~8是不支持的
+
+
+## Math.floor 的另类写法
+Math.floor((touch.y2 - touch.y1) / ANCHOR_HEIGHT) === Math.floor((touch.y2 - touch.y1) | 0
+
+## 取一段区间值的小技巧
+如果需要参数范围控制在[min,max]之间，传统方法可能需要三个控制流，借助math函数可以这么写
+```
+arg = Math.max(min, Math.min(arg, max))
+```
+即可以arg控制在[min, max] 范围内
+
+## filter 和 backdrop-filter 
+- backdrop-filter CSS 属性可以让你为一个元素后面区域添加图形效果（如模糊或颜色偏移）。 因为它适用于元素背后的所有元素，为了看到效果，必须使元素或其背景至少部分透明。
+- filter CSS属性将模糊或颜色偏移等图形效果应用于元素。滤镜通常用于调整图像，背景和边框的渲染。
+(详情)[https://www.jb51.net/css/745019.html]
+
+## 需要小范围闭环取值
+可以借助取余函数，例如type只有三种值 0 1 2
+```
+let type = 0 
+function changeType(){
+  type = (type + 1) % 3
+}
+for(var i = 0;i<=100;i++){
+  changeType()
+  console.log(type) 
+}
+```
+结果 0、1、2、0、1、2、0、1、2.............
+适合闭环取值
