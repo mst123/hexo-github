@@ -41,7 +41,7 @@ class Point {
 - get set方法设置的属性为prototype上的属性
 - static 可以设置静态方法 只能由原型调用，实例无法调用，可以被子类继承
 - 实例属性可以写在class顶部
-- 静态属性 暂时只可以 Point.prototype.prop设置 (已有提案，和静态方法类似)
+- 静态属性 暂时只可以 Point.prop设置 (已有提案，和静态方法类似)
 - 私有属性和方法有提案，在属性和方法前面 + `#`
 - 拥有新特性 `new target` （用于ES5构造函数），如果构造函数不是通过new命令或Reflect.construct()调用的，new.target会返回undefined
 
