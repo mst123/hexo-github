@@ -182,6 +182,15 @@ var c = function (a) {
 }
 //undefined
 ```
+重复声明会被忽略
+```
+foo(); // 1
+var foo;
+function foo() { console.log( 1 ); }
+foo = function() { console.log( 2 ); };
+```
+注意，var foo 尽管出现在 function foo()... 的声明之前，**但它是重复的声明（因此被忽略了）**，因为函数声明会被提升到普通变量之前。
+> 看一下你所不知道的JavaScript上 40页
 ## 19 npx讲解
 npx 会帮你执行依赖包里的二进制文件
 举个例子： 
@@ -472,3 +481,13 @@ for(var i = 0;i<=100;i++){
 ```
 结果 0、1、2、0、1、2、0、1、2.............
 适合闭环取值
+
+## console.log 打印彩色
+```
+var message = "Hello word";
+var color = "red";
+   
+console.log("%c " + message ,  "color:" + color);
+console.log("%c " + message ,  "color:" + "blue");
+console.log("%c " + message ,  "color:" + "yellow");
+```
