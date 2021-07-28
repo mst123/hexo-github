@@ -70,7 +70,7 @@ console.log('main end');
 async function async1() {
   console.log('async1 start'); // 2
   await async2(); // 微任务 1
-  console.log('async1 end'); // 6
+  console.log('async1 end'); // 微任务 1 6
 }
 async function async2() {
   console.log('async2'); // 3
@@ -88,7 +88,7 @@ new Promise(function(resolve) {
   console.log('promise1'); // 4
   resolve(); // 微任务 2
 }).then(function() {
-  console.log('promise2'); // 7
+  console.log('promise2'); // 微任务 2 7
 });
 console.log('script end'); // 5
 ```
