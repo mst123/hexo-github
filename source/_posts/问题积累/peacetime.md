@@ -491,3 +491,6 @@ console.log("%c " + message ,  "color:" + color);
 console.log("%c " + message ,  "color:" + "blue");
 console.log("%c " + message ,  "color:" + "yellow");
 ```
+
+## element 动态rules
+form默认会在rules改变后，重新校验，有字段可以设置。需要注意数据变化和rules变化的先后顺序问题，会带来一些不可预见的bug，form有去除校验结果的办法
