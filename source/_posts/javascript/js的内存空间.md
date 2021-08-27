@@ -2,9 +2,9 @@
 title: JavaScript的内存空间
 categories: 
   - javascript
-  - JavaScript的内存空间
 tags: 
   - JavaScript的内存空间
+  - 闭包
 ---
 
 ### 导言
