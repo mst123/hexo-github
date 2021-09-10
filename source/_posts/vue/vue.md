@@ -47,7 +47,9 @@ passive这个修饰符会执行默认方法。你们可能会问，明明默认�
 
 ## 生命周期
 
-#### 要掌握每个生命周期什么时候被调用
+### 要掌握每个生命周期什么时候被调用
+
+![Snipaste_2021-09-06_20-27-19](vue/Snipaste_2021-09-06_20-27-19.png)
 
 1. beforeCreate 在实例初始化之后，数据观测(data observer) 之前被调用。
    1. initLifecycle(vm): 主要作用是确认组件的父子关系和初始化某些实例属性。找到父组件实例赋值给`vm.$parent`，将自己`push`给父组件的`$children`；
@@ -67,7 +69,7 @@ passive这个修饰符会执行默认方法。你们可能会问，明明默认�
 8. destroyed Vue 实例销毁后调用。调用后， Vue
    实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。 该钩子在服务器端渲染期间不被调用
 
-#### 要掌握每个生命周期内部可以做什么事
+### 要掌握每个生命周期内部可以做什么事
 
 1. created 实例已经创建完成，因为它是最早触发的原因可以进行一些数据，资源的请求。
 2. mounted 实例已经挂载完成，可以进行一些DOM操作
@@ -75,7 +77,7 @@ passive这个修饰符会执行默认方法。你们可能会问，明明默认�
 4. updated 可以执行依赖于 DOM 的操作。然而在大多数情况下，你应该避免在此期间更改状态，因为这可能会导致更新无限循环。该钩子在服务器端渲染期间不被调用。
 5. destroyed 可以执行一些优化操作,清空定时器，解除绑定事件
 
-### Vue 的父组件和子组件生命周期钩子
+## Vue 的父组件和子组件生命周期钩子
 
 - 加载渲染过程
 
@@ -89,7 +91,73 @@ passive这个修饰符会执行默认方法。你们可能会问，明明默认�
 
 父 beforeDestroy -> 子 beforeDestroy -> 子 destroyed -> 父 destroyed
 
+## vue的数据方法劫持
+
+主要是利用了`Object.create`拓展了数组的prototype，下述代码拦截了7种方法，并手动调用notify()
+
+```
+import { def } from '../util/index'
+
+const arrayProto = Array.prototype
+export const arrayMethods = Object.create(arrayProto)
+
+const methodsToPatch = [
+  'push',
+  'pop',
+  'shift',
+  'unshift',
+  'splice',
+  'sort',
+  'reverse'
+]
+
+/**
+ * Intercept mutating methods and emit events
+ */
+methodsToPatch.forEach(function (method) {
+  // cache original method
+  const original = arrayProto[method]
+  def(arrayMethods, method, function mutator (...args) {
+    const result = original.apply(this, args)
+    // 数组对象的__ob__
+    const ob = this.__ob__
+    let inserted
+    switch (method) {
+      case 'push':
+      case 'unshift':
+        inserted = args
+        break
+      case 'splice':
+        inserted = args.slice(2)
+        break
+    }
+    if (inserted) ob.observeArray(inserted)
+    // notify change
+    ob.dep.notify()
+    return result
+  })
+})
+```
+
+只是拓展了数组原型链还不够，还需要将数组的`__proto__`指向拓展后的类，这段代码在vue源码中Observe类中
+
+````
+	if (Array.isArray(value)) {
+      if (hasProto) {
+        protoAugment(value, arrayMethods)
+      } else {
+        copyAugment(value, arrayMethods, arrayKeys)
+      }
+      this.observeArray(value)
+    } else {
+      this.walk(value)
+    }
+````
+
+
+
 ## 获取初始data
+
 在某些情况我们可能要重置data上面的某些属性，比如在表单提交后需要清空form
 ```
 this.$data // 组件当前data对象

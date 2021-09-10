@@ -105,7 +105,7 @@ centos：`firewall-cmd --zone=public --add-port=10050/tcp --permanent`  --perman
 
 6.echo 'export PATH=/usr/local/node-v6/bin:$PATH' >> /etc/profile //将/usr/local/node−v6/bin目录添加到PATH′>>/etc/profile//将/usr/local/node−v6/bin目录添加到PATH 环境变量中可以方便地使用通过 npm 全局安装的第三方工具
 
-7. source /etc/profile 有时候需要更新
+7.source /etc/profile 有时候需要更新
 
 > 第六、七步可能不需要，试一下npm -v 能不能ok，如果不可以的话，在运行第六步
 

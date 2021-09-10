@@ -2,9 +2,8 @@
 title: this绑定规则的详解
 categories: 
   - javascript
-  - 作用域
+  - this
 tags: 
-  - 作用域
   - this
 ---
 
@@ -33,7 +32,7 @@ let _printName = foo()
 
 ## this到底是什么
 
-`this` 是在运行时进行绑定的，**==是和执行上下文绑定的==**，并不是在编写时绑定，它的上下文取决于函数调用时的各种条件。`this`的绑定和**函数声明的位置没有任何关系，只取决于函数的调用方式**。
+`this` 是在运行时进行绑定的，==是和执行上下文绑定的==，并不是在编写时绑定，它的上下文取决于函数调用时的各种条件。`this`的绑定和**函数声明的位置没有任何关系，只取决于函数的调用方式**。
 
 ![image-20210720111215903](this/image-20210720111215903.png)
 
@@ -139,3 +138,38 @@ foo.call( obj ); // 2
 2. 这个新对象会被执行 [[ 原型 ]] 连接。 
 3. 这个新对象会绑定到函数调用的 this。 
 4. 如果函数没有返回其他对象，那么 new 表达式中的函数调用会自动返回这个新对象
+
+### 还有一些需要注意的示例
+
+注意后三个示例，详细解释在 同分类下 从ECMAScript规范解读this中有解读
+
+```
+var value = 1;
+
+var foo = {
+  value: 2,
+  bar: function () {
+    return this.value;
+  }
+}
+
+//示例1
+console.log(foo.bar()); // 2
+//示例2
+console.log((foo.bar)()); // 2
+//示例3
+console.log((foo.bar = foo.bar)()); // 1
+//示例4
+console.log((false || foo.bar)()); // 1
+//示例5
+console.log((foo.bar, foo.bar)()); // 1
+```
+
+后三个类型，方便记忆的话，可以将其理解为隐式绑定，foo.bar被隐式的赋值了，相当于 
+
+```
+var a = foo.bar
+a()
+```
+
+但是需要注意第二个示例
