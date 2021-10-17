@@ -19,6 +19,7 @@ git remote add origin1 xxx.git // 将本地仓库与另一个远端建立联系
 如果增加`-u`指令 则使用 `git push` 默认推送到设置的仓库,不使用默认则是 `git push origin master`
 
 ### git图示
+图丢了。。
 
  ![image-20210426132629619](git/image-20210426132629619.png)
 
@@ -137,7 +138,7 @@ git fetch origin master
 git log -p FETCH_HEAD
 ```
 
-如图： 
+如图：  图丢了
 ![img](git/fetch.png)
 
 可以看到返回的信息包括更新的文件名，更新的作者和时间，以及更新的代码（19行红色[删除]和绿色[新增]部分）。我们可以通过这些信息来判断是否产生冲突，以确定是否将更新merge到当前分支。

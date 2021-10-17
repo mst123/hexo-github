@@ -6,9 +6,7 @@ tags:
   - websocket
 ---
 
-> (websocket--阮一峰)[http://www.ruanyifeng.com/blog/2017/05/websocket.html]
->
-> [websocket--阮一峰]](http://www.ruanyifeng.com/blog/2017/05/websocket.html)
+> [websocket--阮一峰](http://www.ruanyifeng.com/blog/2017/05/websocket.html)
 
 ### 基础概念
 
