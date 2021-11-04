@@ -8,18 +8,20 @@ tags:
 ---
 ### 简易流程
 
+首先初始化vue-router实例，然后vue.use，再然后根vue初始化，作为配置传入
+
 - vue.use vue-router
 
 - Vue-router install
 
   - 混入，根组件保存router和route属性，子组件递归持有root属性
-  - vue-router init 
-    - 首先生成实例，执行construct
+  - vue-router 初始化
+    - 首先生成实例，执行constructor
       - 生成matcher，createMatcher
         - 根据routes创建一个路由映射表 {pathList, pathMap, nameMap}
         - 提供match方法
       - 根据mode，初始化相应history
-    - 执行init方法
+    - 执行init方法-vue根实例初始化的时候执行
       - history.transitionTo 根据当前路径渲染组件
         - const route = this.router.match(location, this.current) 匹配路由
       - History.listen 定义 history.cb  在多种情况下更新 vue._route，保证其正确性，方便被watch
