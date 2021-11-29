@@ -19,13 +19,73 @@ git remote add origin1 xxx.git // 将本地仓库与另一个远端建立联系
 如果增加`-u`指令 则使用 `git push` 默认推送到设置的仓库,不使用默认则是 `git push origin master`
 
 ### git图示
-图丢了。。
-
  ![image-20210426132629619](git/image-20210426132629619.png)
 
 
 
 ### git命令简单介绍，后期会补全
+
+#### **git add** 
+
+可将该文件添加到暂存区。
+
+```
+git add [file1] [file2] ...
+```
+
+添加指定目录到暂存区，包括子目录：
+
+```
+git add [dir]
+```
+
+添加当前目录下的所有文件到暂存区：
+
+```
+git add .
+```
+
+##### 撤销git add
+
+撤销上次add
+
+```
+git checkout .  撤销add操作，不可恢复
+```
+
+单独撤销某个文件 对应vscode中的取消暂存文件
+
+```
+git reset a.txt
+```
+
+上面的这个命令是一个简写，实际上`reset`命令的完整写法如下：
+
+```
+git reset --mixed HEAD a.txt
+```
+
+​	其中，`mixed`是一个模式（mode）参数，如果`reset`省略这个选项的话默认是`mixed`模式；`HEAD`指定了一个历史提交的 hash 值；`a.txt`指定了一个或者多个文件。
+
+**该命令的自然语言描述是：不改变`work dir`中的任何数据，将`stage`区域中的`a.txt`文件还原成`HEAD`指向的`commit history`中的样子**。就相当于把对`a.txt`的修改从`stage`区撤销，但依然保存在`work dir`中，变为`unstage`的状态。
+
+> 描述的不咋滴
+
+#### git commit
+
+将暂存区内容添加到仓库中
+
+```
+git commit -m '一些描述'
+```
+
+再简单提一些常见场景， 比如说`commit`完之后，突然发现一些错别字需要修改，又不想为改几个错别字而新开一个`commit`到`history`区，那么就可以使用下面这个命令：
+
+```
+git commit --amend
+```
+
+这样就是把错别字的修改和之前的那个`commit`中的修改合并，作为一个`commit`提交到`history`区。
 
 #### 工作区命令
 
@@ -138,7 +198,7 @@ git fetch origin master
 git log -p FETCH_HEAD
 ```
 
-如图：  图丢了
+
 ![img](git/fetch.png)
 
 可以看到返回的信息包括更新的文件名，更新的作者和时间，以及更新的代码（19行红色[删除]和绿色[新增]部分）。我们可以通过这些信息来判断是否产生冲突，以确定是否将更新merge到当前分支。
@@ -270,7 +330,7 @@ git reset --hard commitID 回退版本 相当于删除中间的版本
 
 　`git checkout -b master` 如果分支存在则只切换分支，若不存在则创建并切换到master分支
 
-> > 在这里只介绍分支相关的命令
+> 在这里只介绍分支相关的命令
 
 ##### Git 合并分支的两种方式
 
