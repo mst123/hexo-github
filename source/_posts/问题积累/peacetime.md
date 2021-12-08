@@ -408,6 +408,18 @@ console.log(require("@/assets/img/401.png"));
 
   - 不能删除根对象 例如obj1 可以删除obj1.xx
 
+## element的table组件在flex布局下宽度自适应解决办法
+给宽度一个99% 可以很简单的搞定
+```
+<tp-el-table-ex
+  class="table"
+  ref="clickTable"
+  border
+  highlight-current-row
+  :loading="tableLoading"
+  :data="tableData"
+  style="width: 99%;"
+```
 ## input事件和change事件的区别
  - input事件：
   > input事件在输入框输入的时候回实时响应并触发
