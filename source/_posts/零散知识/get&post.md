@@ -8,19 +8,23 @@ tags:
 ---
 ## POST提交数据时四种常见的数据格式
 - application/x-www-form-urlencoded
+  
   > 浏览器的原生 表单，如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded方式提交数据。
 - multipart/form-data
+  
   > 我们使用表单上传文件时，必须让 表单的 enctype 等于 multipart/form-data
 - application/json
+  
   > JSON 格式支持比键值对复杂得多的结构化数据
 - text/xml
+  
   > XML-RPC（XML Remote Procedure Call）,它是一种使用 HTTP 作为传输协议，XML 作为编码方式的远程调用规范。
 
 ****
 ## get的编码类型 仅有 application/x-www-form-urlencoded
 
 ## W3C列出的HTTP方法 POST和GET的区别
-![区别](post-bg1.png)  
+![区别](./get&post/post-bg1.png)  
 
 ## 常见解答 get post的区别
 - 1.GET请求的数据会附在URL之后，以?分割URL和传输数据，参数之间以&相连，POST把提交的数据则放置在是HTTP包的包体中。

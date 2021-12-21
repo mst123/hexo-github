@@ -506,3 +506,75 @@ console.log("%c " + message ,  "color:" + "yellow");
 
 ## element 动态rules
 form默认会在rules改变后，重新校验，有字段可以设置。需要注意数据变化和rules变化的先后顺序问题，会带来一些不可预见的bug，form有去除校验结果的办法
+
+## arguments 和对应参数的绑定
+
+```
+function foo(name, age, sex, hobbit) {
+
+    console.log(name, arguments[0]); // name name
+
+    // 改变形参
+    name = 'new name';
+
+    console.log(name, arguments[0]); // new name new name
+
+    // 改变arguments
+    arguments[1] = 'new age';
+
+    console.log(age, arguments[1]); // new age new age
+
+    // 测试未传入的是否会绑定
+    console.log(sex); // undefined
+
+    sex = 'new sex';
+
+    console.log(sex, arguments[2]); // new sex undefined
+
+    arguments[3] = 'new hobbit';
+
+    console.log(hobbit, arguments[3]); // undefined new hobbit
+
+}
+
+foo('name', 'age')
+```
+
+传入的参数，实参和 arguments 的值会共享，当没有传入时，实参与 arguments 值不会共享
+
+除此之外，以上是在非严格模式下，如果是在严格模式下，实参和 arguments 是不会共享的。
+
+## JSON.stringify 有第二个参数 replacer
+
+它可以是数组或者函数，用来指定对象序列化过程中哪些属性应该被处理，哪些应该被排除。
+
+```
+function replacer(key, value) {
+  if (typeof value === "string") {
+    return undefined;
+  }
+  return value;
+}
+
+var foo = {foundation: "Mozilla", model: "box", week: 45, transport: "car", month: 7};
+var jsonString = JSON.stringify(foo, replacer);
+
+console.log(jsonString)
+// {"week":45,"month":7}
+var foo = {foundation: "Mozilla", model: "box", week: 45, transport: "car", month: 7};
+console.log(JSON.stringify(foo, ['week', 'month']));
+// {"week":45,"month":7}
+```
+
+如果一个被序列化的对象拥有 toJSON 方法，那么该 toJSON 方法就会覆盖该对象默认的序列化行为：不是那个对象被序列化，而是调用 toJSON 方法后的返回值会被序列化，例如：
+
+```
+var obj = {
+  foo: 'foo',
+  toJSON: function () {
+    return 'bar';
+  }
+};
+JSON.stringify(obj);      // '"bar"'
+JSON.stringify({x: obj}); // '{"x":"bar"}'
+```

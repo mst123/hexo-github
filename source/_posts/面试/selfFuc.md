@@ -17,59 +17,89 @@ Function.prototype.selfCall = function(context) {
   // 将函数赋值给ctx.fnc 
   ctx.fnc = this;
   // 执行函数
-  ctx.fnc(...arg);
+  const res = ctx.fnc(...arg);
   Reflect.deleteProperty(ctx, "fnc")
+  return res
 }
 ```
+上面的方法借用了很多ES6的方法，让我们看一下比较原始的方法
+
+```
+Function.prototype.call2 = function (context) {
+    var context = context || window;
+    context.fn = this;
+
+    var args = [];
+    for(var i = 1, len = arguments.length; i < len; i++) {
+        args.push('arguments[' + i + ']');
+    }
+
+    var result = eval('context.fn(' + args +')');
+
+    delete context.fn
+    return result;
+}
+```
+
+
+
 ## apply函数
+
 ```
 Function.prototype.selfApply = function (context) {
   const ctx = context || window;
   ctx.fnc = this;
   const arg = [...arguments].slice(1)[0];
   // const arg = Array.slice.call(arguments, 1)[0];
-  ctx.fnc(...arg)
+  const res = ctx.fnc(...arg)
   Reflect.deleteProperty(ctx, "fnc")
+  return res
 }
 ```
+
+不借用ES6
+
+```
+Function.prototype.apply = function (context, arr) {
+    var context = Object(context) || window;
+    context.fn = this;
+
+    var result;
+    if (!arr) {
+        result = context.fn();
+    } else {
+        var args = [];
+        for (var i = 0, len = arr.length; i < len; i++) {
+            args.push('arr[' + i + ']');
+        }
+        result = eval('context.fn(' + args + ')')
+    }
+
+    delete context.fn
+    return result;
+}
+```
+
+> 关于 Object(context) 原文是这么说的：
+>
+> 非严格模式下，指定为 null 或 undefined 时会自动指向全局对象，郑航写的是严格模式下的，我写的是非严格模式下的，实际上现在的模拟代码有一点没有覆盖，就是当值为原始值（数字，字符串，布尔值）的 this 会指向该原始值的自动包装对象。
 
 ## bind函数
+
 - 首先书写了一个简单的bind函数，并不包括 new 操作
 ```
-Function.prototype.selfBind = function (context) {
-  const ctx = context || window;
-  ctx.fnc = this;
-  const arg = [...arguments].slice(1);
+Function.prototype.myBind = function (ctx) {
+  const args = [...arguments].slice(1)
+  const self = this
   return function () {
-    ctx.fnc(...arg)
+    return self.apply(ctx, [...args, ...arguments])   
   }
-} 
+}
 ```
-- bind函数还有合并参数的功能
+构造函数效果的模拟实现 // TODO
 
-```
-var a = {
-  a: 1
-}
-function ceShi(x, y){
-  console.log(this.a);
-  console.log(x);
-  console.log(y);
-}
-Function.prototype.myBind = function(ctx) {
-  var context = ctx || window;
-  context.fnc = this;
-  var args = [...arguments].slice(1);
-  return function(){
-    context.fnc(...args.concat([...arguments]))
-  }
-}
-var bindFnc1 = ceShi.bind(a, 2)
-var bindFnc2 = ceShi.myBind(a, 2)
-bindFnc1(3); // 1 2 3
-bindFnc2(3); // 1 2 3
-```
 ## new 操作符
+
 首先分析一下 new 操作符
 ```
 function Student(name, age) {
@@ -89,19 +119,21 @@ var jojo = new Student("jsd", 23);
 - 将obj的[[prototype]]属性指向构造函数constrc的原型（即obj.[[prototype]] = constrc.prototype）。
 - 将构造函数constrc内部的this绑定到新建的对象obj，执行constrc（也就是跟调用普通函数一样，只是此时函数的this为新创建的对象obj而已，就好像执行obj.constrc()一样）；
 - 若构造函数没有返回非原始值（即不是引用类型的值），则返回该新建的对象obj（默认会添加return this）。否则，返回引用类型的值。
+
 官方解释
+
 - 创建一个空的简单JavaScript对象（即{}）；
 - 链接该对象（设置该对象的constructor）到另一个对象 ；
 - 将步骤1新创建的对象作为this的上下文 ；
 - 如果该函数没有返回对象，则返回this。
-实现方式如下：
+  实现方式如下：
+
 ```
-function newFactor(ctor) {
-  const arg = [...arguments].slice(1);
-  var obj = {}
-  ctor.call(obj, ...arg);
-  obj.__proto__ = ctor.prototype;
-  return obj;
+function createClass(_Class, ...rest) {
+  const obj = {}
+  const res = _Class.apply(obj, rest)
+  obj.__proto__ = _Class.prototype
+  return typeof res === "object" ? res : obj
 }
 ```
 利用Object.create稍微简化一下
@@ -233,3 +265,347 @@ MyPromise.prototype.then = function (sucess, error) {
   this._errorCallBack = error;
 }
 ```
+
+## 珂里化
+第一版 比较简单，也好理解
+```
+var curry = function (fn) {
+  // 取到fn之后的参数
+  var args = [].slice.call(arguments, 1);
+  // 返回一个待使用的新函数
+  return function () {
+    // 将新函数的参数 和 之前生成珂里化函数的参数合并
+    var newArgs = args.concat([].slice.call(arguments));
+    // 不改变this，使用所有参数进行调用
+    return fn.apply(this, newArgs);
+  };
+};
+
+function add(a, b) {
+  return a + b;
+}
+
+var addCurry = curry(add, 1, 2);
+addCurry() // 3
+//或者
+var addCurry = curry(add, 1);
+addCurry(2) // 3
+//或者
+var addCurry = curry(add);
+addCurry(1, 2) // 3
+```
+
+第二版 稍微复杂一些，先看实现的效果会比较好理解一点
+
+```
+var fn = curry(function (a, b, c) {
+  console.log([a, b, c]);
+});
+
+fn("a", "b", "c"); // ["a", "b", "c"]
+fn("a", "b")("c"); // ["a", "b", "c"]
+fn("a")("b")("c"); // ["a", "b", "c"]
+fn("a")("b", "c"); // ["a", "b", "c"]
+```
+
+**首先需要明确1点**
+
+- 参数的个数是确定的，这也是递归调用的截止条件
+
+来看实现过程
+
+```
+function curry(fn, args) {
+  // 函数的形参个数
+  var length = fn.length;
+  // 实参个数是 arguments.length
+
+  // 参数数组，可能会在递归中传过来，如果没有，初始化为空
+  args = args || [];
+
+  return function () {
+    // args 可能是arguments 所以需要转成数组
+    var _args = args.slice(0), arg, i;
+    // 把参数传入数组
+    for (i = 0; i < arguments.length; i++) {
+      arg = arguments[i];
+      _args.push(arg);
+    }
+    // 如果参数还不够 则继续调用curry
+    if (_args.length < length) {
+      // 保证this的准确性
+      return curry.call(this, fn, _args);
+    } else {
+      // 参数凑够了，直接调用fn就可以了
+      return fn.apply(this, _args);
+    }
+  };
+}
+
+```
+
+## 防抖
+
+[参考](https://github.com/mqyqingfeng/Blog/issues/22)
+
+有一些需要注意的点，可以帮助理解函数，重点看代码中注释的地方
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    var count = 1
+    function handle(event) {
+      console.log(this);
+    }
+    document.onmousemove = debounce(handle, 400)
+
+    function debounce(fn, wait) {
+      var timer = null
+      return function () {
+        clearTimeout(timer)
+        timer = setTimeout(
+        	// 这么写 实际上没有效果
+          fn.apply(this, arguments),
+          // 下面的写法均有效果
+          fn.bind(this, arguments),
+					fn,
+          wait
+        )
+      }
+    }
+  </script>
+</body>
+</html>
+```
+
+需要注意的是，setTimeout第一个参数需要是一个函数，而`fn.apply(this, arguments)`不能算一个函数
+
+下面写一个比较标准的debounce，可以正确响应参数和this
+
+```
+	function debounce(fn, wait) {
+      var timer = null
+      return function () {
+        clearTimeout(timer)
+        timer = setTimeout(
+          fn.bind(this, ...arguments),
+          wait
+        )
+      }
+    }
+ // 不使用es6
+function debounce(func, wait) {
+    var timeout;
+
+    return function () {
+        var context = this;
+        var args = arguments;
+
+        clearTimeout(timeout)
+        timeout = setTimeout(function(){
+            func.apply(context, args)
+        }, wait);
+    }
+}
+```
+
+### 立刻执行
+
+这个时候，代码已经很是完善了，但是为了让这个函数更加完善，我们接下来思考一个新的需求。
+
+这个需求就是：
+
+我不希望非要等到事件停止触发后才执行，我希望**立刻执行函数，然后等到停止触发 n 秒后，才可以重新触发执行**。
+
+其实这个实现也算简单，主要是理解需求
+
+```
+function immedia(fn, wait) {
+      var flag = true
+      var timer = null
+      return function () {
+        clearTimeout(timer)
+        // 保证不在触发后wait时间后，可以再次被触发
+        timer = setTimeout(
+          function () {
+            flag = true
+          },
+          wait
+        )
+        if(flag){
+        	// 触发后 开启保护
+          flag = false
+          fn.apply(this, arguments)
+        }
+      }
+    }
+```
+
+写在一个函数里，也很简单
+
+```
+	function debounce(fn, wait, immediate) {
+      var timer = null
+      if(immediate){
+        var flag = true
+        return function () {
+          clearTimeout(timer)
+          timer = setTimeout(
+            function () {
+              flag = true
+            },
+            wait
+          )
+          if(flag){
+            flag = false
+            fn.apply(this, arguments)
+          }
+        }
+      }else{
+        return function () {
+          clearTimeout(timer)
+          timer = setTimeout(
+            fn.bind(this, ...arguments),
+            wait
+          )
+        }
+      }
+    }
+```
+
+## 节流
+
+节流的原理很简单：
+
+如果你持续触发事件，每隔一段时间，只执行一次事件。
+
+关于节流的实现，有两种主流的实现方式，一种是使用时间戳，一种是设置定时器。
+
+### 时间戳
+
+```
+function throttle(fn, wait) {
+  const previous = 0;
+  return function () {
+    const now = new Date().getTime()
+    if (now - previous > wait) {
+      previous = now
+    }
+    fn.apply(this, arguments)
+  }
+}
+```
+
+### 定时器
+
+```
+	function throttle(fn, wait) {
+      let flag = true
+      return function () {
+        if (flag) {
+          flag = false
+          fn.apply(this, arguments)
+          setTimeout(function () {
+            flag = true
+          },wait)
+        }
+      }
+    }
+```
+
+
+
+## deepclone
+
+首先实现一个简单clone，包括对象 数组和基本类型的clone
+
+```
+function deepClone(targer) {
+  if (typeof targer !== "object") {
+    return targer
+  } else {
+    const copy = Array.isArray(targer) ? [] : {}
+    for (const key in targer) {
+      copy[key] = deepClone(targer[key])
+    }
+    return copy
+  }
+}
+```
+
+如果出现循环引用，就会栈溢出，如何解决这个问题呢，需要借助map数据结构
+
+解决循环引用问题，我们可以额外开辟一个存储空间，来存储当前对象和拷贝对象的对应关系，当需要拷贝当前对象时，先去存储空间中找，有没有拷贝过这个对象，如果有的话直接返回，如果没有的话继续拷贝，这样就巧妙化解的循环引用的问题。
+
+这个存储空间，需要可以存储`key-value`形式的数据，且`key`可以是一个引用类型，我们可以选择`Map`这种数据结构：
+
+- 检查`map`中有无克隆过的对象
+- 有 - 直接返回
+- 没有 - 将当前对象作为`key`，克隆对象作为`value`进行存储
+- 继续克隆
+
+```
+function deepClone(target) {
+  const map = new Map();
+  return (function _clone(target) {
+    if (typeof target !== "object") {
+      return target
+    } else {
+      if (map.has(target)) {
+        return target
+      }
+      map.set(target, null)
+      const copy = Array.isArray(target) ? [] : {}
+      for (const key in target) {
+        copy[key] = _clone(target[key])
+      }
+      return copy
+    }
+  })(target)
+}
+
+const target = {
+  field1: 1,
+  field2: undefined,
+  field3: {
+      child: 'child'
+  },
+  field4: [2, 4, 8]
+};
+target.target = target
+console.log(deepClone(target));
+```
+
+控制台结果如下
+
+```
+{
+  field1: 1,
+  field2: undefined,
+  field3: { child: 'child' },
+  field4: [ 2, 4, 8 ],
+  target: <ref *1> {
+    field1: 1,
+    field2: undefined,
+    field3: { child: 'child' },
+    field4: [ 2, 4, 8 ],
+    target: [Circular *1]
+  }
+}
+```
+
+`circular`表示循环引用的意思，把Map换成weakMap，Map有强引用，不利用垃圾收集

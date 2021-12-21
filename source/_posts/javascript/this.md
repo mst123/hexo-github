@@ -12,18 +12,21 @@ tags:
 看下述一段代码
 
 ```
+
 var bar = {
- 	myName:"time.geekbang.com",
- 	printName: function () {
- 		console.log(myName)
- 	} 
+    myName:"time.geekbang.com",
+    printName: function () {
+        console.log(myName)
+    }    
 }
 function foo() {
- 	let myName = " 极客时间 "
- 	return bar.printName
+    let myName = "极客时间"
+    return bar.printName
 }
-let myName = " 极客邦 "
+let myName = "极客邦"
 let _printName = foo()
+_printName()
+bar.printName()
 ```
 
 相信你已经知道了，在 printName 函数里面使用的变量 myName 是属于全局作用域下面的，所以最终打印出来的值都是“极客邦”
@@ -32,7 +35,7 @@ let _printName = foo()
 
 ## this到底是什么
 
-`this` 是在运行时进行绑定的，==是和执行上下文绑定的==，并不是在编写时绑定，它的上下文取决于函数调用时的各种条件。`this`的绑定和**函数声明的位置没有任何关系，只取决于函数的调用方式**。
+`this` 是在运行时进行绑定的，**是和执行上下文绑定的**，并不是在编写时绑定，它的上下文取决于函数调用时的各种条件。`this`的绑定和**函数声明的位置没有任何关系，只取决于函数的调用方式**。
 
 ![image-20210720111215903](this/image-20210720111215903.png)
 
@@ -97,7 +100,7 @@ var a = "oops, global"; // a 是全局对象的属性
 bar(); // "oops, global"
 
 ```
-> 虽然 bar 是 obj.foo 的一个引用，但是实际上，它引用的是 foo 函数本身，因此此时的 bar() 其实是一个不带任何修饰的函数调用，因此应用了默认绑定
+> 虽然 bar 是 obj.foo 的一个引用，**但是实际上，它引用的是 foo 函数本身**，因此此时的 bar() 其实是一个不带任何修饰的函数调用，因此应用了默认绑定
 
 一种更微妙、更常见并且更出乎意料的情况发生在传入回调函数时
 ```
@@ -134,6 +137,7 @@ foo.call( obj ); // 2
 ### new 绑定 （暂不深究）
 在 JavaScript 中，构造函数只是一些使用 new 操作符时被调用的函数。它们并不会属于某个类，也不会实例化一个类。实际上， 它们甚至都不能说是一种特殊的函数类型，它们只是被 new 操作符调用的普通函数而已。
 使用 new 来调用函数，或者说发生构造函数调用时，会自动执行下面的操作。
+
 1. 创建（或者说构造）一个全新的对象。 
 2. 这个新对象会被执行 [[ 原型 ]] 连接。 
 3. 这个新对象会绑定到函数调用的 this。 
@@ -141,7 +145,7 @@ foo.call( obj ); // 2
 
 ### 还有一些需要注意的示例
 
-注意后三个示例，详细解释在 同分类下 从ECMAScript规范解读this中有解读
+注意后三个示例，详细解释在 **同分类下-从ECMAScript规范解读this**中有解读
 
 ```
 var value = 1;
@@ -173,3 +177,12 @@ a()
 ```
 
 但是需要注意第二个示例
+
+## 关于this补充
+
+可以帮助理解
+
+[从ECMAScript规范解读this](https://github.com/mqyqingfeng/Blog/issues/7)
+
+[极客时间](https://time.geekbang.org/column/article/128427)
+
