@@ -7,7 +7,7 @@ tags:
   - this
 ---
 > 这一小节比较晦涩难懂，目前简单的了解一下就行，有需要再深入研究
-转载于 https://github.com/mqyqingfeng/Blog/issues/7
+转载于 <https://github.com/mqyqingfeng/Blog/issues/7>
 
 当JavaScript代码执行一段可执行代码(executable code)时，会创建对应的执行上下文(execution context)。
 
@@ -21,13 +21,13 @@ tags:
 
 ……
 
-因为我们要从 ECMASciript5 规范开始讲起。
+因为我们要从 ECMAScript5 规范开始讲起。
 
 先奉上 ECMAScript 5.1 规范地址：
 
-英文版：http://es5.github.io/#x15.1
+英文版：<http://es5.github.io/#x15.1>
 
-中文版：http://yanhaijing.com/es5/#115
+中文版：<http://yanhaijing.com/es5/#115>
 
 让我们开始了解规范吧！
 

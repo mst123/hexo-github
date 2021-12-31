@@ -8,6 +8,7 @@ tags:
 ---
 
 记录一下需要记忆的点
+
 ## finally的实现方式
 
 虽然看起来很简单，但是也值得思索
@@ -31,29 +32,27 @@ Promise.prototype.myFinally = function (callback) {
 
 - 从上面的实现还可以看到，`finally`方法总是会返回原来的值，注意下述代码
 
-  - ```
-    const p2 = new Promise(function (resolve, reject) {
-          setTimeout(() => resolve("11111"), 1000)
-        })
-        Promise.prototype.myFinally = function (callback) {
-          let P = this.constructor;
-          return this.then(
-            value  => P.resolve(callback()).then(() => value),
-            reason => P.resolve(callback()).then(() => { throw reason })
-          );
-        };
-        p2.myFinally(() => {
-    
-        }).then(res => {
-          console.log(res); // 1111
-        })
-    ```
+  ```
+  const p2 = new Promise(function (resolve, reject) {
+        setTimeout(() => resolve("11111"), 1000)
+      })
+      Promise.prototype.myFinally = function (callback) {
+        let P = this.constructor;
+        return this.then(
+          value  => P.resolve(callback()).then(() => value),
+          reason => P.resolve(callback()).then(() => { throw reason })
+        );
+      };
+      p2.myFinally(() => {
+  
+      }).then(res => {
+        console.log(res); // 1111
+      })
+  ```
 
-    也就意味着在promise中穿插finally 并不会有副作用
+  也就意味着在promise中穿插finally 并不会有副作用
 
 - // TODO `P.resolve(callback()).then(() => value)` 为什么需要这么长呢
-
-  
 
 ## 面试手写promise
 

@@ -11,6 +11,7 @@ tags:
 [koa中文网](https://koa.bootcss.com/#links)  有比较详细的介绍
 详细可运行的配置在 [个人git项目](https://github.com/mst123/bfe)
 > 和文章略有出入（很多插件都有更新的版本）
+
 ## koa常用的中间件
 
 - kao-router 路由相关 接口必备
@@ -33,7 +34,7 @@ tags:
 - koa-helmet 前端安全 设置安全头
 - koa-send 静态文件服务中间件 可以实现下载功能，也是koa-static的依赖
 - Koa-static 静态资源服务器
-- koa-compose 整合中间件 ompose[midleware, ....]  替代带多次 use() 
+- koa-compose 整合中间件 ompose[midleware, ....]  替代带多次 use()
 
 ## 使用webpack 开发 koa 项目
 
@@ -47,8 +48,8 @@ tags:
 - 安装babel相关的plugin或loader
 
   - @babel/core  
-  - @babel/node 
-  - @babel/preset-env 
+  - @babel/node
+  - @babel/preset-env
   - babel-loader
 
 - 书写webpack.config.js
@@ -58,40 +59,40 @@ tags:
   const nodeExcternals = require("webpack-node-externals")
   const { CleanWebpackPlugin } = require("clean-webpack-plugin")
   const webpackconfig = {
-  	target: "node",
-  	mode: "development",
-  	entry: {
-  		server: path.join(__dirname, "./src/index.js")
-  	},
-  	output: {
-  		filename: "[name].bundle.js",
-  		path: path.join(__dirname, "./dist")
-  	},
-  	devtool: {
-  		"eval-source-map"
-  	},
-  	modules: {
-  		rules: [
-  			{
-  				test: /\.(js|jsx)$/,
-  				use: {
-  					loader: "babel-loader"
-  				},
-  				exclude: [path.join(__dirname, "/node-modules")]
-  			}
-  		]
-  	},
-  	externals: [nodeExcternals()],
-  	plugins: [
-  		new CleanWebpackPlugin(),
-  		new webpack.DefinePlugin({
-  			'process.env': {
-  				NODE_ENV: JOSN.stringfy(process.env.NODE_ENV) (就算是字符串还是需要)类似于“‘production’”
-  			}
-  		})
-  	],
-  	node: {
-  		console: true,
+   target: "node",
+   mode: "development",
+   entry: {
+    server: path.join(__dirname, "./src/index.js")
+   },
+   output: {
+    filename: "[name].bundle.js",
+    path: path.join(__dirname, "./dist")
+   },
+   devtool: {
+    "eval-source-map"
+   },
+   modules: {
+    rules: [
+     {
+      test: /\.(js|jsx)$/,
+      use: {
+       loader: "babel-loader"
+      },
+      exclude: [path.join(__dirname, "/node-modules")]
+     }
+    ]
+   },
+   externals: [nodeExcternals()],
+   plugins: [
+    new CleanWebpackPlugin(),
+    new webpack.DefinePlugin({
+     'process.env': {
+      NODE_ENV: JOSN.stringfy(process.env.NODE_ENV) (就算是字符串还是需要)类似于“‘production’”
+     }
+    })
+   ],
+   node: {
+    console: true,
       global: true,
       process: true,
       __filename: true,
@@ -99,24 +100,24 @@ tags:
       Buffer: true,
       setImmediate: true,
       path: true ?webapck 5 好像没了
-  	}
+   }
   }
   ```
 
--  新建 `.babelrc`
+- 新建 `.babelrc`
 
   ```
   {
-  	presets: [
-  		[
-  			"@babel/preset-env",
-  			{
-  				targets: {
-  					node: "current"
-  				}
-  			}
-  		]
-  	]
+   presets: [
+    [
+     "@babel/preset-env",
+     {
+      targets: {
+       node: "current"
+      }
+     }
+    ]
+   ]
   }
   ```
 
@@ -146,37 +147,37 @@ const nodeExcternals = require("webpack-node-externals")
 const webpack = require('webpack');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const webpackconfig = {
-	target: "node",
-	mode: "development",
-	entry: {
-		server: path.join(__dirname, "./src/index.js")
-	},
-	output: {
-		filename: "[name].bundle.js",
-		path: path.join(__dirname, "./dist")
-	},
-	modules: {
-		rules: [
-			{
-				test: /\.(js|jsx)$/,
-				use: {
-					loader: "babel-loader"
-				},
-				exclude: [path.join(__dirname, "/node-modules")]
-			}
-		]
-	},
-	externals: [nodeExcternals()],
-	plugins: [
-		new CleanWebpackPlugin(),
-		new webpack.DefinePlugin({
-			'process.env': {
-				NODE_ENV: JOSN.stringfy(process.env.NODE_ENV) // (就算是字符串还是需要)类似于“‘production’”
-			}
-		})
-	],
-	node: {
-		console: true,
+ target: "node",
+ mode: "development",
+ entry: {
+  server: path.join(__dirname, "./src/index.js")
+ },
+ output: {
+  filename: "[name].bundle.js",
+  path: path.join(__dirname, "./dist")
+ },
+ modules: {
+  rules: [
+   {
+    test: /\.(js|jsx)$/,
+    use: {
+     loader: "babel-loader"
+    },
+    exclude: [path.join(__dirname, "/node-modules")]
+   }
+  ]
+ },
+ externals: [nodeExcternals()],
+ plugins: [
+  new CleanWebpackPlugin(),
+  new webpack.DefinePlugin({
+   'process.env': {
+    NODE_ENV: JOSN.stringfy(process.env.NODE_ENV) // (就算是字符串还是需要)类似于“‘production’”
+   }
+  })
+ ],
+ node: {
+  console: true,
     global: true,
     process: true,
     __filename: true,
@@ -184,17 +185,17 @@ const webpackconfig = {
     Buffer: true,
     setImmediate: true,
     path: true // ?webapck 5 好像没了
-	}
+ }
 }
 dev
 const webpackMerge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.config.base');
 const webpackConfig = webpackMerge(baseWebpackConfig, {
-	mode: 'development',
-	devtool: "eval-source-map",
-	stats: {
-		children: false // 关闭日志消息
-	}
+ mode: 'development',
+ devtool: "eval-source-map",
+ stats: {
+  children: false // 关闭日志消息
+ }
 })
 
 module.exports = webpackConfig;
@@ -204,42 +205,41 @@ const baseWebpackConfig = require('./webpack.config.base');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const webpackConfig = webpackMerge(baseWebpackConfig, {
-	mode: 'production',
-	stats: {
-		children: false, // 关闭日志消息
-		warnings: false
-	},
-	optimization: {
-		minimizer: [new TerserPlugin({
-			terserOptions: {
-				compress: {
-					warnings: false,
-					drop_console: false, //注释掉console
-					dead_code: true,
-					drop_debugger: true //注释掉debugger
-				},
-				output: { // 最新的貌似没这属性
-					comments: false,
-					beautify: false
-				},
-				mangle: true // 混淆
-			},
-			parallel: true, // 并行化执行
-			sourceMap: false // 使用源映射将错误消息位置映射到模块（这会减慢编译速度）
-		})],
-		splitChunks: { // 视频里配的不太好，仅做示例吧
+ mode: 'production',
+ stats: {
+  children: false, // 关闭日志消息
+  warnings: false
+ },
+ optimization: {
+  minimizer: [new TerserPlugin({
+   terserOptions: {
+    compress: {
+     warnings: false,
+     drop_console: false, //注释掉console
+     dead_code: true,
+     drop_debugger: true //注释掉debugger
+    },
+    output: { // 最新的貌似没这属性
+     comments: false,
+     beautify: false
+    },
+    mangle: true // 混淆
+   },
+   parallel: true, // 并行化执行
+   sourceMap: false // 使用源映射将错误消息位置映射到模块（这会减慢编译速度）
+  })],
+  splitChunks: { // 视频里配的不太好，仅做示例吧
       cacheGroups: {
         commons: {
-					name: 'commons',
-					chunks: 'initial',
-					minChunks: 3,
-					enforce: true
+     name: 'commons',
+     chunks: 'initial',
+     minChunks: 3,
+     enforce: true
         }
       }
     }
-	},
+ },
 })
 
 module.exports = webpackConfig;
 ```
-

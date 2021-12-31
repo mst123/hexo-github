@@ -60,13 +60,13 @@ db.once('open', function() {
 });
 // 还有一种方式 更加简洁
 var User = mongoose.model('User', { // 建立表
-	name: String,
-	age: Number
+ name: String,
+ age: Number
 });
 var fluffy = new User({ name: 'ming', age: 15 }); 
 
 fluffy.save(function (err, fluffy) { // 保存一条数据
-	if (err) return console.error(err);
+ if (err) return console.error(err);
 });
 ```
 
@@ -80,7 +80,7 @@ fluffy.save(function (err, fluffy) { // 保存一条数据
 
 ![image-20210428181713717](mongoose/image-20210428181713717.png)
 
-#### mongoose初始化 
+#### mongoose初始化
 
 ```
 DBHelper.js
@@ -186,8 +186,6 @@ const delete_ = async () => {
 delete_();
 ```
 
- 
-
 ### 静态方法
 
 添加 `Model` 的静态方法也十分简单，继续用 `animalSchema` 举例：
@@ -205,4 +203,3 @@ delete_();
 ```
 
 同样**不要**在静态方法中使用 ES6 箭头函数
-

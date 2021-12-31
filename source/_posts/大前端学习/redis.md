@@ -60,7 +60,7 @@ services:
 - 输入 auth 123456 // 密码登陆
 - 输出OK表示成功
 
-> 想从镜像终端中出来，输入exit 
+> 想从镜像终端中出来，输入exit
 
 ##### 常用的redis命令
 
@@ -70,7 +70,7 @@ services:
 
 - auth 123456 // 登陆
 
-- select  number 切换自动数据库，默认有0 - 15 
+- select  number 切换自动数据库，默认有0 - 15
 
 - 设置数据
 
@@ -88,14 +88,14 @@ services:
 
 - Hash
 
-  - hset obj key value 
+  - hset obj key value
 
   - ```
     就像给一个对象设置键值对一样 
     hset brian name "brian"
     hset brian age 19
     brian = {
-    	name: "brian",
+     name: "brian",
       age: 20
     }
     ```
@@ -132,14 +132,14 @@ services:
 
   - client list 可以查看redis-cli连接的哪些redis-client服务 通过idle空闲时间判断当前使用的
   - client kill host:port 断开
-  - flushdb 清空当前数据库的数据 
-  - flushall 清空所有数据库 
+  - flushdb 清空当前数据库的数据
+  - flushall 清空所有数据库
 
 - slowlog  slow log是用来记录执行时间的日子系统
 
 ### redis备份
 
-save 命令备份（同步任务，会阻塞，使用bgsave） 会生成一个dump.rdb，quit停止服务 
+save 命令备份（同步任务，会阻塞，使用bgsave） 会生成一个dump.rdb，quit停止服务
 
 CONFIG get dir 找到数据存在位置，把dump.rdb放入，重启服务就可以了
 
@@ -243,4 +243,3 @@ const getHValue = (key) => {
   return promisify(client.hgetall).bind(client)(key)
 }
 ```
-

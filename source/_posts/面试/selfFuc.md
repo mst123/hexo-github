@@ -8,6 +8,7 @@ tags:
 ---
 
 ## call函数
+
 ```
 Function.prototype.selfCall = function(context) {
   const ctx = context || window;
@@ -22,6 +23,7 @@ Function.prototype.selfCall = function(context) {
   return res
 }
 ```
+
 上面的方法借用了很多ES6的方法，让我们看一下比较原始的方法
 
 ```
@@ -40,8 +42,6 @@ Function.prototype.call2 = function (context) {
     return result;
 }
 ```
-
-
 
 ## apply函数
 
@@ -87,6 +87,7 @@ Function.prototype.apply = function (context, arr) {
 ## bind函数
 
 - 首先书写了一个简单的bind函数，并不包括 new 操作
+
 ```
 Function.prototype.myBind = function (ctx) {
   const args = [...arguments].slice(1)
@@ -96,11 +97,13 @@ Function.prototype.myBind = function (ctx) {
   }
 }
 ```
+
 构造函数效果的模拟实现 // TODO
 
 ## new 操作符
 
 首先分析一下 new 操作符
+
 ```
 function Student(name, age) {
   this.name = name
@@ -111,7 +114,9 @@ Student.prototype.say = function () {
 }
 var jojo = new Student("jsd", 23);
 ```
+
 从结果分析
+
 - 返回了一个对象，其实例属性是通过构造函数(Student)生成的
 - 对象的`__proto__`指向Student.prototype
 从过程分析
@@ -136,7 +141,9 @@ function createClass(_Class, ...rest) {
   return typeof res === "object" ? res : obj
 }
 ```
+
 利用Object.create稍微简化一下
+
 ```
 function newFactorSimple(ctor) {
   const arg = [...arguments].slice(1);
@@ -146,7 +153,9 @@ function newFactorSimple(ctor) {
   return obj;
 }
 ```
+
 > 其实构造函数内含有return语句时，结果会出现差异
+
 ```
 // 例子4
 function Student(name){
@@ -169,8 +178,10 @@ function Student(name){
 var student = new Student('若川');
 console.log(student); {name: '若川'}
 ```
+
 前面六种基本类型都会正常返回{name: '若川'}，后面的Object(包含Functoin, Array, Date, RegExg, Error)都会直接返回这些值  
 **下面是考虑到各种情况后的new实现**  
+
 ```
 /**
  * 模拟实现 new 操作符
@@ -200,14 +211,18 @@ function newOperator(ctor){
     return newObj;
 }
 ```
+
 ## create函数
+
 很多框架源码作者使用它来初始化一个新的对象，难道是最佳实践？  
 原因有二  
+
 - 通过Object.create(null)创建出来的对象，没有任何属性，显示No properties。我们可以将其当成一个干净的 map 来使用，自主定义 toString,hasOwnProperty等方法，并且不必担心将原型链上的同名方法被覆盖。
 - {...}创建的对象，使用for in遍历对象的时候，会遍历原型链上的属性，带来性能上的损耗。使用Object.create(null)则不必再对其进行遍历了。
 ![两种方式的比较](write1.png)  
 
 手写Object.create
+
 ```
 function ObjCreate(proto, properties) {
   // 判断类型，第一个参数传入的必须是 object, function
@@ -220,16 +235,21 @@ function ObjCreate(proto, properties) {
   return new func();  // 返回创建的新对象，这里思考下，new func() 又做了什么事情呢？且往下看！
 };
 ```
+
 new func()的作用是创建一个新的对象，其中func是一个构造函数，在这个过程中，主要包含了如下步骤：  
 
 - 创建空对象obj;
 - 将obj的原型设置为构造函数的原型，obj.__proto__= func.prototype;
 - 以obj为上下文执行构造函数，func.call(obj);
 - 返回obj对象。
+
 ## 手写promise
+
 所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。Promise 提供统一的 API，各种异步操作都可以用同样的方法进行处理。
+
 - 对象的状态不受外界影响。Promise对象代表一个异步操作，有三种状态：pending（进行中）、fulfilled（已成功）和rejected（已失败）。只有异步操作的结果，可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。这也是Promise这个名字的由来，它的英语意思就是“承诺”，表示其他手段无法改变。
 - 一旦状态改变，就不会再变，任何时候都可以得到这个结果。Promise对象的状态改变，只有两种可能：从pending变为fulfilled和从pending变为rejected。只要这两种情况发生，状态就凝固了，不会再变了，会一直保持这个结果，这时就称为 resolved（已定型）。如果改变已经发生了，你再对Promise对象添加回调函数，也会立即得到这个结果。这与事件（Event）完全不同，事件的特点是，如果你错过了它，再去监听，是得不到结果的。
+
 > 摘自阮一峰ES6深入理解
 
 ### 引入三个问题
@@ -284,7 +304,9 @@ MyPromise.prototype.then = function (sucess, error) {
 ```
 
 ## 珂里化
+
 第一版 比较简单，也好理解
+
 ```
 var curry = function (fn) {
   // 取到fn之后的参数
@@ -395,11 +417,11 @@ function curry(fn, args) {
       return function () {
         clearTimeout(timer)
         timer = setTimeout(
-        	// 这么写 实际上没有效果
+         // 这么写 实际上没有效果
           fn.apply(this, arguments),
           // 下面的写法均有效果
           fn.bind(this, arguments),
-					fn,
+     fn,
           wait
         )
       }
@@ -414,7 +436,7 @@ function curry(fn, args) {
 下面写一个比较标准的debounce，可以正确响应参数和this
 
 ```
-	function debounce(fn, wait) {
+ function debounce(fn, wait) {
       var timer = null
       return function () {
         clearTimeout(timer)
@@ -464,7 +486,7 @@ function immedia(fn, wait) {
           wait
         )
         if(flag){
-        	// 触发后 开启保护
+         // 触发后 开启保护
           flag = false
           fn.apply(this, arguments)
         }
@@ -475,7 +497,7 @@ function immedia(fn, wait) {
 写在一个函数里，也很简单
 
 ```
-	function debounce(fn, wait, immediate) {
+ function debounce(fn, wait, immediate) {
       var timer = null
       if(immediate){
         var flag = true
@@ -530,7 +552,7 @@ function throttle(fn, wait) {
 ### 定时器
 
 ```
-	function throttle(fn, wait) {
+ function throttle(fn, wait) {
       let flag = true
       return function () {
         if (flag) {
@@ -543,8 +565,6 @@ function throttle(fn, wait) {
       }
     }
 ```
-
-
 
 ## deepclone
 

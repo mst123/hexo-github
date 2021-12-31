@@ -44,8 +44,6 @@ preloadImage() {
 
 ![img](https://juejin.cn/post/6893681741240909832)![点击并拖拽以移动](https://juejin.cn/post/6893681741240909832)这种方案主要是利用浏览器的缓存机制，由js代码在特定时机提前加载相应图片，优惠券列表渲染时就可以直接从缓存获取。不过，这种方案增加了额外的代码，需要自己控制好加载时机，并且将图片的url硬编码在了逻辑中。
 
-
-
 可以看出，以上两种方案能够解决我们的问题，但都存在一些缺点。
 
 那么，有没有更好的解决方案呢？答案是prefetch-一种由浏览器原生提供的预加载方案。
@@ -107,8 +105,6 @@ prefetch(链接预取）是一种浏览器机制，其利用浏览器空闲时�
 
 ![img](https://juejin.cn/post/6893681741240909832)![点击并拖拽以移动](https://juejin.cn/post/6893681741240909832)再次查看页面首次加载的效果：
 
-
-
 ![img](prefetch和preload/186fdb0cbe1044e4a27a5223387354e8~tplv-k3u1fbpfcp-watermark.awebp)
 
 字体样式闪动的现象没有了！我们对比下使用preload前后的network面板。
@@ -149,8 +145,6 @@ prefetch(链接预取）是一种浏览器机制，其利用浏览器空闲时�
 
 ![img](https://juejin.cn/post/6893681741240909832)![点击并拖拽以移动](https://juejin.cn/post/6893681741240909832)这显然不够方便，而且将资源路径硬编码在了页面中（实际上，ticket_bg.a5bb7c33.png后缀中的hash是构建过程自动生成的，所以硬编码的方式很多场景下本身就行不通）。webpack插件preload-webpack-plugin可以帮助我们将该过程自动化，结合htmlWebpackPlugin在构建过程中插入link标签。
 
-
-
 ```
 const PreloadWebpackPlugin = require('preload-webpack-plugin');
 ...
@@ -173,11 +167,9 @@ plugins: [
 
 ![img](https://juejin.cn/post/6893681741240909832)![点击并拖拽以移动](https://juejin.cn/post/6893681741240909832)PreloadWebpackPlugin配置总体上比较简单，需要注意的是include属性。该属性默认取值'asyncChunks'，表示仅预加载异步js模块；如果需要预加载图片、字体等资源，则需要将其设置为'allAssets'，表示处理所有类型的资源。
 
-
-
 但一般情况下我们不希望把预加载范围扩得太大，所以需要通过fileBlacklist或fileWhitelist进行控制。
 
-对于异步加载的模块，还可以通过webpack内置的/_ webpackPreload: true _/标记进行更细粒度的控制。
+对于异步加载的模块，还可以通过webpack内置的/_webpackPreload: true_/标记进行更细粒度的控制。
 
 以下面的代码为例，webpack会生成标签添加到html页面头部。
 

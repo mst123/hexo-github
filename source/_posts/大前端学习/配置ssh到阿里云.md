@@ -7,7 +7,9 @@ tags:
   - 阿里云
 ---
 解决方案最好去官网查看
+
 ## 简短的记录一下步骤
+
 - 申请阿里云服务器
 - 创建秘钥对，然后绑定到实例
 - 运行长命令
@@ -15,6 +17,7 @@ tags:
   - 应该会出现权限问题
 - 运行命令，获取权限 chmod 400 .pem文件的完整路径  chmod 400 ~/.ssh/alien-linux.pem
 - 配置config文件 vim ~/.ssh/config
+
   ```
     Host Aliyun #自定义别名
     HostName 39.106.100.189 #ssh服务器公网IP
@@ -22,14 +25,18 @@ tags:
     User root #ssh服务器用户名，默认root
     IdentityFile ~/.ssh/alien-linux.pem #秘钥文件路径
   ```
+
 - 这样差不多就ok了
 
 ## 在阿里云安装docker
+
 [docker-install](https://github.com/docker/docker-install)
+
 ```
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
 ```
+
 然后 需要安装 docker-compose 查找linux安装方法,mac docker客户端集成了docker-compose
 [compose](https://docs.docker.com/compose/install/)
 
@@ -38,15 +45,19 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-
 ```
 
 然后需要给脚本执行权限
+
 ```
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 ## 安装mongo
+
 ### 下载mongo
+
 docker pull mongo
 
-如果失败的话，可以配置中国镜像, 编写`/etc/docker/daemon.json` 
+如果失败的话，可以配置中国镜像, 编写`/etc/docker/daemon.json`
+
 ```
 {
   "registry-mirrors": ["https://<my-docker-mirror-host>"]
@@ -55,11 +66,13 @@ docker pull mongo
  "registry-mirrors": ["https://registry.docker-cn.com"]
 }
 ```
+
 然后重启docker  `systemctl restart docker.service`
 
 ### 运行mongo
 
 `docker run -d --name some-mongo -p 10050:27017 mongo`
+
 - -d 表示后台运行
 - -p 定义端口 10050:27017  容器端口27017映射到宿主机10050
 - --name 命名
@@ -91,7 +104,7 @@ centos：`firewall-cmd --zone=public --add-port=10050/tcp --permanent`  --perman
 
 ## 安装nodejs
 
-1.wget https://nodejs.org/dist/v6.10.3/node-v6.10.3-linux-x64.tar.xz //下载最新的稳定版 v6.10.3 到本地
+1.wget <https://nodejs.org/dist/v6.10.3/node-v6.10.3-linux-x64.tar.xz> //下载最新的稳定版 v6.10.3 到本地
 
 （最新 [https://nodejs.org/dist/v14.15.1/node-v14.15.1-linux-x64.tar.xz](https://links.jianshu.com/go?to=https%3A%2F%2Fnodejs.org%2Fdist%2Fv14.15.1%2Fnode-v14.15.1-linux-x64.tar.xz)）
 

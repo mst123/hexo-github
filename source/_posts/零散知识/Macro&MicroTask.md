@@ -8,10 +8,10 @@ tags:
 
 > 这个可以看浏览器原理
 
-micro-task和macro-task就是两种不同的任务队列 
+micro-task和macro-task就是两种不同的任务队列
 
 - macro-task:
-  - script(script标签里面的整体代码) 
+  - script(script标签里面的整体代码)
   - setTimeout
   - setInterval
   - setImmediate
@@ -30,6 +30,7 @@ JS开发人员应该对这些方法都不会太陌生——都是些常见的异
 每一次事件循环中，主进程都会先执行一个macroTask任务，这个任务就来自于所谓的MacroTask Queue队列；当该macroTask执行完后，Event loop会立马**调用microTask队列的任务，直到消费完所有的microtask，再继续下一个事件循环**。
 > 管中窥豹，microTask调用优先级较高于macroTask.  
 先看一个demo
+
 ```
 console.log('main start');
 
@@ -45,6 +46,7 @@ process.nextTick(() => {
 
 console.log('main end');
 ```
+
 看看它们的执行顺序是怎么样的：
 
 ```
@@ -55,7 +57,9 @@ console.log('main end');
 5   setTimeout
 6   process.nextTick 3
 ```
+
 大致流程如下所示：
+
 1. 先运行主程序（事实上主程序本身就是一个macroTask），主程序把setTimeout和process.nextTick分别放入MacroTask Queue和MicroTask Queue
 
 2. 主程序结束，这时候我们看到了第一二条的打印结果main start、main end
@@ -69,6 +73,7 @@ console.log('main end');
 6. 继续如4所示过程，Event Loop在Current MacroTask执行完成后消费MicroTask Queue，这时候我们有了最后一条输出process.nextTick 3
 
 **下面也是一道经常考的面试题,可以更好的理解async await**
+
 ```
 async function async1() {
   console.log('async1 start'); // 2

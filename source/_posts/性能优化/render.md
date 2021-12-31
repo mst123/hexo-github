@@ -13,13 +13,13 @@ tags:
 
 1. 触发视觉变化（不仅仅是js控制还有可能是css）
 2. 浏览器对样式进行重新计算
-3. 计算出新的元素布局 
+3. 计算出新的元素布局
 4. 浏览器进行重新绘制
 5. 渲染层的合成
 
 > 浏览器初次加载会完整的走过整个流程，但是之后我们可以对这个流程进行优化，避免非必要的流程
 
-###  布局(layouts)与绘制(paint) 
+### 布局(layouts)与绘制(paint)
 
 > **详细的回流重绘见下一篇文章**
 
@@ -36,12 +36,12 @@ tags:
      3. 增加或者移除样式表
      4. 内容变化，比如用户在 input 框中输入文字, CSS3 动画等
      5. 激活 `CSS` 伪类，比如 `:hover`
-     6. 操作`class`属性 
+     6. 操作`class`属性
      7. 脚本操作`DOM`
      8. 计算`offsetWidth`和`offsetHeight`属性
      9. 设置 style 属性的值
    - 当不可避免的出现回流时，应该避免 layout thrashing 布局抖动
-     -  避免回流（减少次数）
+     - 避免回流（减少次数）
      - 读写分离（可以借助fastdom）
 2. 重绘(`repaint`), 当计算好盒子模型的位置, 大小以及其他属性后, 浏览器就根据各自的特性进行绘制一遍, 显现出来给用户看
    - 重绘则是视觉效果变化引起的重新绘制。比如 `color` 或者 `background` 发生了变化，那就该给触发重绘的元素化化妆，化成它想要的样子。
@@ -50,9 +50,9 @@ tags:
 
 ### 复合线程(compositor thread)与图层(layers)
 
-详细介绍见 https://segmentfault.com/a/1190000014520786
+详细介绍见 <https://segmentfault.com/a/1190000014520786>
 
-淘宝团队的文章 https://fed.taobao.org/blog/taofed/do71ct/performance-composite/
+淘宝团队的文章 <https://fed.taobao.org/blog/taofed/do71ct/performance-composite/>
 
 提升到合成层的最好方法就是 用 **transfrom + opacity 搭配 will-change**
 
@@ -99,4 +99,3 @@ window.addEventListener("pointermove", () => {
 下图是rAF 和 rIF 的不同
 
 ![image-20210122142533699](./render/image-20210122142533699.png)
-

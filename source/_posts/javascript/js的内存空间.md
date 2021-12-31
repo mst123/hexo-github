@@ -35,10 +35,10 @@ tags:
 
 ```
 function foo(){
-	var a = " 极客时间 "
-	var b = a
-	var c = {name:" 极客时间 "}
-	var d = c
+ var a = " 极客时间 "
+ var b = a
+ var c = {name:" 极客时间 "}
+ var d = c
 }
 foo()
 ```
@@ -51,9 +51,9 @@ foo()
 
 #### 为什么一定要分堆和栈两个存储空间
 
-​	这是因为 JavaScript 引擎需要用栈来维护程序执行期间上下文的状态，如果栈空间大了话，所有的数据都存放在栈空间里面，那么会影响到上下文切换的效率，进而又影响到整个程序的执行效率。
+​ 这是因为 JavaScript 引擎需要用栈来维护程序执行期间上下文的状态，如果栈空间大了话，所有的数据都存放在栈空间里面，那么会影响到上下文切换的效率，进而又影响到整个程序的执行效率。
 
-​	下面简单介绍一下上下文的切换，比如文中的 foo 函数执行结束了，JavaScript 引擎需要离开当前的执行上下文，只需要将指针下移到上个执行上下文的地址就可以了，foo 函数执行上下文栈区空间全部回收。
+​ 下面简单介绍一下上下文的切换，比如文中的 foo 函数执行结束了，JavaScript 引擎需要离开当前的执行上下文，只需要将指针下移到上个执行上下文的地址就可以了，foo 函数执行上下文栈区空间全部回收。
 
 ![image-20210720141334853](js的内存空间/image-20210720141334853.png)
 
@@ -63,19 +63,19 @@ foo()
 
 ```
 function foo() {
-	var myName = " 极客时间 "
-	let test1 = 1
-	const test2 = 2
-	var innerBar = { 
-		setName:function(newName){
-			myName = newName
-		},
-		getName:function(){
-			console.log(test1)
-			return myName
-		}
-	}
-	return innerBar
+ var myName = " 极客时间 "
+ let test1 = 1
+ const test2 = 2
+ var innerBar = { 
+  setName:function(newName){
+   myName = newName
+  },
+  getName:function(){
+   console.log(test1)
+   return myName
+  }
+ }
+ return innerBar
 }
 var bar = foo()
 bar.setName(" 极客邦 ")
@@ -91,7 +91,7 @@ console.log(bar.getName())
 
 - 在编译过程中，遇到内部函数 setName，JavaScript 引擎还要对内部函数做一次快速的词法扫描，发现该内部函数引用了 foo 函数中的 myName 变量，由于是内部函数引用了外部函数的变量，所以 JavaScript 引擎判断这是一个闭包，于是在堆空间创建换一个“closure(foo)”的对象（这是一个内部对象，JavaScript 是无法访问的），用来保存 myName 变量。
 
--  接着继续扫描到 getName 方法时，发现该函数内部还引用变量 test1，于是JavaScript 引擎又将 test1 添加到“closure(foo)”对象中。这时候堆中的“closure(foo)”对象中就包含了 myName 和 test1 两个变量了。
+- 接着继续扫描到 getName 方法时，发现该函数内部还引用变量 test1，于是JavaScript 引擎又将 test1 添加到“closure(foo)”对象中。这时候堆中的“closure(foo)”对象中就包含了 myName 和 test1 两个变量了。
 
 - 由于 test2 并没有被内部函数引用，所以 test2 依然保存在调用栈中。
 
@@ -103,4 +103,3 @@ console.log(bar.getName())
   > - 然后“command+f"(mac) 或者 "ctrl+f"(win),搜索“setName”，然后你就会发现setName对象下面包含了 **raw_outer_scope_info_or_feedback_metadata**，对闭包的引用数据就在这里面。（实际上也看不到闭包的数据）
 
 ![image-20210720143331806](js的内存空间/image-20210720143331806.png)
-

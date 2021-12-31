@@ -21,7 +21,7 @@ tags:
 
 #### 借用工具进行优化
 
-- html-minifier (webpack已经集成) 
+- html-minifier (webpack已经集成)
 
 ### css优化
 
