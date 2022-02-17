@@ -1,5 +1,6 @@
 ---
 title: linux基本命令
+date: 2021-05-10
 categories: 
   - 大前端
 tags: 

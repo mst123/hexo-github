@@ -1,5 +1,6 @@
 ---
 title: vue初始化流程简单分析
+date: 2021-01-19
 categories: 
   - vue
 tags: 
@@ -21,12 +22,12 @@ Vue.prototype._init = function(options) {
       vm
   )
   // ...
-  initLifecycle(vm) // 开始一系列的初始化
+  initLifecycle(vm) // 开始一系列的初始化 
   initEvents(vm)
   initRender(vm)
   callHook(vm, 'beforeCreate')        //执行 beforeCreate 钩子
   initInjections(vm)
-  initState(vm)
+  initState(vm) // observe
   initProvide(vm)
   callHook(vm, 'created')                    //执行 created 钩子
   // ...
@@ -50,9 +51,11 @@ Vue.prototype._init = function(options) {
 
 - **initEvents(vm)**: 主要作用是将父组件使用`v-on`或`@`注册的自定义事件添加到子组件的私有属性`vm._events`中；
 
-- **initRender(vm)**: 主要作用是初始化用来将`render`函数转为`vnode`的两个方法`vm._c` 和`vm.$createElement`。用户自定义的`render`函数的参数`h`就是`vm.$createElement`方法，它可以返回`vnode`。
+- **initRender(vm)**: 主要作用是初始化用来将`render`函数转为`vnode`的方法`vm.$createElement`。用户自定义的`render`函数的参数`h`就是`vm.$createElement`方法，它可以返回`vnode`。此阶段还会进行`$attrs` `$listeners` `$slots` `$scopedSlots`的处理
 
-  > 等以上操作全部完成，就会执行`beforeCreate`钩子函数，此时用户可以在函数中通过`this`访问到`vm.$parent`和`vm.$createElement`等有限的属性和方法。
+  > 等以上操作全部完成，就会执行`beforeCreate`钩子函数，此时用户可以在函数中通过`this`访问到`vm.$parent`和`vm.$createElement ` `$attrs` `$listeners` `$slots` `$scopedSlots`等有限的属性和方法。
+  >
+  > ![image-20220118205925251](vue初始化流程分析/image-20220118205925251.png)
 
 - **触发beforeCreate**
 
@@ -181,7 +184,7 @@ export function mountComponent(
 
 - 触发`beforeMount`
 
-- 在`mountComponent`方法中，**会实例化一个watcher，watcher执行完内部逻辑后（响应式关键）**，执行` updateComponent`方法将`vm._render()`返回的vnode挂载到真实节点中
+- 在`mountComponent`方法中，**会实例化一个watcher，watcher执行完内部逻辑后（响应式关键）**，执行`updateComponent`方法将`vm._render()`返回的vnode挂载到真实节点中
 
 ```
 // 生成一个watcher实例，updateComponent作为watcher函数的回调
@@ -215,27 +218,27 @@ Vue.prototype._render = function() {
 
 #### observer
 
-vue会针对对象数据类型进行`observer`函数处理，方法的作用就是给非 VNode 的对象类型数据添加一个`Observer`类 
+`initState`阶段，vue会针对对象数据类型进行`observer`函数处理，方法的作用就是给非 VNode 的对象类型数据添加一个`Observer`类
 
 举个例子, 下面的data 会有6次observer处理，会有6个Observer类
 
 ```
 data = {
- 	a: 1,
- 	b: 2,
- 	c: [1, 2, {a: 1}],
- 	d: {
- 		a: {
- 			b: 1
- 		}
- 	}
+  a: 1,
+  b: 2,
+  c: [1, 2, {a: 1}],
+  d: {
+   a: {
+    b: 1
+   }
+  }
 }
 data 一次
 c 一次
-	c {a:1} 一次
+ c {a:1} 一次
 d 一次
-	a 一次
-		b 一次
+ a 一次
+  b 一次
 ```
 
 Observer会递归处理对象类型，有一个dep实例属性，用处在 defineReactive 中 childOb.dep.depend()，（父对象变化会影响子对象）
@@ -412,7 +415,7 @@ const targetStack = []
 
 上一节我们提到在`mountComponent` 函数中实例化了一个**`render watcher`** 实例，现在来重点分析一下。
 
-**`render watcher`** 是一个比较特殊的watcher实例，会挂载到vm._watcher上，并且持有该组件响应数据所有的dep实例，所有的dep实例也会持有**`render watcher`** ，==每个组件有且仅有一个render watch==
+**`render watcher`** 是一个比较特殊的watcher实例，会挂载到vm._watcher上，并且持有该组件响应数据所有的dep实例，所有的dep实例也会持有**`render watcher`** ，***每个组件有且仅有一个render watch***
 
 首先看一下watcher的代码
 
@@ -477,7 +480,7 @@ pushTarget(this)
 // pushTarget 代码如下，入栈并把当前的watcher赋值给dep
 
 /* function pushTarget (_target) {
-	targetStack.push(target)
+ targetStack.push(target)
   Dep.target = target
 } */
 
@@ -647,18 +650,156 @@ export default {
 - 我们再重点关注一下computed watcher中的deps
   - 其中一个是data1对应的dep，subs存在三个watcher，对应render user computed
   - 还有一个是data2对应的dep，subs存在二个watcher，对应render  computed
+- // TODO 为什么根data的`__ob__`持有的dep没有关联的watcher，也没有watcher关联它 
 
 ### 总结
 
 根据自己的理解，进行一个简短的总结，方便理解记忆
 
-- vue在init阶段中的initData，对data进行初始化，针对对象类型进行递归处理，使用observer函数处理
+- vue在init阶段中的initData
+  - initProps(vm, opts.props) 对prop进行`defineReactive`设置`set`和`get`
+  - initMethods(vm, opts.methods) 
+  - initData(vm)  对data进行初始化，针对对象类型进行递归处理，使用`observer`函数处理
+  - initComputed 针对每个computed生成一个对应的watcher，并在访问get函数时触发依赖收集
+  - initWatch(vm, opts.watch) 生成`user watcher`，并完成依赖收集
 - 每一个observer函数，都会实例化一个Observer实例，挂载到对象类型的`__ob__`上
 - Observer在实例化的过程中，会针对对象的每一个key用defineReactive进行处理
 - defineReactive会生成一个dep实例，并设置key的getter和setter
-- 在mouted阶段，vue会初始化一个watcher实例，watcher在实例化的过程中会将Dep.target指向自身，然后运行回调函数，并且有一个入栈的操作(可能是递归处理的时候方便恢复，因为是子组件先mouted，这是我自己猜测的)
+- 在mouted阶段，vue会初始化一个`render watcher`实例，watcher在实例化的过程中会将Dep.target指向自身，然后运行回调函数，并且有一个入栈的操作(可能是递归处理的时候方便恢复，因为是子组件先mouted，这是我自己猜测的)
 - render watch对应的回调函数就是`vm._update(vm._render(), hydrating)`，在构建虚拟dom的过程中，会触发视图依赖数据的getter函数(在构建虚拟dom的过程中，应该会深度遍历子组件，先完成子组件的依赖收集，这也是watch入栈出栈的原因吧)
 - getter函数 会将数据对应的dep和当前的render watch 互相链接（持有）
 - 虚拟dom及挂载完成，render watch 会进行出栈
 - 执行 cleanupDeps ，用新的订阅替换旧订阅（性能优化，详细参考黄轶blog）
 
+### 其它需要掌握的点
+
+#### keep-alive组件
+
+https://ustbhuangyi.github.io/vue-analysis/v2/extend/keep-alive.html#%E5%86%85%E7%BD%AE%E7%BB%84%E4%BB%B6
+
+需要注意的点
+
+- Keep-alive缓存的是vnode
+- keep-alive 只缓存第一个子组件
+- `vnode.elm` 缓存了 `vnode` 创建生成的 DOM 节点
+- 再次激活的时候跳过mount过程，直接把dom插入目标元素中
+
+#### 数组原型拦截
+
+简单的描述一下过程：
+
+在observe数组时，会将数组的`__proto__`指向由`Array.prototype`拓展而来的原型对象，该对象会原原本本的执行数组原生的方法，并针对七种方法做了拓展，**把新添加的值变成一个响应式对象，并且再调用 `ob.dep.notify()` 手动触发依赖通知**
+
+```
+import { def } from '../util/index'
+
+const arrayProto = Array.prototype
+export const arrayMethods = Object.create(arrayProto)
+
+const methodsToPatch = [
+  'push',
+  'pop',
+  'shift',
+  'unshift',
+  'splice',
+  'sort',
+  'reverse'
+]
+
+/**
+ * Intercept mutating methods and emit events
+ */
+methodsToPatch.forEach(function (method) {
+  // cache original method
+  const original = arrayProto[method]
+  def(arrayMethods, method, function mutator (...args) {
+    const result = original.apply(this, args)
+    // 数组对象的__ob__
+    const ob = this.__ob__
+    let inserted
+    switch (method) {
+      case 'push':
+      case 'unshift':
+        inserted = args
+        break
+      case 'splice':
+        inserted = args.slice(2)
+        break
+    }
+    if (inserted) ob.observeArray(inserted)
+    // notify change
+    ob.dep.notify()
+    return result
+  })
+})
+```
+
+只是拓展了数组原型链还不够，还需要将数组的`__proto__`指向拓展后的类，这段代码在vue源码中Observe类中
+
+````
+ if (Array.isArray(value)) {
+      if (hasProto) {
+        protoAugment(value, arrayMethods)
+      } else {
+        copyAugment(value, arrayMethods, arrayKeys)
+      }
+      this.observeArray(value)
+    } else {
+      this.walk(value)
+    }
+````
+
+
+
+#### 生命周期
+
+![img](vue初始化流程分析/44114780-3aca-11eb-85f6-6fac77c0c9b3-20220215152913357.png)
+
+##### 要掌握每个生命周期什么时候被调用
+
+![Snipaste_2021-09-06_20-27-19](vue初始化流程分析/Snipaste_2021-09-06_20-27-19.png)
+
+1. beforeCreate 在实例初始化之后，数据观测(data observer) 之前被调用。
+   1. initLifecycle(vm): 主要作用是确认组件的父子关系和初始化某些实例属性。找到父组件实例赋值给`vm.$parent`，将自己`push`给父组件的`$children`；
+   2. initEvents(vm): 主要作用是将父组件使用`v-on`或`@`注册的自定义事件添加到子组件的私有属性`vm._events`中；
+   3. initRender(vm): 主要作用是初始化用来将`render`函数转为`vnode`的两个方法`vm._c` 和`vm.$createElement`。用户自定义的`render`函数的参数`h`就是`vm.$createElement`方法，它可以返回`vnode`。此阶段还会进行`$attrs` `$listeners` `$slots` `$scopedSlots`的处理, 此时用户可以在函数中通过`this`访问到`vm.$parent`和`vm.$createElement` `$attrs` `$listeners` `$slots` `$scopedSlots`等有限的属性和方法。等以上操作全部完成，就会执行`beforeCreate`钩子函数
+2. created 实例已经创建完成之后被调用。在这一步，实例已完成以下的配置：数据观测(data observer)，属性和方法的运算，
+   watch/event 事件回调。这里没有$el。这 3 个初始化方法先初始化`inject`，然后初始化`props/data`状态，最后初始化`provide`，这样做的目的是可以在`props/data`中使用`inject`内所注入的内容。
+   等以上操作全部完成，就会执行`created`钩子函数，此时用户可以在函数中通过`this`访问到`vm`中的`props`，`methods`，`data`，`computed`，`watch`和`inject`等大部分属性和方法。
+   1. initInjections(vm): 初始化`inject`，使得`vm`可以访问到对应的依赖；
+   2. initState(vm): 初始化会被使用到的状态，状态包括`props`，`methods`，`data`，`computed`，`watch`五个选项。调用相应的`init`方法，使用`vm.$options`中提供的选项对这些状态进行初始化，其中`initData`方法会调用`observe(data, true)`，实现对`data`中属性的监听，实际上是使用`Object.defineProperty`方法定义属性的`getter`和`setter`方法；
+   3. initProvide(vm)：初始化`provide`，使得`vm`可以为子组件提供依赖(所以在`initState`后)。
+3. beforeMount 在挂载开始之前被调用：相关的 render 函数首次被调用。
+4. mounted el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用该钩子。
+5. beforeUpdate 数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前。
+6. updated 由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子。
+7. beforeDestroy 实例销毁之前调用。在这一步，实例仍然完全可用。
+8. destroyed Vue 实例销毁后调用。调用后， Vue 实例指示的所有东西都会解绑定，所有的事件监听器会被移除，所有的子实例也会被销毁。 该钩子在服务器端渲染期间不被调用
+
+##### 要掌握每个生命周期内部可以做什么事
+
+1. created 实例已经创建完成，因为它是最早触发的原因可以进行一些数据，资源的请求。
+2. mounted 实例已经挂载完成，可以进行一些DOM操作
+3. beforeUpdate 可以在这个钩子中进一步地更改状态，这不会触发附加的重渲染过程。
+4. updated 可以执行依赖于 DOM 的操作。然而在大多数情况下，你应该避免在此期间更改状态，因为这可能会导致更新无限循环。该钩子在服务器端渲染期间不被调用。
+5. destroyed 可以执行一些优化操作,清空定时器，解除绑定事件
+
+##### Vue 的父组件和子组件生命周期钩子
+
+- 加载渲染过程
+
+父 beforeCreate -> 父 created -> 父 beforeMount -> 子 beforeCreate -> 子 created -> 子 beforeMount -> 子 mounted -> 父 mounted
+
+- 子组件更新过程
+
+父 beforeUpdate -> 子 beforeUpdate -> 子 updated -> 父 updated
+
+- 子组件销毁过程
+
+父 beforeDestroy -> 子 beforeDestroy -> 子 destroyed -> 父 destroyed
+
+##### diff算法
+
+https://vue3js.cn/interview/vue/diff.html#%E4%BA%8C%E3%80%81%E6%AF%94%E8%BE%83%E6%96%B9%E5%BC%8F
+
+https://juejin.cn/post/6994959998283907102#comment

@@ -1,11 +1,14 @@
 ---
 title: vuex源码分析-简易流程
+date: 2021-02-09
 categories: 
   - vue
 tags: 
   - vue
   - vuex源码分析
 ---
+
+![image-20220214140159456](vuex/image-20220214140159456.png)
 
 先放一张store的代码结构图
 

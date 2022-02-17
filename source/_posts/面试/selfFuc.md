@@ -1,5 +1,6 @@
 ---
 title: 常用手写函数
+data: 2020-12-08
 categories: 
   - 面试
 tags: 
@@ -239,7 +240,7 @@ function ObjCreate(proto, properties) {
 new func()的作用是创建一个新的对象，其中func是一个构造函数，在这个过程中，主要包含了如下步骤：  
 
 - 创建空对象obj;
-- 将obj的原型设置为构造函数的原型，obj.__proto__= func.prototype;
+- 将obj的原型设置为构造函数的原型，obj.**proto**= func.prototype;
 - 以obj为上下文执行构造函数，func.call(obj);
 - 返回obj对象。
 

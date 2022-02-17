@@ -1,5 +1,6 @@
 ---
 title: prefetch和preload
+date: 2021-10-20
 categories: 
   - 性能优化
 tags: 
@@ -236,5 +237,3 @@ import(/* webpackPreload: true */ 'AsyncModule');
 8、最后我们来看下preload和prefetch的浏览器兼容性。
 
 ![img](prefetch和preload/f12f50cef0ce46f596cd1e4756ad23c6~tplv-k3u1fbpfcp-watermark.awebp)![img](prefetch和preload/e13b12dbdb4e4499ba1d22788cd30b02~tplv-k3u1fbpfcp-watermark.awebp)可以看到，两者的兼容性目前都还不是太好。好在不支持preload和prefetch的浏览器会自动忽略它，因此可以将它们作为一种渐进增强功能，优化我们页面的资源加载，提升性能和用户体验。
-
-> 作者： Sha Chaoheng

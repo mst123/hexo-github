@@ -1,5 +1,6 @@
 ---
 title: 工作中遇到的-小-问题记录
+date: 2020年05月18日
 categories: 
   - 问题记录
 tags: 
@@ -679,4 +680,35 @@ var obj = {
 };
 JSON.stringify(obj);      // '"bar"'
 JSON.stringify({x: obj}); // '{"x":"bar"}'
+```
+
+## inject provide 响应式
+
+provide使用函数可以实现响应式，看起来不像是能响应的样子。。
+
+```javascript
+// 父
+data() {
+  return {
+    ceshiObj1: {
+      a: 1
+    },
+  }
+},
+provide () {
+  return {
+    getInfo: () => this.ceshiObj1
+  }
+},
+methods: {
+  testInject() {
+    this.ceshiObj1.a++
+  },
+}
+// 子
+computed: {
+  test() {
+    return this.getInfo().a
+  }
+}
 ```

@@ -1,5 +1,6 @@
 ---
 title: this绑定规则的详解
+date: 2021-07-20
 categories: 
   - javascript
   - this

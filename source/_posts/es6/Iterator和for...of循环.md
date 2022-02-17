@@ -1,5 +1,6 @@
 ---
 title: Iterator 和 for...of 循环
+date: 2020-05-12
 categories: 
   - ES6
 tags: 

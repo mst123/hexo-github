@@ -1,11 +1,13 @@
 ---
 title: 浏览器缓存原理
+date: 2021-08-24
 categories: 
   - HTTP
 tags: 
   - HTTP
   - cache
 ---
+转载
 
 # 一、浏览器缓存基本认识
 

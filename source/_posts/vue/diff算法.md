@@ -9,6 +9,7 @@ tags:
 
 **转载至** [blog](https://github.com/aooy/blog/issues/2)
 diff 算法 也可以参考[掘金小册](https://juejin.cn/book/6844733705089449991/section/6844733705232056328)
+
 # 目录
 
 - 前言
@@ -107,19 +108,19 @@ diff的过程就是调用patch函数，就像打补丁一样修改真实dom。
 
 ```
 function patch (oldVnode, vnode) {
-	if (sameVnode(oldVnode, vnode)) {
-		patchVnode(oldVnode, vnode)
-	} else {
-		const oEl = oldVnode.el
-		let parentEle = api.parentNode(oEl)
-		createEle(vnode)
-		if (parentEle !== null) {
-			api.insertBefore(parentEle, vnode.el, api.nextSibling(oEl))
-			api.removeChild(parentEle, oldVnode.el)
-			oldVnode = null
-		}
-	}
-	return vnode
+ if (sameVnode(oldVnode, vnode)) {
+  patchVnode(oldVnode, vnode)
+ } else {
+  const oEl = oldVnode.el
+  let parentEle = api.parentNode(oEl)
+  createEle(vnode)
+  if (parentEle !== null) {
+   api.insertBefore(parentEle, vnode.el, api.nextSibling(oEl))
+   api.removeChild(parentEle, oldVnode.el)
+   oldVnode = null
+  }
+ }
+ return vnode
 }
 ```
 
@@ -144,7 +145,7 @@ function patch (oldVnode, vnode) {
 
 ```
 if (sameVnode(oldVnode, vnode)) {
-	patchVnode(oldVnode, vnode)
+ patchVnode(oldVnode, vnode)
 } 
 ```
 
@@ -152,7 +153,7 @@ if (sameVnode(oldVnode, vnode)) {
 
 ```
 function sameVnode(oldVnode, vnode){
-	return vnode.key === oldVnode.key && vnode.sel === oldVnode.sel
+ return vnode.key === oldVnode.key && vnode.sel === oldVnode.sel
 }
 ```
 
@@ -164,15 +165,15 @@ function sameVnode(oldVnode, vnode){
 
 ```
 else {
-		const oEl = oldVnode.el
-		let parentEle = api.parentNode(oEl)
-		createEle(vnode)
-		if (parentEle !== null) {
-			api.insertBefore(parentEle, vnode.el, api.nextSibling(oEl))
-			api.removeChild(parentEle, oldVnode.el)
-			oldVnode = null
-		}
-	}
+  const oEl = oldVnode.el
+  let parentEle = api.parentNode(oEl)
+  createEle(vnode)
+  if (parentEle !== null) {
+   api.insertBefore(parentEle, vnode.el, api.nextSibling(oEl))
+   api.removeChild(parentEle, oldVnode.el)
+   oldVnode = null
+  }
+ }
 ```
 
 过程如下：
@@ -210,13 +211,13 @@ patchVnode (oldVnode, vnode) {
         api.setTextContent(el, vnode.text)
     }else {
         updateEle(el, vnode, oldVnode)
-    	if (oldCh && ch && oldCh !== ch) {
-	    	updateChildren(el, oldCh, ch)
-	    }else if (ch){
-	    	createEle(vnode) //create el's children dom
-	    }else if (oldCh){
-	    	api.removeChildren(el)
-	    }
+     if (oldCh && ch && oldCh !== ch) {
+      updateChildren(el, oldCh, ch)
+     }else if (ch){
+      createEle(vnode) //create el's children dom
+     }else if (oldCh){
+      api.removeChildren(el)
+     }
     }
 }
 ```
@@ -348,7 +349,7 @@ diff的遍历过程中，只要是对dom进行的操作都调用`api.insertBefor
 
 [![img](diff算法/diff7.png)](https://github.com/aooy/blog/blob/master/images/issues-2/diff7.png?raw=true)
 
-#### 下面举个例子，画出diff完整的过程，每一步dom的变化都用不同颜色的线标出。
+#### 下面举个例子，画出diff完整的过程，每一步dom的变化都用不同颜色的线标出
 
 1. a,b,c,d,e假设是4个不同的元素，我们没有设置key时，b没有复用，而是直接创建新的，删除旧的。
 

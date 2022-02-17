@@ -1,10 +1,13 @@
 ---
 title: git温故知新
+date: 2021-05-07
 categories: 
   - 大前端
 tags: 
   - git
 ---
+
+可以以那篇文章进行拓展，这篇文章作废掉
 
 ### 学习网址
 
@@ -44,6 +47,15 @@ git add [dir]
 git add .
 ```
 
+```git add -u <==> git add –update```
+**提交所有被删除和修改的文件到数据暂存区**
+
+```git add .```
+**提交所有修改的和新建的数据暂存区**
+
+```git add -A <==>git add –all```
+**提交所有被删除、被替换、被修改和新增的文件到数据暂存区**
+
 ##### 撤销git add
 
 撤销上次add
@@ -64,7 +76,7 @@ git reset a.txt
 git reset --mixed HEAD a.txt
 ```
 
-​ 其中，`mixed`是一个模式（mode）参数，如果`reset`省略这个选项的话默认是`mixed`模式；`HEAD`指定了一个历史提交的 hash 值；`a.txt`指定了一个或者多个文件。
+ 其中，`mixed`是一个模式（mode）参数，如果`reset`省略这个选项的话默认是`mixed`模式；`HEAD`指定了一个历史提交的 hash 值；`a.txt`指定了一个或者多个文件。
 
 **该命令的自然语言描述是：不改变`work dir`中的任何数据，将`stage`区域中的`a.txt`文件还原成`HEAD`指向的`commit history`中的样子**。就相当于把对`a.txt`的修改从`stage`区撤销，但依然保存在`work dir`中，变为`unstage`的状态。
 
@@ -111,7 +123,7 @@ git commit -m "msg" 暂存区提交到本地仓库
 
 ##### git push
 
-​ **git push** 命令用于从将本地的分支版本上传到远程并合并。
+ **git push** 命令用于从将本地的分支版本上传到远程并合并。
 
 命令格式如下：远程分支如果不存在，则会创建一个分支
 
@@ -264,11 +276,11 @@ git reset --hard commitID 回退版本 相当于删除中间的版本
 
 `git reset`  通过把分支记录回退几个提交记录来实现撤销改动
 
-​ `git reset HEAD~1` 回退到上次提交（撤销commit），但是文件修改后的内容还是存在于工作区的
+ `git reset HEAD~1` 回退到上次提交（撤销commit），但是文件修改后的内容还是存在于工作区的
 
 > 远程仓库做出的修改并没有回退哦，要记住
 
-​ 此时通过git log和 git reflog对比就能看出两条命令的明显区别了
+ 此时通过git log和 git reflog对比就能看出两条命令的明显区别了
 
 ![image-20210427154024280](git/image-20210427154024280.png)
 
@@ -310,19 +322,19 @@ git reset --hard commitID 回退版本 相当于删除中间的版本
 
 　　`git branch -d dev` 删除dev分支，如果在分支中有一些未merge的提交，那么会删除分支失败
 
-​  `git branch -D dev`：强制删除dev分支
+  `git branch -D dev`：强制删除dev分支
 
-​  `git branch -vv`  可以查看本地分支对应的远程分支
+  `git branch -vv`  可以查看本地分支对应的远程分支
 
 　　`git branch -m oldName newName`  给分支重命名
 
-​  `git branch -f main HEAD~3`  **强制修改分支位置** 向上移动3个位置
+  `git branch -f main HEAD~3`  **强制修改分支位置** 向上移动3个位置
 
-​  `git branch -f main commitID`  **强制修改分支位置**到指定commit
+  `git branch -f main commitID`  **强制修改分支位置**到指定commit
 
 ##### Git checkout
 
-​ `git checkout master` 将分支切换到master
+ `git checkout master` 将分支切换到master
 
 　`git checkout -b master` 如果分支存在则只切换分支，若不存在则创建并切换到master分支
 

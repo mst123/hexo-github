@@ -1,5 +1,6 @@
 ---
 title: websocket
+date: 2021-05-09
 categories: 
   - 大前端
 tags: 
@@ -12,7 +13,7 @@ tags:
 
 websocket是一种网络传输协议，可在单个TCP连接上进行全双工通信，位于OSI模型的应用层。
 
-#### 特点：
+#### 特点
 
 - tcp连接，与http协议兼容
 - 双向通信，主动推送
@@ -34,7 +35,7 @@ websocket是一种网络传输协议，可在单个TCP连接上进行全双工�
 #### web端
 
 ```
-		const ws = new WebSocket("ws://127.0.0.1:3000")
+  const ws = new WebSocket("ws://127.0.0.1:3000")
     ws.onopen = () => {
       // 向服务端发送数据
       ws.send("hello server")
@@ -46,9 +47,9 @@ websocket是一种网络传输协议，可在单个TCP连接上进行全双工�
     
     绑定多种时间，可以使用addEventListener
     ws.addEventListener("message", function(event) {
-  		var data = event.data;
-  		// 处理数据
-		});
+    var data = event.data;
+    // 处理数据
+  });
 ```
 
 ### server端
@@ -77,4 +78,3 @@ ws.on("open", () => {
   })
 })
 ```
-

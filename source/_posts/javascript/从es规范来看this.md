@@ -1,5 +1,6 @@
 ---
 title: 从ECMAScript规范解读this
+date: 2021-09-19
 categories: 
   - javascript
   - this

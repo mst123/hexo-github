@@ -1,5 +1,6 @@
 ---
 title: class 重难点
+date: 2020-05-12
 categories: 
   - ES6
 tags: 

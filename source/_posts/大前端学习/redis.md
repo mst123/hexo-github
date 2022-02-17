@@ -1,5 +1,6 @@
 ---
 title: redis
+date: 2021-05-25
 categories: 
   - 大前端
 tags: 
