@@ -15,7 +15,7 @@ git 简记，主要参考掘金小册和以前的视频笔记，构建一个简�
 - 提交所有被删除和修改的文件到数据暂存区
 
 ```
-git add -u <==> git add –update
+git add -u 或 git add –update
 ```
 
 - 提交所有修改的和新建的数据暂存区
@@ -27,24 +27,18 @@ git add .
 - 提交所有被删除、被替换、被修改和新增的文件到数据暂存区
 
 ```
-git add -A <==>git add –all
+git add -A 或 git add –all
 ```
 
 ### 撤销 add
 
 ```
-# 恢复暂存区的指定文件到工作区
-$ git checkout [file]
 
 # 恢复暂存区的所有文件到工作区 => vscode git工具中的 取消暂存所有更改
-$ git checkout .
 
-# **重置**暂存区的指定文件，与上一次commit保持一致，但工作区不变
-$ git reset [file]
+$ git reset HEAD 如果后面什么都不跟的话 就是上一次add 里面的全部撤销了 
 
-# **重置**暂存区与工作区，与上一次commit保持一致 => vscode git工具中的放弃所有更改
-$ git reset --hard
-
+$ git reset HEAD XXX/XXX/XXX.php 就是对某个php文件进行撤销了
 ```
 
 ### commit
@@ -216,9 +210,9 @@ merge有时产生冲突:
 
 处于冲突解决状态时
 
-​ 解决冲突，解决完冲突后进行commit时，会自动填入commit信息"这是一个merge信息"
+ 解决冲突，解决完冲突后进行commit时，会自动填入commit信息"这是一个merge信息"
 
-​ 放弃解决  `git merge --abort，`输入这行代码，你的 Git 仓库就会回到 `merge` 前的状态
+ 放弃解决  `git merge --abort，`输入这行代码，你的 Git 仓库就会回到 `merge` 前的状态
 
 ### checkout
 
@@ -227,13 +221,13 @@ merge有时产生冲突:
 `checkout` 本质上的功能其实是：签出（ checkout ）指定的 `commit`
 
 ```
-# 恢复暂存区的指定文件到工作区
+此命令用来放弃掉所有还没有加入到缓存区（就是 git add 命令）的修改
 
-$ git checkout [file]
+# 放弃单个文件修改,注意不要忘记中间的"--",不写就成了检出分支了!
+git checkout -- filepathname
 
-# 恢复暂存区的所有文件到工作区 => vscode git工具中的 取消暂存所有更改
-
-$ git checkout .
+# 放弃所有的文件修改
+git checkout . 
 
 # 切换到分支
 

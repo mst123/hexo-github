@@ -559,7 +559,7 @@ function throttle(fn, wait) {
         if (flag) {
           flag = false
           fn.apply(this, arguments)
-          setTimeout(function () {
+          setTimeouto=(function () {
             flag = true
           },wait)
         }
@@ -572,13 +572,13 @@ function throttle(fn, wait) {
 首先实现一个简单clone，包括对象 数组和基本类型的clone
 
 ```
-function deepClone(targer) {
-  if (typeof targer !== "object") {
-    return targer
+function deepClone(target) {
+  if (typeof target !== "object") {
+    return target
   } else {
-    const copy = Array.isArray(targer) ? [] : {}
-    for (const key in targer) {
-      copy[key] = deepClone(targer[key])
+    const copy = Array.isArray(target) ? [] : {}
+    for (const key in target) {
+      copy[key] = deepClone(target[key])
     }
     return copy
   }
@@ -591,7 +591,7 @@ function deepClone(targer) {
 
 这个存储空间，需要可以存储`key-value`形式的数据，且`key`可以是一个引用类型，我们可以选择`Map`这种数据结构：
 
-- 检查`map`中有无克隆过的对象
+- 检查`map`中有无克隆过的对象
 - 有 - 直接返回
 - 没有 - 将当前对象作为`key`，克隆对象作为`value`进行存储
 - 继续克隆
