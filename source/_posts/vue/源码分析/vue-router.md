@@ -21,7 +21,7 @@ vue-router的整体流程不难理解，难点在于一些功能的实现。
 
   - 混入，根组件保存router和route属性，通过混入`beforeCreated` 子组件递归持有根组件(Vue)
   
-    - ```
+    - ```javascript
       Object.defineProperty(Vue.prototype, '$route', {
         // 混入beforeCreated 保证所有组件都能访问到 _routerRoot vue根实例
         get () { return this._routerRoot._route }
@@ -390,5 +390,3 @@ function createMatcher (
   })
   // 1 2 3 4 5 6 7 8 9 遍历完了
   ```
-
-  

@@ -712,3 +712,30 @@ computed: {
   }
 }
 ```
+
+## defer和async
+
+js的执行都会阻塞html parsing
+
+![wfL82.png](peacetime/bVWhRl.png)
+
+## bind函数的参数
+
+直接看代码吧
+
+```
+function resolve(res) {
+  console.log(res);
+}
+
+function bindHandle(...rest) {
+  console.log(rest);
+}
+
+const after = bindHandle.bind(null, resolve, "promise")
+
+after("res","res2")
+
+[ [Function: resolve], 'promise', 'res', 'res2' ]
+```
+

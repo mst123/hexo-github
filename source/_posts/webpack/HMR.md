@@ -1,30 +1,31 @@
 ---
 title: webpack热更新
 data: 2022-01-04 14:53:13
-categories: 
+categories:
   - webpack
-tags: 
+tags:
   - webpack
   - HMR
 ---
 
 `Hot Module Replacement`，简称`HMR`，无需完全刷新整个页面的同时，更新模块。`HMR`的好处，在日常开发工作中体会颇深：**节省宝贵的开发时间、提升开发体验**。
 
-在这里简单介绍一个HMR的原理
+在这里简单介绍一个 HMR 的原理
 
-### HMR初始化
+### HMR 初始化
 
 #### webpack-dev-server
 
-Webpack-dev-server的执行过程，其实也是一个HMR开启的过程
+Webpack-dev-server 的执行过程，其实也是一个 HMR 开启的过程
 
-- 修改webpackOptions，添加两个入口文件，一个是websocket客户端代码，一个是热更新客户端代码(主要是用于检查更新逻辑)。
+- 修改 webpackOptions，添加两个入口文件，一个是 websocket 客户端代码，一个是热更新客户端代码(主要是用于检查更新逻辑)。
 
 - 启动`webpack`，生成`compiler`实例。`compiler`上有很多方法，比如可以启动 `webpack` 所有**编译**工作，以及**监听**本地文件的变化。
 
 - 使用`express`框架启动本地`server`，让浏览器可以请求本地的**静态资源**。
-  - 启动server的时候，监听compiler的done事件，当监听到一次`webpack`编译结束，就会调用`_sendStats`方法通过`websocket`给浏览器发送通知，`ok`和`hash`事件，这样浏览器就可以拿到最新的`hash`值了，做检查更新逻辑
-  - 生成 **webpack-dev-middleware** 中间件实例，保存在this.middleware（主要是本地文件的**编译**和**输出**以及**监听**）
+
+  - 启动 server 的时候，监听 compiler 的 done 事件，当监听到一次`webpack`编译结束，就会调用`_sendStats`方法通过`websocket`给浏览器发送通知，`ok`和`hash`事件，这样浏览器就可以拿到最新的`hash`值了，做检查更新逻辑
+  - 生成 **webpack-dev-middleware** 中间件实例，保存在 this.middleware（主要是本地文件的**编译**和**输出**以及**监听**）
 
 - 本地`server`启动之后，再去启动`websocket`服务，通过`websocket`，可以建立本地服务和浏览器的双向通信。这样就可以实现当本地文件发生变化，立马告知浏览器可以热更新代码啦！
 
@@ -50,7 +51,7 @@ Webpack-dev-server的执行过程，其实也是一个HMR开启的过程
 - 注册一系列事件。
 - 开启对本地文件的监听，当文件发生变化，重新编译，编译完成之后继续监听
 
-### 一次完整的HMR流程
+### 一次完整的 HMR 流程
 
 1. 当文件发生变化，就触发重新编译。当监听到一次`webpack`编译结束，`_sendStats`方法就通过`websoket`给浏览器发送通知
 
@@ -59,16 +60,16 @@ Webpack-dev-server的执行过程，其实也是一个HMR开启的过程
 
    ```
     this.sockWrite(sockets, 'hash', stats.hash);
-     if (stats.errors.length > 0) { 
-      this.sockWrite(sockets, 'errors', stats.errors); 
-     } else if (stats.warnings.length > 0) { 
-      this.sockWrite(sockets, 'warnings', stats.warnings); 
+     if (stats.errors.length > 0) {
+      this.sockWrite(sockets, 'errors', stats.errors);
+     } else if (stats.warnings.length > 0) {
+      this.sockWrite(sockets, 'warnings', stats.warnings);
      } else { this.sockWrite(sockets, 'ok'); }
    ```
 
    ![image-20220111134320575](HMR/image-20220111134320575.png)
 
-2. 客户端接受到ws消息后，`hash`事件更新当前`hash`值，ok事件触发`hotEmitter`
+2. 客户端接受到 ws 消息后，`hash`事件更新当前`hash`值，ok 事件触发`hotEmitter`
 
 ```
 // webpack-dev-server/client/index.js
@@ -90,15 +91,15 @@ socket(socketUrl, onSocketMessage);
 function reloadApp() {
  if (hot) {
         log.info('[WDS] App hot update...');
-        
+
         // hotEmitter其实就是EventEmitter的实例
         var hotEmitter = require('webpack/hot/emitter');
         hotEmitter.emit('webpackHotUpdate', currentHash);
-    } 
+    }
 }
 ```
 
-3. web-dev-server插入的客户端的另一个入口文件 `webpack/hot/dev-server.js`，监听`hotEmitter`事件，进行热更新检查 `check`
+3. web-dev-server 插入的客户端的另一个入口文件 `webpack/hot/dev-server.js`，监听`hotEmitter`事件，进行热更新检查 `check`
 
    ```
    // webpack/hot/dev-server.js
@@ -120,7 +121,7 @@ function reloadApp() {
                window.location.reload();
            });
    };
-   
+
    var hotEmitter = require("./emitter");
    hotEmitter.on("webpackHotUpdate", function(currentHash) {
        lastHash = currentHash;
@@ -179,7 +180,7 @@ function reloadApp() {
           module = installedModules[moduleId];
           // 删除过期的依赖
           delete outdatedDependencies[moduleId];
-          
+
           // 存储了被删掉的模块id，便于更新代码
           outdatedSelfAcceptedModules.push({
               module: moduleId
@@ -200,7 +201,7 @@ function reloadApp() {
       复制代码
       ```
 
-      3. 通过__webpack_require__执行相关模块的代码
+      3. 通过**webpack_require**执行相关模块的代码
 
       ```
       for (i = 0; i < outdatedSelfAcceptedModules.length; i++) {

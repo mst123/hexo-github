@@ -120,7 +120,6 @@ var jojo = new Student("jsd", 23);
 
 - 返回了一个对象，其实例属性是通过构造函数(Student)生成的
 - 对象的`__proto__`指向Student.prototype
-从过程分析
 - 创建一个空对象obj（{}）
 - 将obj的[[prototype]]属性指向构造函数constrc的原型（即obj.[[prototype]] = constrc.prototype）。
 - 将构造函数constrc内部的this绑定到新建的对象obj，执行constrc（也就是跟调用普通函数一样，只是此时函数的this为新创建的对象obj而已，就好像执行obj.constrc()一样）；
@@ -304,6 +303,170 @@ MyPromise.prototype.then = function (sucess, error) {
 }
 ```
 
+### 进阶的promise 
+
+实现then的链式调用
+
+```
+class MyPromise {
+  PromiseResult = null; // 终值
+  PromiseState = "pending"; // 状态
+  toDoFulFilled = null;
+  toDoRejected = null;
+  // 构造方法
+  constructor(executor) {
+    const resolve = (value) => {
+      setTimeout(() => {
+        console.log("resolve");
+        if (this.PromiseState !== "pending") return;
+        this.PromiseState = "fulfilled";
+        this.PromiseResult = value;
+
+        if (this.toDoFulFilled) {
+          this.toDoFulFilled(this.PromiseResult);
+        }
+      }, 0);
+    };
+    const reject = (reason) => {
+      setTimeout(() => {
+        if (this.PromiseState !== "pending") return;
+        this.PromiseState = "rejected";
+        this.PromiseResult = reason;
+
+        if (this.toDoRejected) {
+          this.toDoRejected(this.PromiseResult);
+        }
+      }, 0);
+    };
+    // 执行传进来的函数
+    try {
+      executor(resolve, reject);
+    } catch (error) {
+      reject(error);
+    }
+  }
+
+  then(onFulfilled, onRejected) {
+    return new MyPromise((resolve, reject) => {
+      const resolvePromise = (cb) => {
+        try {
+          // 这个prevRes 就是本次then的返回值
+          // cb 就是 onFulfilled  onRejected
+          const prevRes = cb(this.PromiseResult);
+          // TODO
+          if (prevRes instanceof MyPromise) {
+            prevRes.then(resolve, reject);
+          } else {
+            resolve(prevRes);
+          }
+        } catch (err) {
+          reject(err);
+          throw new Error(err);
+        }
+      };
+
+      this.toDoFulFilled = resolvePromise.bind(this, onFulfilled);
+      this.toDoRejected = resolvePromise.bind(this, onRejected);
+    });
+  }
+}
+
+/* const test1 = new MyPromise((resolve, reject) => {
+  resolve("成功");
+}).then(
+  (res) => {
+    console.log(res);
+  },
+  (error) => {
+    console.log(error);
+  }
+); */
+
+const test2 = new MyPromise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("定时器");
+  }, 2000);
+})
+  .then(
+    (res) => {
+      console.log(res);
+      return res + "链式调用";
+    },
+    (error) => {
+      console.log(error);
+    }
+  )
+  .then(
+    (res) => {
+      console.log(res);
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
+```
+
+
+
+### 限制promise并发
+
+主要的点
+
+- 在then方法里启动下一次任务
+- while为了塞满队列
+- task是一个待启动的promise
+
+```
+class MaxDuty{
+  used = 0
+  tasks = []
+  constructor(max) {
+    this.max = max
+  }
+  addTask(task) {
+    this.tasks.push(task)
+  }
+  walk() {
+    if (this.tasks.length && this.used < this.max) {
+      this.used++
+      const task = this.tasks.shift()
+      task().then(res => {
+        console.log(res);
+        this.used--
+        this.walk()
+      })
+    }
+  }
+  start() {
+    // 需要塞满
+    while (this.used < this.max) {
+      this.walk()
+    }
+  }
+}
+// 返回一个待启动的promise
+function createTask(time, order) {
+  return () => {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(order)
+      }, time);
+    })
+  }
+}
+
+const maxDuty = new MaxDuty(2)
+
+maxDuty.addTask(createTask(1000, 1))
+maxDuty.addTask(createTask(500, 2))
+maxDuty.addTask(createTask(300, 3))
+maxDuty.addTask(createTask(400, 4))
+
+maxDuty.start()
+```
+
+
+
 ## 珂里化
 
 第一版 比较简单，也好理解
@@ -335,6 +498,8 @@ var addCurry = curry(add);
 addCurry(1, 2) // 3
 ```
 
+### 固定参数
+
 第二版 稍微复杂一些，先看实现的效果会比较好理解一点
 
 ```
@@ -354,35 +519,76 @@ fn("a")("b", "c"); // ["a", "b", "c"]
 
 来看实现过程
 
-```
-function curry(fn, args) {
-  // 函数的形参个数
-  var length = fn.length;
-  // 实参个数是 arguments.length
-
-  // 参数数组，可能会在递归中传过来，如果没有，初始化为空
-  args = args || [];
-
+```javascript
+function curry(fn) {
+  // 形参的个数 
+  const length = fn.length
+  let args = [].slice.call(arguments, 1)
   return function () {
-    // args 可能是arguments 所以需要转成数组
-    var _args = args.slice(0), arg, i;
-    // 把参数传入数组
-    for (i = 0; i < arguments.length; i++) {
-      arg = arguments[i];
-      _args.push(arg);
-    }
-    // 如果参数还不够 则继续调用curry
-    if (_args.length < length) {
-      // 保证this的准确性
-      return curry.call(this, fn, _args);
+    const argChild = [...args,...arguments]
+    if (argChild.length === length) {
+      return fn.apply(this, argChild)
     } else {
-      // 参数凑够了，直接调用fn就可以了
-      return fn.apply(this, _args);
+      // console.log(argChild);
+      return curry.call(this, fn, ...argChild)
+      // return curry.apply(this, fn, argChild)
     }
-  };
+  }
 }
 
+
+var fn1 = curry(function(a, b, c) {
+  console.log([a, b, c]);
+});
+
+fn1("a", "b", "c") // ["a", "b", "c"]
+fn1("a", "b")("c") // ["a", "b", "c"]
+fn1("a")("b")("c") // ["a", "b", "c"]
+fn1("a")("b", "c") // ["a", "b", "c"]
+
+var fn2 = curry(function(a, b, c) {
+  console.log([a, b, c]);
+}, "a");
+
+fn2("b", "c") // ["a", "b", "c"]
+fn2("b")("c") // ["a", "b", "c"]
+
 ```
+
+
+
+### 不固定参数
+
+这种方法太刻意了，建议闲下来的时候看看
+
+```
+// fn(a,b,c) = fn(a)(b)(c)
+function curry(fn) {
+    return function core(...args) {
+        let params = []
+        params = params.concat(args)
+        let inner = function(...args2) {
+            params = params.concat(args2)
+            return core.apply(this, params)
+        }
+        inner.toString = ()=>{
+            return fn.apply(null, params)
+        }
+        return inner
+    }
+}
+
+function add(...args) {
+    return args.reduce((prev,curr)=>prev + curr, 0)
+}
+let curriedAdd = curry(add)
+alert(curriedAdd(1,2,3))
+
+alert(curriedAdd(1, 2)(1, 2, 3))
+curriedAdd(1)(2)(3)(4)(5)
+```
+
+
 
 ## 防抖
 
@@ -568,6 +774,28 @@ function throttle(fn, wait) {
 ```
 
 ## deepclone
+
+先看一个足够用的版本
+
+```
+function deepClone(obj) {
+  if (obj === 'null') return null
+  if (typeof obj !== 'object') return obj
+  if (obj instanceof RegExp) return new RegExp(obj)
+  if (obj instanceof Date) return new Date(obj)
+  let result = new obj.constructor
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+    	result[key] = deepClone(obj[key]) 
+    }
+  }
+  // 上面的for循环可以改成
+  // Reflect.ownKeys(key => result[key] = deepClone(obj[key])
+  return result
+}
+```
+
+
 
 首先实现一个简单clone，包括对象 数组和基本类型的clone
 

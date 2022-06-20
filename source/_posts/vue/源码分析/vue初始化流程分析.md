@@ -1,4 +1,5 @@
 ---
+.
 title: vue初始化流程简单分析
 date: 2021-01-19
 categories: 
@@ -7,6 +8,8 @@ tags:
   - vue
   - vue源码分析
 ---
+
+![image-20220325102130556](vue初始化流程分析/image-20220325102130556.png)
 
 本文简单的分析一下vue从初始化到完成渲染的流程，重点还是在于响应式的分析，生命周期函数简单带过。
 
@@ -688,7 +691,7 @@ https://ustbhuangyi.github.io/vue-analysis/v2/extend/keep-alive.html#%E5%86%85%E
 
 简单的描述一下过程：
 
-在observe数组时，会将数组的`__proto__`指向由`Array.prototype`拓展而来的原型对象，该对象会原原本本的执行数组原生的方法，并针对七种方法做了拓展，**把新添加的值变成一个响应式对象，并且再调用 `ob.dep.notify()` 手动触发依赖通知**
+在observe数组时，会将数组的`__proto__`指向由`Array.prototype`拓展而来的原型对象，该对象会原原本本的执行数组原生的方法，并针对七种方法做了重新定义，**把新添加的值变成一个响应式对象，并且再调用 `ob.dep.notify()` 手动触发依赖通知**
 
 ```
 import { def } from '../util/index'
@@ -712,7 +715,9 @@ const methodsToPatch = [
 methodsToPatch.forEach(function (method) {
   // cache original method
   const original = arrayProto[method]
+  // 重新定义七种方法
   def(arrayMethods, method, function mutator (...args) {
+    // 调用原方法 
     const result = original.apply(this, args)
     // 数组对象的__ob__
     const ob = this.__ob__
@@ -788,15 +793,15 @@ methodsToPatch.forEach(function (method) {
 
 - 加载渲染过程
 
-父 beforeCreate -> 父 created -> 父 beforeMount -> 子 beforeCreate -> 子 created -> 子 beforeMount -> 子 mounted -> 父 mounted
+​		父 beforeCreate -> 父 created -> 父 beforeMount -> 子 beforeCreate -> 子 created -> 子 beforeMount -> 子 mounted -> 父 mounted
 
 - 子组件更新过程
 
-父 beforeUpdate -> 子 beforeUpdate -> 子 updated -> 父 updated
+​		父 beforeUpdate -> 子 beforeUpdate -> 子 updated -> 父 updated
 
 - 子组件销毁过程
 
-父 beforeDestroy -> 子 beforeDestroy -> 子 destroyed -> 父 destroyed
+​		父 beforeDestroy -> 子 beforeDestroy -> 子 destroyed -> 父 destroyed
 
 ##### diff算法
 

@@ -123,13 +123,16 @@ centos：`firewall-cmd --zone=public --add-port=10050/tcp --permanent`  --perman
 
 > 第六、七步可能不需要，试一下npm -v 能不能ok，如果不可以的话，在运行第六步
 
-### docker的基本命令
+## docker的基本命令
 
-一、基本命令
+### 一、基本命令
+
 docker version查看docker版本
 docker info查看docker详细信息
 docker --help查看docker命令
-二、镜像命令
+
+### 二、镜像命令
+
 docker images查看docker镜像
 
 ![img](配置ssh到阿里云/20190407133555456.png)
@@ -160,7 +163,9 @@ docker rmi hello-world从Docker中删除hello-world镜像
 docker rmi -f hello-world从Docker中强制删除hello-world镜像
 docker rmi -f hello-world nginx从Docker中强制删除hello-world镜像和nginx镜像
 docker rmi -f $(docker images -p)通过docker images -p查询到的镜像ID来删除所有镜像
-三、容器命令。
+
+### 三、容器命令
+
 docker run [OPTIONS] IMAGE根据镜像新建并启动容器。IMAGE是镜像ID或镜像名称
 OPTIONS说明：
  --name=“容器新名字”：为容器指定一个名称

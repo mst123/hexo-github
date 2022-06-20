@@ -36,7 +36,7 @@ git add -A 或 git add –all
 
 # 恢复暂存区的所有文件到工作区 => vscode git工具中的 取消暂存所有更改
 
-$ git reset HEAD 如果后面什么都不跟的话 就是上一次add 里面的全部撤销了 
+$ git reset HEAD 如果后面什么都不跟的话 就是上一次add 里面的全部撤销了 相当于git restore -staged .
 
 $ git reset HEAD XXX/XXX/XXX.php 就是对某个php文件进行撤销了
 ```
@@ -106,6 +106,14 @@ reset后接参数
 #### 修改前几次的commit 不新增commit
 
 详见#rebase章节
+
+
+
+### restore 撤销
+
+`git restore --staged <file>...`  撤销add，将暂存区的文件从暂存区撤出，但不会更改文件的内容
+
+`git restore <file>...` 撤销工作区改动，已经在暂存区的改动不会撤销 相当于 `git checkout -- filepathname `
 
 ### push
 
@@ -307,11 +315,11 @@ HEAD-->master-->commitID，通常情况下，HEAD会一直跟随着当前分支�
 
 3. 查看未提交的内容：diff
 
-   1. 查看暂存区和上一条 `commit` 的区别：`git diff --staged`（或 `--cached`）
+   1. 查看暂存区和上一条 `commit` 的区别：`git diff --staged`（或 `--cached`）也就是暂存区 tobe commit的内容
 
    2. 查看工作目录和暂存区的区别：`git diff` 不加选项参数
 
-   3. 查看工作目录和上一条 `commit` 的区别：`git diff HEAD(commitID)` **vscode默认展示的**
+   3. 查看工作目录和上一条 `commit` 的区别：`git diff HEAD(commitID)` **vscode默认展示的**,也就是工作目录和暂存区所有的改动相较于最新commit的区别
 
 > git reflog  查看**本地所有**的所有操作记录（包括分支、包括已经被删除的 commit 记录和 reset 的操作）,适合找回
 
