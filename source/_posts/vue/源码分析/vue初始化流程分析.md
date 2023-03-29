@@ -50,7 +50,9 @@ Vue.prototype._init = function(options) {
 首先，将用户提供的`options`对象，父组件定义在子组件上的`event`、`props`(子组件实例化时)，`vm`原型方法，和`Vue`构造函数内置的选项合并成一个新的`options`对象，赋值给`vm.$options`。
 接下来，执行 3 个初始化方法：
 
-- **initLifecycle(vm)**: 主要作用是确认组件的父子关系和初始化某些实例属性。找到父组件实例赋值给`vm.$parent`，将自己`push`给父组件的`$children`；
+- **initLifecycle(vm)**: 主要作用是确认组件的父子关系（定位非抽象父级）和初始化某些实例属性。找到父组件实例赋值给`vm.$parent`，将自己`push`给父组件的`$children`；
+
+- ![image-20230308115942545](vue初始化流程分析/image-20230308115942545.png)
 
 - **initEvents(vm)**: 主要作用是将父组件使用`v-on`或`@`注册的自定义事件添加到子组件的私有属性`vm._events`中；
 
@@ -492,7 +494,7 @@ pushTarget(this)
 
 首先说明，`Dep.target`  和 `targetStack` 均为全局属性
 
-实际上就是把 `Dep.target` 赋值为当前的**渲染 `watcher`**(貌似一个实例仅有一个) 并压栈（为了恢复用）。接着又执行了：
+实际上就是把 `Dep.target` 赋值为当前的**渲染 `watcher`**(貌似一个实例仅有一个) 并压栈（为了恢复用，vue3中是为了满足嵌套watch）。接着又执行了：
 
 ```js
 value = this.getter.call(vm, vm)

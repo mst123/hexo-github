@@ -10,6 +10,8 @@ tags:
 ---
 ## 介绍一下commonjs循环加载的处理方式
 
+[有循环加载的原理解释，理解起来更加清晰](https://juejin.cn/post/6994224541312483336#heading-3)
+
 脚本文件`a.js`代码如下。
 
 ```javascript

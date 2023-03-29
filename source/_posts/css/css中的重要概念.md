@@ -13,37 +13,39 @@ tags:
 
 文档中的层叠上下文由满足以下任意一个条件的元素形成：
 
+**小总结**
+
+z-index相关：
+
+- z-index不为auto
+  - position 为absolute relative fixed sticky（后两种z-index无限制）
+  - flex grid容器的子元素
+- 新属性css3相关
+  - transform 变换
+  - filter 过滤器
+- 和性能方面有关系
+  - will-change
+  - contain
+
+**详细介绍**
+
 - 文档根元素（`<html>`）；
-
-- [`position`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/position) 值为 `absolute`（绝对定位）或 `relative`（相对定位）且 [`z-index`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/z-index) 值不为 `auto`的元素；
-
+- [`position`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/position) 值为 `absolute`（绝对定位）或 `relative`（相对定位）且 [`z-index`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/z-index) 值不为 `auto` 的元素；
 - [`position`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/position) 值为 `fixed`（固定定位）或 `sticky`（粘滞定位）的元素（沾滞定位适配所有移动设备上的浏览器，但老的桌面浏览器不支持）；
-
-- flex ([`flexbox` (en-US)](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox)) 容器的子元素，且 [`z-index`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/z-index) 值不为 `auto`；
-
+- flex ([`flex`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex)) 容器的子元素，且 [`z-index`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/z-index) 值不为 `auto`；
 - grid ([`grid`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/grid)) 容器的子元素，且 [`z-index`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/z-index) 值不为 `auto`；
-
 - [`opacity`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/opacity) 属性值小于 `1` 的元素（参见 [the specification for opacity](https://www.w3.org/TR/css3-color/#transparency)）；
-
 - [`mix-blend-mode`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/mix-blend-mode) 属性值不为 `normal` 的元素；
-
 - 以下任意属性值不为`none`的元素：
-
   - [`transform`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transform)
   - [`filter`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/filter)
+  - [`backdrop-filter`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/backdrop-filter)
   - [`perspective`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/perspective)
   - [`clip-path`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/clip-path)
   - [`mask`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/mask) / [`mask-image`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/mask-image) / [`mask-border`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/mask-border)
-
 - [`isolation`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/isolation) 属性值为 `isolate` 的元素；
-
-- [`-webkit-overflow-scrolling`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/-webkit-overflow-scrolling) 属性值为 `touch` 的元素；
-
 - [`will-change`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/will-change) 值设定了任一属性而该属性在 non-initial 值时会创建层叠上下文的元素（参考[这篇文章](https://dev.opera.com/articles/css-will-change-property/)）；
-
-- [`contain`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/contain) 属性值为 `layout`、`paint` 或包含它们其中之一的合成值（比如 `contain: strict`、`contain: content`）的元素。
-
-在层叠上下文中，子元素同样也按照上面解释的规则进行层叠。 重要的是，其子级层叠上下文的 `z-index`值只在父级中才有意义。子级层叠上下文被自动视为父级层叠上下文的一个独立单元。
+- [`contain`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/contain) 属性值为 `layout`、`paint` 或包含它们其中之一的合成值（比如 `contain: strict`、`contain: content`）的元素。在层叠上下文中，子元素同样也按照上面解释的规则进行层叠。 重要的是，其子级层叠上下文的 `z-index`值只在父级中才有意义。子级层叠上下文被自动视为父级层叠上下文的一个独立单元。
 
 总结:
 
@@ -82,9 +84,12 @@ Tips:  层叠上下文顺序
 
 几个重要的应用:
 
-- BFC 可以包含浮动的元素（清除浮动）
+- BFC 可以包含浮动的元素（清除浮动，防止高度塌陷）
+
 - 同一个 BFC 下外边距会发生折叠
+
 - BFC 可以阻止元素被浮动元素覆盖(左侧固定，右侧自适应布局)  
-- ![img](css中的重要概念/v2-5ebd48f09fac875f0bd25823c76ba7fa_720w-20211213143017754.png)
+
+  ![img](css中的重要概念/v2-5ebd48f09fac875f0bd25823c76ba7fa_720w-20211213143017754.png)
 
 可以参考[知乎](https://zhuanlan.zhihu.com/p/25321647)
