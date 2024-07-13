@@ -24,13 +24,13 @@ tags:
 ###### 六级标题
 ```
 
-![效果展示](markdown/title.gif)
+![效果展示](assets/markdown/title.gif)
 
 ## 段落
 
 Markdown 段落没有特殊的格式，直接编写文字就好，段落的换行是使用两个以上空格加上回车。  
 
-![效果展示](markdown/duanluo.jpg)
+![效果展示](assets/markdown/duanluo.jpg)
 
 ## 字体
 
@@ -45,7 +45,7 @@ __粗体文本__
 ___粗斜体文本___
 ```
 
-![效果展示](markdown/ziti.gif)
+![效果展示](assets/markdown/ziti.gif)
 
 ## 分隔线
 
@@ -59,7 +59,7 @@ ___粗斜体文本___
 ----------
 ```
 
-![效果展示](markdown/分隔线.jpg)
+![效果展示](assets/markdown/分隔线.jpg)
 
 ## 删除线
 
@@ -71,14 +71,14 @@ GOOGLE.COM
 ~~BAIDU.COM~~
 ```
 
-![效果展示](markdown/删除线.jpg)
+![效果展示](assets/markdown/删除线.jpg)
 
 ## 下划线
 
 下划线可以通过 HTML 的 <u> 标签来实现：
 
 <u>带下划线文本</u>
-![效果展示](markdown/下划线.jpg)
+![效果展示](assets/markdown/下划线.jpg)
 
 ## 脚注
 
@@ -92,4 +92,4 @@ Markdown 脚注的格式如下:
 创建脚注格式类似这样 [^RUNOOB]。  
 
 [^RUNOOB]: 菜鸟教程 -- 学的不仅是技术，更是梦想！！！
-![效果展示](markdown/脚注.gif)
+![效果展示](assets/markdown/脚注.gif)

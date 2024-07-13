@@ -24,7 +24,7 @@ ceshiProp: {
 
 渲染结果如下：
 
-![image-20210121155711009](vue/image-20210121155711009.png)
+![image-20210121155711009](assets/vue/image-20210121155711009.png)
 
 - Property：节点对象在内存中存储的属性，可以访问和设置。
 - Attribute：节点对象的其中一个属性( property )，值是一个对象，可以通过点访问法 document.getElementById('xx').attributes 或者 document.getElementById('xx').getAttributes('xx') 读取，通过 document.getElementById('xx').setAttribute('xx',value) 新增和修改。

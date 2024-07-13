@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "计算机基础/git.md",
+                "file": "浏览器原理/浏览器原理.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "计算机基础/git.md",
+                "file": "浏览器原理/浏览器原理.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "计算机基础/git.md",
+                "file": "浏览器原理/浏览器原理.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "计算机基础/git.md"
+                "file": "浏览器原理/浏览器原理.md"
               }
             }
           }
@@ -148,8 +148,12 @@
   },
   "active": "6ac3ad67bba3a541",
   "lastOpenFiles": [
-    "网络/鉴权2.md",
+    "正则/assets/基础知识/image-20240713140610224.png",
+    "正则/assets/基础知识",
+    "浏览器原理/assets/浏览器原理/image-20240713132045589.png",
+    "浏览器原理/assets/浏览器原理/image-20240713131950864.png",
     "计算机基础/git.md",
+    "网络/鉴权2.md",
     "计算机基础/git/160149e054fe485c~tplv-t2oaga2asx-watermark.gif",
     "计算机基础/git/1600acce7b90b009~tplv-t2oaga2asx-watermark.gif",
     "计算机基础/git/1600abd620a8e28c~tplv-t2oaga2asx-watermark.gif",
@@ -158,8 +162,6 @@
     "计算机基础/git/15fe333cb605b0de~tplv-t2oaga2asx-watermark.gif",
     "计算机基础/git/15fe243fce5804fd~tplv-t2oaga2asx-watermark.gif",
     "计算机基础/git/15fe19c8a3235853~tplv-t2oaga2asx-watermark.gif",
-    "计算机基础/git/15fe3de05468c613~tplv-t2oaga2asx-watermark.gif",
-    "计算机基础/git/15fdf0187f2f4b2d~tplv-t2oaga2asx-watermark.gif",
     "零散知识/垃圾回收.md",
     "零散知识/箭头函数.md",
     "零散知识/防抖和节流.md",
@@ -183,7 +185,6 @@
     "大前端学习/mongoose.md",
     "大前端学习/linux基本命令.md",
     "大前端学习/koa2.md",
-    "大前端学习/鉴权.md",
     "未命名 2.canvas",
     "未命名.canvas",
     "未命名 1.canvas",

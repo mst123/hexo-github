@@ -81,7 +81,7 @@ docker pull mongo
 
 检查docker下边运行的镜像 `docker ps`，如下图所示
 
-![Snipaste_2021-04-20_10-22-34](配置ssh到阿里云/Snipaste_2021-04-20_10-22-34.png)
+![Snipaste_2021-04-20_10-22-34](assets/配置ssh到阿里云/Snipaste_2021-04-20_10-22-34.png)
 
 ## 关闭防火墙
 
@@ -135,7 +135,7 @@ docker --help查看docker命令
 
 docker images查看docker镜像
 
-![img](配置ssh到阿里云/20190407133555456.png)
+![img](assets/配置ssh到阿里云/20190407133555456.png)
 
 PEPOSITORY：镜像的仓库源
 TAG：镜像的标签
@@ -148,11 +148,11 @@ docker images -p只显示镜像ID
 docker images --digests显示镜像的摘要信息
 docker images --no-trunc显示完整的镜像信息
 
-![img](配置ssh到阿里云/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpemhpcWlhbmcxMjE3,size_16,color_FFFFFF,t_70.png)
+![img](assets/配置ssh到阿里云/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpemhpcWlhbmcxMjE3,size_16,color_FFFFFF,t_70.png)
 
 docker search tomcat从Docker Hub上查找tomcat镜像
 
-![img](配置ssh到阿里云/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpemhpcWlhbmcxMjE3,size_16,color_FFFFFF,t_70-20210421214616330.png)
+![img](assets/配置ssh到阿里云/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpemhpcWlhbmcxMjE3,size_16,color_FFFFFF,t_70-20210421214616330.png)
 
 STARS：关注度
 docker search -s 30 tomcat从Docker Hub上查找关注度大于30的tomcat镜像

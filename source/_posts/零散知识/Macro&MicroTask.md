@@ -32,7 +32,7 @@ JS开发人员应该对这些方法都不会太陌生——都是些常见的异
 - **微任务列表存储在环境变量中**
 - 结论来自于v8原理 18节
 
-![示意图](./Macro&MicroTask/MacroTask1.jpg)  
+![示意图](assets/./Macro&MicroTask/MacroTask1.jpg)  
 每一次事件循环中，主进程都会先执行一个macroTask任务，这个任务就来自于所谓的MacroTask Queue队列；当该macroTask结束前，Event loop会立马**调用microTask队列的任务，直到消费完所有的microtask，再继续下一个事件循环**。
 
 > 管中窥豹，microTask调用优先级较高于macroTask.  

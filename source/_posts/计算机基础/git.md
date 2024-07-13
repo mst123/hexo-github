@@ -178,7 +178,7 @@ git push origin -d feature1 # 用 -d 参数把远程仓库的 branch 也删了
 git reflog 查看删除分支前的commit 
 ```
 
-![img](git/15fe3de05468c613~tplv-t2oaga2asx-watermark.gif)
+![img](assets/git/15fe3de05468c613~tplv-t2oaga2asx-watermark.gif)
 
 从图中可以看出，`HEAD` 的最后一次移动行为是「从 `branch1` 移动到 `master`」。而在这之后，`branch1` 就被删除了。所以它之前的那个 `commit` 就是 `branch1` 被删除之前的位置了，也就是第二行的 `c08de9a`。
 
@@ -199,7 +199,7 @@ git checkout -b branch1
 git merge branch
 ```
 
-![img](git/15fdea7b6646a1f3~tplv-t2oaga2asx-watermark.gif)
+![img](assets/git/15fdea7b6646a1f3~tplv-t2oaga2asx-watermark.gif)
 
 ```
 1 git checkout branch1
@@ -210,9 +210,9 @@ git merge branch
 
 ```
 
-![img](git/1600abd620a8e28c~tplv-t2oaga2asx-watermark.gif)
+![img](assets/git/1600abd620a8e28c~tplv-t2oaga2asx-watermark.gif)
 
-![img](git/160149e054fe485c~tplv-t2oaga2asx-watermark.gif)
+![img](assets/git/160149e054fe485c~tplv-t2oaga2asx-watermark.gif)
 
 ### merge
 
@@ -260,7 +260,7 @@ git checkout -b feature1
 
 首先介绍一下`HEAD`，可以把HEAD理解成一个指针，HEAD指针通常会指向一个分支，如下图所示
 
-![e'm](git/image-20210427143641740.png)
+![e'm](assets/git/image-20210427143641740.png)
 
 HEAD-->master-->commitID，通常情况下，HEAD会一直跟随着当前分支，并指向分支，而分支则指向当前最新的commit
 
@@ -268,15 +268,15 @@ HEAD-->master-->commitID，通常情况下，HEAD会一直跟随着当前分支�
 
 > 经过我的测试，在工作区和暂存区有改动的情况下，无法进行git checkout commitID or branch
 >
-> ![image-20220106112249119](git/image-20220106112249119.png)
+> ![image-20220106112249119](assets/git/image-20220106112249119.png)
 
 > 还有一种相对引用的方式，`git checkout main^`*3 或者  `git checkout main^^^` 或者 `git checkout main~3`  或者使用 `git checkout HEAD^^^`,这几种方法都是向父节点方向移动
 
-![image-20210427144448741](git/image-20210427144448741.png)
+![image-20210427144448741](assets/git/image-20210427144448741.png)
 
 如果此时进行commit，git的返回信息会提示我们，You are in ‘detached HEAD’ state.（你现在处于’分离头’状态）。然后会从C3节点出现一个新的节点，HEAD会指向新的节点，可以简单的理解为匿名分支（图和上边不一样，仅做示意）
 
-![image-20210427145825615](git/image-20210427145825615.png)
+![image-20210427145825615](assets/git/image-20210427145825615.png)
 
 我们现在有两个选择，如下：
 
@@ -343,7 +343,7 @@ git rebase 可以理解为嫁接、编辑（包括删除）commit链条，可以
 
 见合并分支一节，如果是commitID的话，效果如下图所示
 
-![img](git/15fe24400508e3c8~tplv-t2oaga2asx-watermark.gif)
+![img](assets/git/15fe24400508e3c8~tplv-t2oaga2asx-watermark.gif)
 
 如果在这里执行：
 
@@ -369,7 +369,7 @@ git rebase 第3个commit
 
 > 建议熟练后在进行骚操作
 
-![image-20220106215219131](git/image-20220106215219131.png)
+![image-20220106215219131](assets/git/image-20220106215219131.png)
 
 #### Git rebase --onto
 
@@ -383,7 +383,7 @@ git rebase --onto 目标commit 起点commit(不包括起点) 终点commit
 git rebase --onto 第3个commit 第4个commit branch1
 ```
 
-![img](git/15fe24400d7d73d0~tplv-t2oaga2asx-watermark.gif)
+![img](assets/git/15fe24400d7d73d0~tplv-t2oaga2asx-watermark.gif)
 
 同样的，你也可以用 `rebase --onto` 来撤销提交：
 
@@ -395,7 +395,7 @@ git rebase --onto HEAD^^ HEAD^ branch1
 
 也就是这样：
 
-![img](git/15fe243fce5804fd~tplv-t2oaga2asx-watermark.gif)
+![img](assets/git/15fe243fce5804fd~tplv-t2oaga2asx-watermark.gif)
 
 ### reset
 
@@ -415,7 +415,7 @@ git reset --hard C3
 >
 > 在relog里可以回溯哦，前提在git没回收commit节点之前
 
-![img](git/15fe19c8a3235853~tplv-t2oaga2asx-watermark.gif)
+![img](assets/git/15fe19c8a3235853~tplv-t2oaga2asx-watermark.gif)
 
 所以同理，`reset --hard` 不仅可以撤销提交，还可以用来把 `HEAD` 和 `branch` 移动到其他的任何地方。
 
@@ -423,7 +423,7 @@ git reset --hard C3
 git reset --hard branch2
 ```
 
-![img](git/15fe333cb605b0de~tplv-t2oaga2asx-watermark.gif)
+![img](assets/git/15fe333cb605b0de~tplv-t2oaga2asx-watermark.gif)
 
 ### tag
 
@@ -439,7 +439,7 @@ git tag
 
 加上`-l`命令可以使用通配符来过滤`tag`
 
-![img](git/webp)
+![img](assets/git/webp)
 
 #### 新建tag
 
@@ -465,7 +465,7 @@ git tag -a tagName -m "my tag"
 git show tagName
 ```
 
-![image-20220107114423786](git/image-20220107114423786.png)
+![image-20220107114423786](assets/git/image-20220107114423786.png)
 
 tag最重要的是有git commit号，后期我们可以根据这个commit号来回溯代码。
 
@@ -643,4 +643,4 @@ git checkout --detach
 
 执行这行代码，Git 就会把 `HEAD` 和 `branch` 脱离，直接指向当前 `commit`：
 
-![git checkout --detach](git/1600acce7b90b009~tplv-t2oaga2asx-watermark.gif)
+![git checkout --detach](assets/git/1600acce7b90b009~tplv-t2oaga2asx-watermark.gif)

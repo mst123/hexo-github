@@ -75,7 +75,7 @@ virtual dom 另一个重大意义就是提供一个中间层，js去写ui，ios�
 
 一篇相当经典的文章[React’s diff algorithm](https://calendar.perfplanet.com/2013/diff/)中的图，react的diff其实和vue的diff大同小异。所以这张图能很好的解释过程。**比较只会在同层级进行, 不会跨层级比较。**
 
-[![img](diff算法/diff.png)](https://github.com/aooy/blog/blob/master/images/issues-2/diff.png?raw=true)
+[![img](assets/diff算法/diff.png)](https://github.com/aooy/blog/blob/master/images/issues-2/diff.png?raw=true)
 
 举个形象的例子。
 
@@ -308,7 +308,7 @@ updateChildren (parentElm, oldCh, newCh) {
 
 代码很密集，为了形象的描述这个过程，可以看看这张图。
 
-[![img](diff算法/diff2.png)](https://github.com/aooy/blog/blob/master/images/issues-2/diff2.png?raw=true)
+[![img](assets/diff算法/diff2.png)](https://github.com/aooy/blog/blob/master/images/issues-2/diff2.png?raw=true)
 
 过程可以概括为：`oldCh`和`newCh`各有两个头尾的变量`StartIdx`和`EndIdx`，它们的2个变量相互比较，一共有4种比较方式。如果4种比较都没匹配，如果设置了key，就会用key进行比较，在比较的过程中，变量会往中间靠，一旦`StartIdx>EndIdx`表明`oldCh`和`newCh`至少有一个已经遍历完了，就会结束比较。
 
@@ -328,36 +328,36 @@ diff的遍历过程中，只要是对dom进行的操作都调用`api.insertBefor
 
 图中假设startIdx遍历到1。
 
-[![img](diff算法/diff3.png)](https://github.com/aooy/blog/blob/master/images/issues-2/diff3.png?raw=true)
+[![img](assets/diff算法/diff3.png)](https://github.com/aooy/blog/blob/master/images/issues-2/diff3.png?raw=true)
 
 1. 当`oldEndVnode`，`newStartVnode`值得比较，说明 `oldEndVnode.el`跑到了`newStartVnode.el`的前边。（这里笔误，应该是“oldEndVnode.el跑到了oldStartVnode.el的前边”，准确的说应该是oldEndVnode.el需要移动到oldStartVnode.el的前边”）
 
-[![img](diff算法/diff4.png)](https://github.com/aooy/blog/blob/master/images/issues-2/diff4.png?raw=true)
+[![img](assets/diff算法/diff4.png)](https://github.com/aooy/blog/blob/master/images/issues-2/diff4.png?raw=true)
 
 1. newCh中的节点oldCh里没有， 将新节点插入到`oldStartVnode.el`的前边。
 
-[![img](diff算法/diff5.png)](https://github.com/aooy/blog/blob/master/images/issues-2/diff5.png?raw=true)
+[![img](assets/diff算法/diff5.png)](https://github.com/aooy/blog/blob/master/images/issues-2/diff5.png?raw=true)
 
 在结束时，分为两种情况：
 
 1. `oldStartIdx > oldEndIdx`，可以认为`oldCh`先遍历完。当然也有可能`newCh`此时也正好完成了遍历，统一都归为此类。此时`newStartIdx`和`newEndIdx`之间的vnode是新增的，调用`addVnodes`，把他们全部插进`before`的后边，`before`很多时候是为null的。`addVnodes`调用的是`insertBefore`操作dom节点，我们看看`insertBefore`的文档：`parentElement.insertBefore(newElement, referenceElement)`
    如果referenceElement为null则newElement将被插入到子节点的末尾。如果newElement已经在DOM树中，newElement首先会从DOM树中移除。**所以`before`为null，newElement将被插入到子节点的末尾。**
 
-[![img](diff算法/diff6.png)](https://github.com/aooy/blog/blob/master/images/issues-2/diff6.png?raw=true)
+[![img](assets/diff算法/diff6.png)](https://github.com/aooy/blog/blob/master/images/issues-2/diff6.png?raw=true)
 
 1. `newStartIdx > newEndIdx`，可以认为`newCh`先遍历完。此时`oldStartIdx`和`oldEndIdx`之间的vnode在新的子节点里已经不存在了，调用`removeVnodes`将它们从dom里删除。
 
-[![img](diff算法/diff7.png)](https://github.com/aooy/blog/blob/master/images/issues-2/diff7.png?raw=true)
+[![img](assets/diff算法/diff7.png)](https://github.com/aooy/blog/blob/master/images/issues-2/diff7.png?raw=true)
 
 #### 下面举个例子，画出diff完整的过程，每一步dom的变化都用不同颜色的线标出
 
 1. a,b,c,d,e假设是4个不同的元素，我们没有设置key时，b没有复用，而是直接创建新的，删除旧的。
 
-[![img](diff算法/diff8.png)](https://github.com/aooy/blog/blob/master/images/issues-2/diff8.png?raw=true)
+[![img](assets/diff算法/diff8.png)](https://github.com/aooy/blog/blob/master/images/issues-2/diff8.png?raw=true)
 
 1. 当我们给4个元素加上唯一key时，b得到了的复用。
 
-[![img](diff算法/diff9.png)](https://github.com/aooy/blog/blob/master/images/issues-2/diff9.png?raw=true)
+[![img](assets/diff算法/diff9.png)](https://github.com/aooy/blog/blob/master/images/issues-2/diff9.png?raw=true)
 
 这个例子如果我们使用手工优化，只需要3步就可以达到。
 

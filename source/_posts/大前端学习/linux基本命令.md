@@ -22,7 +22,7 @@ tags:
 进入根目录 `cd /`
 文件目录及权限查看 `ls -la`
 
-![Snipaste_2021-04-20_15-10-14](linux基本命令/Snipaste_2021-04-20_15-10-14.png)
+![Snipaste_2021-04-20_15-10-14](assets/linux基本命令/Snipaste_2021-04-20_15-10-14.png)
 
 - 第一列代码文件的各种quanxian r-read w-write x-执行 r-remove
 - home目录相当于个人目录
@@ -35,7 +35,7 @@ tags:
 
 查看运行中的进程`top`  可以按M看详细内存
 
-![Snipaste_2021-04-20_15-18-17](linux基本命令/Snipaste_2021-04-20_15-18-17-8903123.png)
+![Snipaste_2021-04-20_15-18-17](assets/linux基本命令/Snipaste_2021-04-20_15-18-17-8903123.png)
 
 ## 文档相关
 

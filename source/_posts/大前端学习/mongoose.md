@@ -15,7 +15,7 @@ tags:
 
 - 首先在mongoDB里新建一个数据库，例如test1，借助Navicat工具
 
-![image-20210428170647238](mongoose/image-20210428170647238.png)
+![image-20210428170647238](assets/mongoose/image-20210428170647238.png)
 
 - 然后书写test.js
 
@@ -73,13 +73,13 @@ fluffy.save(function (err, fluffy) { // 保存一条数据
 
 - 新增了一条fluffy数据，数据库显示如下
 
-![image-20210428170922882](mongoose/image-20210428170922882.png)
+![image-20210428170922882](assets/mongoose/image-20210428170922882.png)
 
 ### 项目中按功能拆分
 
 一般会把mongoose初始化，Schema，和操作表分离
 
-![image-20210428181713717](mongoose/image-20210428181713717.png)
+![image-20210428181713717](assets/mongoose/image-20210428181713717.png)
 
 #### mongoose初始化
 

@@ -8,7 +8,7 @@ tags:
 ---
 ## 相关概念
 
-![image-20210428205046181](redis/image-20210428205046181.png)
+![image-20210428205046181](assets/redis/image-20210428205046181.png)
 
 ### redis特点
 

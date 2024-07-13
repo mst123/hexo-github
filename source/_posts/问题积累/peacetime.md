@@ -436,7 +436,7 @@ backgroundImage: "url(" + require("../assets/rwkb.png") + ")"
 ```
 
 写法是对的，但是死活出不来，我真是百思不得其解、、、后来发现打印出来的资源
-![资源](require1.png)
+![资源](assets/require1.png)
 ***
 然后我抱着试一试的态度多写了一个`.default`竟然成功了
 
@@ -454,8 +454,8 @@ console.log(require("@/assets/img/401.png"));
 
 ## element ui form表单动态验证
 
-![资源](form1.jpg)  
-![资源](form2.jpg)  
+![资源](assets/form1.jpg)  
+![资源](assets/form2.jpg)  
 切换某一个选项后，会动态改变表单及需要校验的表单  
 项目中采用v-if v-else方法改变表单，但是form rules验证会失效，解决方法：**给元素添加唯一KEY**  
 > 产生bug的原因在于diff算法的复用
@@ -717,7 +717,7 @@ computed: {
 
 js的执行都会阻塞html parsing
 
-![wfL82.png](peacetime/bVWhRl.png)
+![wfL82.png](assets/peacetime/bVWhRl.png)
 
 ## bind函数的参数
 

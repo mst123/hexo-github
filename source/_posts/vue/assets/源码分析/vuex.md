@@ -8,11 +8,11 @@ tags:
   - vuex源码分析
 ---
 
-![image-20220214140159456](vuex/image-20220214140159456.png)
+![image-20220214140159456](assets/vuex/image-20220214140159456.png)
 
 先放一张store的代码结构图
 
-![image-20210929161132720](vuex/image-20210929161132720.png)
+![image-20210929161132720](assets/vuex/image-20210929161132720.png)
 
 ## vuex初始化
 
@@ -51,7 +51,7 @@ function vuexInit () {
 
 其实就是处理用户输入的配置，重点在于通过module层级建立联系，如下图所示
 
-![image-20210929161649181](vuex/image-20210929161649181.png)
+![image-20210929161649181](assets/vuex/image-20210929161649181.png)
 
 ````javascript
 this._modules = new ModuleCollection(options)
@@ -93,7 +93,7 @@ if (module.namespaced) {
 
 #### 构造模块上下文环境
 
-![image-20210929171104463](vuex/image-20210929171104463.png)
+![image-20210929171104463](assets/vuex/image-20210929171104463.png)
 
 构造了一个模块上下文环境：保证模块内两种方法的正确运行和两种数据的正常访问
 
@@ -124,7 +124,7 @@ if (module.namespaced) {
 
 从这里就可以看出，所有的mutations都是挂载在根store的_mutations中，并且同名mutation不会覆盖，而且推入一个队列，顺序执行，下图是实际的代码
 
-![image-20210929172730903](vuex/image-20210929172730903.png)
+![image-20210929172730903](assets/vuex/image-20210929172730903.png)
 
 可以看出来，开启命名空间实际上就是在mutation事件名前拼接了一个路径
 

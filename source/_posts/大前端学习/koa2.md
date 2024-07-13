@@ -7,7 +7,7 @@ tags:
   - koa2
 ---
 
-<img src="koa2/Snipaste_2021-04-23_10-08-28.png" alt="Snipaste_2021-04-23_10-08-28" style="zoom:50%;" />
+![Snipaste_2021-04-23_10-08-28](assets/koa2/Snipaste_2021-04-23_10-08-28.png)
 
 [koa中文网](https://koa.bootcss.com/#links)  有比较详细的介绍
 详细可运行的配置在 [个人git项目](https://github.com/mst123/bfe)

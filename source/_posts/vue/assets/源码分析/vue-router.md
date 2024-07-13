@@ -11,7 +11,7 @@ tags:
 
 vue-router的整体流程不难理解，难点在于一些功能的实现。
 
-![image-20220213105205628](vue-router/image-20220213105205628.png)
+![image-20220213105205628](assets/vue-router/image-20220213105205628.png)
 
 首先初始化vue-router实例，然后vue.use，再然后根vue初始化，作为配置传入
 

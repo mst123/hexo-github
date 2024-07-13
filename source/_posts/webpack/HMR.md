@@ -67,7 +67,7 @@ Webpack-dev-server 的执行过程，其实也是一个 HMR 开启的过程
      } else { this.sockWrite(sockets, 'ok'); }
    ```
 
-   ![image-20220111134320575](HMR/image-20220111134320575.png)
+   ![image-20220111134320575](assets/HMR/image-20220111134320575.png)
 
 2. 客户端接受到 ws 消息后，`hash`事件更新当前`hash`值，ok 事件触发`hotEmitter`
 
@@ -139,7 +139,7 @@ function reloadApp() {
 
    3. 调用`hotDownloadUpdateChunk`发送`xxx/hash.hot-update.js` 请求，通过`JSONP`方式。
 
-      ![img](HMR/16ec04316d6ac5e3~tplv-t2oaga2asx-watermark.gif)
+      ![img](assets/HMR/16ec04316d6ac5e3~tplv-t2oaga2asx-watermark.gif)
 
    4. 返回结果后，要立即执行`webpackHotUpdate`这个方法。
 

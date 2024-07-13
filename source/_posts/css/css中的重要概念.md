@@ -55,7 +55,7 @@ z-index相关：
 
 Tips:  层叠上下文顺序
 
-![更完整的7阶层叠顺序图](css中的重要概念/2016-01-09_211116.png)
+![更完整的7阶层叠顺序图](assets/css中的重要概念/2016-01-09_211116.png)
 
 ### [BFC](https://developer.mozilla.org/zh-CN/docs/Web/Guide/CSS/Block_formatting_context)
 
@@ -90,6 +90,6 @@ Tips:  层叠上下文顺序
 
 - BFC 可以阻止元素被浮动元素覆盖(左侧固定，右侧自适应布局)  
 
-  ![img](css中的重要概念/v2-5ebd48f09fac875f0bd25823c76ba7fa_720w-20211213143017754.png)
+  ![img](assets/css中的重要概念/v2-5ebd48f09fac875f0bd25823c76ba7fa_720w-20211213143017754.png)
 
 可以参考[知乎](https://zhuanlan.zhihu.com/p/25321647)

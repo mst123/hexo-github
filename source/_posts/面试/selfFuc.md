@@ -219,7 +219,7 @@ function newOperator(ctor){
 
 - 通过Object.create(null)创建出来的对象，没有任何属性，显示No properties。我们可以将其当成一个干净的 map 来使用，自主定义 toString,hasOwnProperty等方法，并且不必担心将原型链上的同名方法被覆盖。
 - {...}创建的对象，使用for in遍历对象的时候，会遍历原型链上的属性，带来性能上的损耗。使用Object.create(null)则不必再对其进行遍历了。
-![两种方式的比较](write1.png)  
+![两种方式的比较](assets/write1.png)  
 
 手写Object.create
 
