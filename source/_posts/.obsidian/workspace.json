@@ -1,0 +1,186 @@
+{
+  "main": {
+    "id": "cbf1b31bab2f024a",
+    "type": "split",
+    "children": [
+      {
+        "id": "68300add4368683e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6ac3ad67bba3a541",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "零散知识/垃圾回收.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "7e056225fba95c5c",
+    "type": "split",
+    "children": [
+      {
+        "id": "e13bea6ac2f201ad",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "652283637ab818a1",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "45086163523beb73",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "66124579bb6bfce1",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "2b18b5c9969200ab",
+    "type": "split",
+    "children": [
+      {
+        "id": "246eaf0b80102280",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c98e118ee0793321",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "零散知识/垃圾回收.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "81185cc00e3008e4",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "零散知识/垃圾回收.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "c5fe467b477b5b99",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "610f7593fd6bb712",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "零散知识/垃圾回收.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "6ac3ad67bba3a541",
+  "lastOpenFiles": [
+    "零散知识/箭头函数.md",
+    "零散知识/垃圾回收.md",
+    "零散知识/防抖和节流.md",
+    "算法/递归链表翻转.md",
+    "大前端学习/git.md",
+    "计算机基础/计算机基础.md",
+    "webpack/HMR.md",
+    "vue/diff算法.md",
+    "vue/vue问题记录.md",
+    "nodejs/circle-load.md",
+    "markdown/markdown.md",
+    "JavaScript基础/前言.md",
+    "正则/疑难点记录.md",
+    "正则/基础知识.md",
+    "网络/http.md",
+    "网络/cache.md",
+    "网络/http2.md",
+    "网络/http3.md",
+    "网络/鉴权2.md",
+    "大前端学习/websocket.md",
+    "大前端学习/redis.md",
+    "大前端学习/mongoose.md",
+    "大前端学习/linux基本命令.md",
+    "大前端学习/koa2.md",
+    "大前端学习/鉴权.md",
+    "大前端学习/鉴权/image-20240711161659820.png",
+    "大前端学习/插件记录.md",
+    "未命名 2.canvas",
+    "未命名.canvas",
+    "未命名 1.canvas",
+    "面试/selfFuc/write1.png",
+    "浏览器原理/浏览器原理/image-20240616094156196.png",
+    "零散知识/未命名.canvas",
+    "数据类型/概览/Dingtalk_20210407163159.jpg"
+  ]
+}

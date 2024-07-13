@@ -1,4 +1,5 @@
 ---
+
 title: git 简记
 categories: 
   - 计算机基础
@@ -108,7 +109,6 @@ git reset --hard commitId
 详见#rebase章节
 
 
-
 ### restore 撤销
 
 `git restore --staged <file>...`  撤销add，将暂存区的文件从暂存区撤出，但不会更改文件的内容
@@ -200,13 +200,15 @@ git checkout -b branch1
 git merge branch
 ```
 
+![img](git/15fdea7b6646a1f3~tplv-t2oaga2asx-jj-mark:3024:0:0:0:q75.awebp)
+
 ```
 1 git checkout branch1
 2 git rebase master
+在 rebase 之后，记得切回 master 再 merge 一下，把 master 移到最新的 commit
 3 git checkout master
 4 git merge(rebase) branch1
 
-下图1 描述1-2 下图2 描述3-4
 ```
 
 ![img](git/1600abd620a8e28c~tplv-t2oaga2asx-watermark.awebp)
