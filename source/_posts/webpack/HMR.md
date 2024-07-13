@@ -139,7 +139,7 @@ function reloadApp() {
 
    3. 调用`hotDownloadUpdateChunk`发送`xxx/hash.hot-update.js` 请求，通过`JSONP`方式。
 
-      ![img](HMR/16ec04316d6ac5e3~tplv-t2oaga2asx-watermark.awebp)
+      ![img](HMR/16ec04316d6ac5e3~tplv-t2oaga2asx-watermark.gif)
 
    4. 返回结果后，要立即执行`webpackHotUpdate`这个方法。
 

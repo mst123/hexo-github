@@ -108,12 +108,11 @@ git reset --hard commitId
 
 详见#rebase章节
 
-
 ### restore 撤销
 
 `git restore --staged <file>...`  撤销add，将暂存区的文件从暂存区撤出，但不会更改文件的内容
 
-`git restore <file>...` 撤销工作区改动，已经在暂存区的改动不会撤销 相当于 `git checkout -- filepathname `
+`git restore <file>...` 撤销工作区改动，已经在暂存区的改动不会撤销 相当于 `git checkout -- filepathname`
 
 ### push
 
@@ -179,7 +178,7 @@ git push origin -d feature1 # 用 -d 参数把远程仓库的 branch 也删了
 git reflog 查看删除分支前的commit 
 ```
 
-![img](git/15fe3de05468c613~tplv-t2oaga2asx-watermark.awebp)
+![img](git/15fe3de05468c613~tplv-t2oaga2asx-watermark.gif)
 
 从图中可以看出，`HEAD` 的最后一次移动行为是「从 `branch1` 移动到 `master`」。而在这之后，`branch1` 就被删除了。所以它之前的那个 `commit` 就是 `branch1` 被删除之前的位置了，也就是第二行的 `c08de9a`。
 
@@ -200,7 +199,7 @@ git checkout -b branch1
 git merge branch
 ```
 
-![img](git/15fdea7b6646a1f3~tplv-t2oaga2asx-jj-mark:3024:0:0:0:q75.awebp)
+![img](git/15fdea7b6646a1f3~tplv-t2oaga2asx-watermark.gif)
 
 ```
 1 git checkout branch1
@@ -211,9 +210,9 @@ git merge branch
 
 ```
 
-![img](git/1600abd620a8e28c~tplv-t2oaga2asx-watermark.awebp)
+![img](git/1600abd620a8e28c~tplv-t2oaga2asx-watermark.gif)
 
-![img](git/160149e054fe485c~tplv-t2oaga2asx-watermark.awebp)
+![img](git/160149e054fe485c~tplv-t2oaga2asx-watermark.gif)
 
 ### merge
 
@@ -306,7 +305,7 @@ HEAD-->master-->commitID，通常情况下，HEAD会一直跟随着当前分支�
 
 - `git stash pop` ：命令恢复之前缓存的工作目录，将缓存堆栈中的对应stash删除，并将对应修改应用到当前的工作目录下,默认为第一个stash,即stash@{0}，如果要应用并删除其他stash，命令：git stash pop stash@{$num} ，比如应用并删除第二个：git stash pop stash@{1}
 
-- `git stash drop stash@{$num}`：丢弃stash@{$num}存储，从列表中删除这个存储192.168.1.110 
+- `git stash drop stash@{$num}`：丢弃stash@{$num}存储，从列表中删除这个存储192.168.1.110
 
 - `git stash clear`：删除所有缓存的stash
 
@@ -344,7 +343,7 @@ git rebase 可以理解为嫁接、编辑（包括删除）commit链条，可以
 
 见合并分支一节，如果是commitID的话，效果如下图所示
 
-![img](git/15fe24400508e3c8~tplv-t2oaga2asx-watermark.awebp)
+![img](git/15fe24400508e3c8~tplv-t2oaga2asx-watermark.gif)
 
 如果在这里执行：
 
@@ -384,7 +383,7 @@ git rebase --onto 目标commit 起点commit(不包括起点) 终点commit
 git rebase --onto 第3个commit 第4个commit branch1
 ```
 
-![img](git/15fe24400d7d73d0~tplv-t2oaga2asx-watermark.awebp)
+![img](git/15fe24400d7d73d0~tplv-t2oaga2asx-watermark.gif)
 
 同样的，你也可以用 `rebase --onto` 来撤销提交：
 
@@ -396,7 +395,7 @@ git rebase --onto HEAD^^ HEAD^ branch1
 
 也就是这样：
 
-![img](git/15fe243fce5804fd~tplv-t2oaga2asx-watermark.awebp)
+![img](git/15fe243fce5804fd~tplv-t2oaga2asx-watermark.gif)
 
 ### reset
 
@@ -416,7 +415,7 @@ git reset --hard C3
 >
 > 在relog里可以回溯哦，前提在git没回收commit节点之前
 
-![img](git/15fe19c8a3235853~tplv-t2oaga2asx-watermark.awebp)
+![img](git/15fe19c8a3235853~tplv-t2oaga2asx-watermark.gif)
 
 所以同理，`reset --hard` 不仅可以撤销提交，还可以用来把 `HEAD` 和 `branch` 移动到其他的任何地方。
 
@@ -424,7 +423,7 @@ git reset --hard C3
 git reset --hard branch2
 ```
 
-![img](git/15fe333cb605b0de~tplv-t2oaga2asx-watermark.awebp)
+![img](git/15fe333cb605b0de~tplv-t2oaga2asx-watermark.gif)
 
 ### tag
 
@@ -644,4 +643,4 @@ git checkout --detach
 
 执行这行代码，Git 就会把 `HEAD` 和 `branch` 脱离，直接指向当前 `commit`：
 
-![git checkout --detach](git/1600acce7b90b009~tplv-t2oaga2asx-watermark.awebp)
+![git checkout --detach](git/1600acce7b90b009~tplv-t2oaga2asx-watermark.gif)

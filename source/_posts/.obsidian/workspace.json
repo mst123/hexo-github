@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "零散知识/垃圾回收.md",
+                "file": "计算机基础/git.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "零散知识/垃圾回收.md",
+                "file": "计算机基础/git.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "零散知识/垃圾回收.md",
+                "file": "计算机基础/git.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "零散知识/垃圾回收.md"
+                "file": "计算机基础/git.md"
               }
             }
           }
@@ -148,8 +148,20 @@
   },
   "active": "6ac3ad67bba3a541",
   "lastOpenFiles": [
-    "零散知识/箭头函数.md",
+    "网络/鉴权2.md",
+    "计算机基础/git.md",
+    "计算机基础/git/160149e054fe485c~tplv-t2oaga2asx-watermark.gif",
+    "计算机基础/git/1600acce7b90b009~tplv-t2oaga2asx-watermark.gif",
+    "计算机基础/git/1600abd620a8e28c~tplv-t2oaga2asx-watermark.gif",
+    "计算机基础/git/15fe24400508e3c8~tplv-t2oaga2asx-watermark.gif",
+    "计算机基础/git/15fe24400d7d73d0~tplv-t2oaga2asx-watermark.gif",
+    "计算机基础/git/15fe333cb605b0de~tplv-t2oaga2asx-watermark.gif",
+    "计算机基础/git/15fe243fce5804fd~tplv-t2oaga2asx-watermark.gif",
+    "计算机基础/git/15fe19c8a3235853~tplv-t2oaga2asx-watermark.gif",
+    "计算机基础/git/15fe3de05468c613~tplv-t2oaga2asx-watermark.gif",
+    "计算机基础/git/15fdf0187f2f4b2d~tplv-t2oaga2asx-watermark.gif",
     "零散知识/垃圾回收.md",
+    "零散知识/箭头函数.md",
     "零散知识/防抖和节流.md",
     "算法/递归链表翻转.md",
     "大前端学习/git.md",
@@ -166,21 +178,15 @@
     "网络/cache.md",
     "网络/http2.md",
     "网络/http3.md",
-    "网络/鉴权2.md",
     "大前端学习/websocket.md",
     "大前端学习/redis.md",
     "大前端学习/mongoose.md",
     "大前端学习/linux基本命令.md",
     "大前端学习/koa2.md",
     "大前端学习/鉴权.md",
-    "大前端学习/鉴权/image-20240711161659820.png",
-    "大前端学习/插件记录.md",
     "未命名 2.canvas",
     "未命名.canvas",
     "未命名 1.canvas",
-    "面试/selfFuc/write1.png",
-    "浏览器原理/浏览器原理/image-20240616094156196.png",
-    "零散知识/未命名.canvas",
-    "数据类型/概览/Dingtalk_20210407163159.jpg"
+    "零散知识/未命名.canvas"
   ]
 }
