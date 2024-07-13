@@ -1,5 +1,4 @@
 ---
-.
 title: vue初始化流程简单分析
 date: 2021-01-19
 categories: 
@@ -58,7 +57,7 @@ Vue.prototype._init = function(options) {
 
 - **initRender(vm)**: 主要作用是初始化用来将`render`函数转为`vnode`的方法`vm.$createElement`。用户自定义的`render`函数的参数`h`就是`vm.$createElement`方法，它可以返回`vnode`。此阶段还会进行`$attrs` `$listeners` `$slots` `$scopedSlots`的处理
 
-  > 等以上操作全部完成，就会执行`beforeCreate`钩子函数，此时用户可以在函数中通过`this`访问到`vm.$parent`和`vm.$createElement ` `$attrs` `$listeners` `$slots` `$scopedSlots`等有限的属性和方法。
+  > 等以上操作全部完成，就会执行`beforeCreate`钩子函数，此时用户可以在函数中通过`this`访问到`vm.$parent`和`vm.$createElement` `$attrs` `$listeners` `$slots` `$scopedSlots`等有限的属性和方法。
   >
   > ![image-20220118205925251](vue初始化流程分析/image-20220118205925251.png)
 
@@ -655,7 +654,7 @@ export default {
 - 我们再重点关注一下computed watcher中的deps
   - 其中一个是data1对应的dep，subs存在三个watcher，对应render user computed
   - 还有一个是data2对应的dep，subs存在二个watcher，对应render  computed
-- // TODO 为什么根data的`__ob__`持有的dep没有关联的watcher，也没有watcher关联它 
+- // TODO 为什么根data的`__ob__`持有的dep没有关联的watcher，也没有watcher关联它
 
 ### 总结
 
@@ -663,7 +662,7 @@ export default {
 
 - vue在init阶段中的initData
   - initProps(vm, opts.props) 对prop进行`defineReactive`设置`set`和`get`
-  - initMethods(vm, opts.methods) 
+  - initMethods(vm, opts.methods)
   - initData(vm)  对data进行初始化，针对对象类型进行递归处理，使用`observer`函数处理
   - initComputed 针对每个computed生成一个对应的watcher，并在访问get函数时触发依赖收集
   - initWatch(vm, opts.watch) 生成`user watcher`，并完成依赖收集
@@ -680,7 +679,7 @@ export default {
 
 #### keep-alive组件
 
-https://ustbhuangyi.github.io/vue-analysis/v2/extend/keep-alive.html#%E5%86%85%E7%BD%AE%E7%BB%84%E4%BB%B6
+<https://ustbhuangyi.github.io/vue-analysis/v2/extend/keep-alive.html#%E5%86%85%E7%BD%AE%E7%BB%84%E4%BB%B6>
 
 需要注意的点
 
@@ -756,8 +755,6 @@ methodsToPatch.forEach(function (method) {
     }
 ````
 
-
-
 #### 生命周期
 
 ![img](vue初始化流程分析/44114780-3aca-11eb-85f6-6fac77c0c9b3-20220215152913357.png)
@@ -795,18 +792,18 @@ methodsToPatch.forEach(function (method) {
 
 - 加载渲染过程
 
-​		父 beforeCreate -> 父 created -> 父 beforeMount -> 子 beforeCreate -> 子 created -> 子 beforeMount -> 子 mounted -> 父 mounted
+​  父 beforeCreate -> 父 created -> 父 beforeMount -> 子 beforeCreate -> 子 created -> 子 beforeMount -> 子 mounted -> 父 mounted
 
 - 子组件更新过程
 
-​		父 beforeUpdate -> 子 beforeUpdate -> 子 updated -> 父 updated
+​  父 beforeUpdate -> 子 beforeUpdate -> 子 updated -> 父 updated
 
 - 子组件销毁过程
 
-​		父 beforeDestroy -> 子 beforeDestroy -> 子 destroyed -> 父 destroyed
+​  父 beforeDestroy -> 子 beforeDestroy -> 子 destroyed -> 父 destroyed
 
 ##### diff算法
 
-https://vue3js.cn/interview/vue/diff.html#%E4%BA%8C%E3%80%81%E6%AF%94%E8%BE%83%E6%96%B9%E5%BC%8F
+<https://vue3js.cn/interview/vue/diff.html#%E4%BA%8C%E3%80%81%E6%AF%94%E8%BE%83%E6%96%B9%E5%BC%8F>
 
-https://juejin.cn/post/6994959998283907102#comment
+<https://juejin.cn/post/6994959998283907102#comment>
