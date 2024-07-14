@@ -4,7 +4,7 @@ date: 2023-11-20
 categories: 
   - javascript
 tags: 
-  - JavaScript 风格指南
+  - 风格指南
 ---
 
 Original Repository: [ryanmcdermott/clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)

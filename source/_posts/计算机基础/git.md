@@ -3,7 +3,6 @@
 title: git 简记
 categories: 
   - 计算机基础
-  - git
 data: 2022-01-06 21:47:42
 tags: 
   - git

@@ -90,7 +90,7 @@ pagination_dir: page
 include:
 exclude:
 ignore:
-
+  - '**/.obsidian/**'
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
@@ -108,3 +108,4 @@ search:
   field: post
   format: html
   limit: 10000
+  

@@ -28,7 +28,7 @@ tags:
 
 ## W3C列出的HTTP方法 POST和GET的区别
 
-![区别](assets/./get&post/post-bg1.png)  
+![区别](assets/get&post/post-bg1.png)  
 
 ## 常见解答 get post的区别
 
