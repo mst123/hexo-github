@@ -4,14 +4,14 @@
     "type": "split",
     "children": [
       {
-        "id": "d5fc692efc28c2bc",
+        "id": "75a2a2df2c72414e",
         "type": "tabs",
         "children": [
           {
-            "id": "5f8f3547118189d9",
+            "id": "0d9289da0ca4df7e",
             "type": "leaf",
             "state": {
-              "type": "graph",
+              "type": "empty",
               "state": {}
             }
           }
@@ -87,7 +87,7 @@
                 "showSearch": false,
                 "searchQuery": "",
                 "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
+                "unlinkedCollapsed": false
               }
             }
           },
@@ -125,8 +125,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -138,26 +137,41 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "5f8f3547118189d9",
+  "active": "0d9289da0ca4df7e",
   "lastOpenFiles": [
-    "零散知识/事件循环及消息队列.md",
     "javascript/this/this.md",
+    "原型.md",
+    "javascript/深入执行上下文.md",
+    "scope.md",
+    "性能优化/prefetch和preload.md",
+    "性能优化/传输优化.md",
+    "assets/assets/浏览器原理/image-20210712222146731.png.md",
+    "面试/selfFuc.md",
+    "面试/prototype.md",
+    "网络/https加密过程.md",
+    "javascript/scope.md",
+    "javascript/this/this 1.md",
+    "javascript/this/this 2.md",
+    "网络/三次握手四次挥手.md",
+    "HTTP/HTTPS加密过程.md",
+    "javascript/变量提升的本质.md",
+    "网络/http.md",
+    "HTTP",
+    "计算机基础/计算机基础.md",
+    "零散知识/箭头函数.md",
+    "零散知识/防抖和节流.md",
+    "零散知识/事件循环及消息队列.md",
     "javascript/this/从es规范来看this.md",
     "2021-07-20.md",
     "计算机基础/git.md",
     "零散知识/未命名.canvas",
-    "计算机基础/计算机基础.md",
     "javascript/闭包",
-    "javascript/深入执行上下文.md",
     "javascript/this/assets/this/image-20210720111215903.png",
     "javascript/this/assets/this",
     "javascript/this/assets",
     "javascript/this",
-    "面试/selfFuc.md",
     "javascript/this.md",
     "浏览器原理/浏览器原理.md",
-    "网络/三次握手四次挥手.md",
-    "问题积累/peacetime.md",
     "assets/assets",
     "assets",
     "算法/leetcode刷题记录/assets/链表/640.png",
@@ -172,19 +186,6 @@
     "算法/leetcode刷题记录/assets/链表",
     "算法/leetcode刷题记录/assets/单调队列",
     "算法/leetcode刷题记录/assets/单调栈",
-    "算法/leetcode刷题记录/链表~.md",
-    "vue/vue问题记录.md",
-    "vue/源码分析/说明.md",
-    "vue/源码分析/vue初始化流程分析.md",
-    "vue/源码分析/vuex.md",
-    "vue/源码分析/vue-router.md",
-    "vue/diff算法.md",
-    "vue/assets/源码分析/vue初始化流程分析.md",
-    "面向对象/继承.md",
-    "零散知识/前端安全.md",
-    "网络/鉴权2.md",
-    "零散知识/垃圾回收.md",
-    "零散知识/箭头函数.md",
     "未命名 2.canvas",
     "未命名.canvas",
     "未命名 1.canvas"
