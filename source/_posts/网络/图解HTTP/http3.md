@@ -1,9 +1,10 @@
 ---
 title: 第 3 章　HTTP 报文内的 HTTP 信息
 date: 2021-02-24
-categories: 
-  - HTTP
-tags: 
+categories:
+  - 网络
+  - 图解HTTP
+tags:
   - HTTP
 ---
 HTTP 通信过程包括从客户端发往服务器端的请求及从服务器端返回客户端的响应。

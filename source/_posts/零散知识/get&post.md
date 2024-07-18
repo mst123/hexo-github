@@ -10,17 +10,17 @@ tags:
 ## POST提交数据时四种常见的数据格式
 
 - application/x-www-form-urlencoded
-  
-  > 浏览器的原生 表单，如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded方式提交数据。
+   浏览器的原生 表单，如果不设置 enctype 属性，那么最终就会以 application/x-www-form-urlencoded方式提交数据。
+
 - multipart/form-data
-  
-  > 我们使用表单上传文件时，必须让 表单的 enctype 等于 multipart/form-data
-- application/json
-  
-  > JSON 格式支持比键值对复杂得多的结构化数据
+   我们使用表单上传文件时，必须让 表单的 enctype 等于 multipart/form-data
+
+
+- application/json  
+  JSON 格式支持比键值对复杂得多的结构化数据
+
 - text/xml
-  
-  > XML-RPC（XML Remote Procedure Call）,它是一种使用 HTTP 作为传输协议，XML 作为编码方式的远程调用规范。
+  XML-RPC（XML Remote Procedure Call）,它是一种使用 HTTP 作为传输协议，XML 作为编码方式的远程调用规范。
 
 ****
 

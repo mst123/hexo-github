@@ -4,15 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "75a2a2df2c72414e",
+        "id": "f0f11eefe2657cf4",
         "type": "tabs",
         "children": [
           {
-            "id": "0d9289da0ca4df7e",
+            "id": "3f88fd4a4a0611e6",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "计算机基础/git.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -44,7 +48,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "xss",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -81,7 +85,8 @@
             "state": {
               "type": "backlink",
               "state": {
-                "collapseAll": false,
+                "file": "计算机基础/git.md",
+                "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "计算机基础/git.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,10 +124,13 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "计算机基础/git.md"
+              }
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -137,55 +146,55 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "0d9289da0ca4df7e",
+  "active": "3f88fd4a4a0611e6",
   "lastOpenFiles": [
-    "javascript/this/this.md",
-    "原型.md",
-    "javascript/深入执行上下文.md",
-    "scope.md",
-    "性能优化/prefetch和preload.md",
-    "性能优化/传输优化.md",
-    "assets/assets/浏览器原理/image-20210712222146731.png.md",
-    "面试/selfFuc.md",
-    "面试/prototype.md",
-    "网络/https加密过程.md",
-    "javascript/scope.md",
-    "javascript/this/this 1.md",
-    "javascript/this/this 2.md",
-    "网络/三次握手四次挥手.md",
-    "HTTP/HTTPS加密过程.md",
-    "javascript/变量提升的本质.md",
-    "网络/http.md",
-    "HTTP",
     "计算机基础/计算机基础.md",
-    "零散知识/箭头函数.md",
-    "零散知识/防抖和节流.md",
-    "零散知识/事件循环及消息队列.md",
-    "javascript/this/从es规范来看this.md",
-    "2021-07-20.md",
     "计算机基础/git.md",
-    "零散知识/未命名.canvas",
-    "javascript/闭包",
-    "javascript/this/assets/this/image-20210720111215903.png",
-    "javascript/this/assets/this",
-    "javascript/this/assets",
-    "javascript/this",
-    "javascript/this.md",
+    "零散知识/运算符优先级.md",
+    "零散知识/运算符.md",
+    "零散知识/事件循环及消息队列.md",
+    "零散知识/前端安全.md",
+    "零散知识/箭头函数.md",
+    "零散知识/垃圾回收.md",
+    "网络/图解HTTP/http1.md",
+    "网络/图解HTTP/http2.md",
+    "网络/图解HTTP/http3.md",
+    "网络/图解HTTP/http1~.md",
+    "网络/图解HTTP/http2~.md",
+    "网络/三次握手四次挥手.md",
+    "网络/assets.md",
+    "网络/网络协议/image-20210714153451934.png",
+    "网络/网络协议/image-20210714152647756.png",
+    "网络/网络协议/b20e3fe2fd2a486498a8683ff92fb69d~tplv-k3u1fbpfcp-watermark-20211220150615293.gif",
+    "网络/网络协议/HTTP权威指南第六章IP分组.jpeg",
+    "网络/网络协议/6b87668471004dffbe71ee14b7bd8c8d~tplv-k3u1fbpfcp-watermark.gif",
+    "网络/网络协议/49fcab711e4f43beb72f1b2d297bbf0f~tplv-k3u1fbpfcp-watermark-20211220150611420.gif",
+    "网络/网络协议/170723f106ff0306~tplv-t2oaga2asx-watermark.gif",
+    "网络/网络协议",
+    "网络/http的发展史/image-20230216173807167.png",
+    "网络/http的发展史/image-20210805145256682.png",
+    "网络/http的发展史/image-20210805145222668.png",
+    "网络/http的发展史",
+    "网络/https加密过程.md",
     "浏览器原理/浏览器原理.md",
-    "assets/assets",
-    "assets",
-    "算法/leetcode刷题记录/assets/链表/640.png",
-    "算法/leetcode刷题记录/assets/链表/640-20211019112840006.png",
-    "算法/leetcode刷题记录/assets/链表/640-20211019112839982.png",
-    "算法/leetcode刷题记录/assets/链表/640-20211019112839935.png",
-    "算法/leetcode刷题记录/assets/链表/640-20211019112839879.png",
-    "算法/leetcode刷题记录/assets/单调队列/image-20211109113118826.png",
-    "算法/leetcode刷题记录/assets/单调栈/图像.jpeg",
-    "算法/leetcode刷题记录/assets/单调栈/image-20211102141900110.png",
-    "算法/leetcode刷题记录/assets/单调栈/151635833917_.pic_副本.jpg",
-    "算法/leetcode刷题记录/assets/链表",
-    "算法/leetcode刷题记录/assets/单调队列",
-    "算法/leetcode刷题记录/assets/单调栈",
+    "网络/assets/http的发展史",
+    "javascript/深入执行上下文.md",
+    "网络/http的发展史.md",
+    "javascript/变量提升的本质.md",
+    "javascript/作用域.md",
+    "javascript/闭包.md",
+    "javascript/assets/闭包",
+    "javascript/原型链.md",
+    "网络/网络协议.md",
+    "网络/assets/网络协议",
+    "网络/图解HTTP/assets/http1",
+    "网络/http.md",
+    "网络/图解HTTP/http.md",
+    "网络/图解HTTP/assets/http3",
+    "网络/图解HTTP/assets/http2",
+    "网络/图解HTTP/assets/http",
+    "网络/图解HTTP/assets",
+    "零散知识/未命名.canvas",
     "未命名 2.canvas",
     "未命名.canvas",
     "未命名 1.canvas"

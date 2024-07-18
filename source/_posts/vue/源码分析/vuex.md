@@ -3,6 +3,7 @@ title: vuex源码分析-简易流程
 date: 2021-02-09
 categories: 
   - vue
+  - 源码分析
 tags: 
   - vue
   - vuex源码分析
@@ -35,11 +36,9 @@ function vuexInit () {
 
 通过声明周期函数，将store挂载到每一个组件上
 
-
-
 ## Store实例化
 
-我们把 `Store` 的实例化过程拆成 3 个部分，分别是 
+我们把 `Store` 的实例化过程拆成 3 个部分，分别是
 
 - 初始化模块
 - 安装模块
@@ -47,7 +46,7 @@ function vuexInit () {
 
 ### 初始化模块
 
-#### 	构建module树
+#### 构建module树
 
 其实就是处理用户输入的配置，重点在于通过module层级建立联系，如下图所示
 
@@ -106,7 +105,7 @@ if (module.namespaced) {
 举一个mutation的例子
 
 ```
-	module.forEachMutation((mutation, key) => {
+ module.forEachMutation((mutation, key) => {
     const namespacedType = namespace + key
     // 在root module下 注册了 命名空间 mutation 下同
     registerMutation(store, namespacedType, mutation, local)
@@ -131,12 +130,10 @@ if (module.namespaced) {
 这个地方也解除了我对vuex官方文档一段话的不解：
 
 ```
-	默认情况下，模块内部的 action、mutation 和 getter 是注册在**全局命名空间**的——这样使得多个模块能够对同一 mutation 或 action 作出响应。
+ 默认情况下，模块内部的 action、mutation 和 getter 是注册在**全局命名空间**的——这样使得多个模块能够对同一 mutation 或 action 作出响应。
 
-	如果希望你的模块具有更高的封装度和复用性，你可以通过添加 `namespaced: true` 的方式使其成为带命名空间的模块。当模块被注册后，它的所有 getter、action 及 mutation 都会自动根据模块注册的路径调整命名。例如：
+ 如果希望你的模块具有更高的封装度和复用性，你可以通过添加 `namespaced: true` 的方式使其成为带命名空间的模块。当模块被注册后，它的所有 getter、action 及 mutation 都会自动根据模块注册的路径调整命名。例如：
 ```
-
-
 
 ### 初始化 `store._vm`
 
@@ -151,7 +148,7 @@ resetStoreVM(this, state)
 利用vue的data和computed机制实现联系，关键代码如下
 
 ```
-	const wrappedGetters = store._wrappedGetters
+ const wrappedGetters = store._wrappedGetters
   const computed = {}
   forEachValue(wrappedGetters, (fn, key) => {
     // use computed to leverage its lazy-caching mechanism
@@ -175,4 +172,3 @@ resetStoreVM(this, state)
   })
   Vue.config.silent = silent
 ```
-

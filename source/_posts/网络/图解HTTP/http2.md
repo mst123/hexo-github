@@ -2,7 +2,8 @@
 title: 第 2 章　简单的 HTTP 协议
 date: 2021-02-02
 categories: 
-  - HTTP
+  - 网络
+  - 图解HTTP
 tags: 
   - HTTP
 ---

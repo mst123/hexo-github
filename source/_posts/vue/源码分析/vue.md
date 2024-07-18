@@ -1,14 +1,15 @@
 ---
-title: vue初始化流程简单分析
+title: vue初始化流程-简易流程
 date: 2021-01-19
 categories: 
   - vue
+  - 源码分析
 tags: 
   - vue
   - vue源码分析
 ---
 
-![image-20220325102130556](assets/vue初始化流程分析/image-20220325102130556.png)
+![image-20220325102130556](assets/vue/image-20220325102130556.png)
 
 本文简单的分析一下vue从初始化到完成渲染的流程，重点还是在于响应式的分析，生命周期函数简单带过。
 
@@ -51,7 +52,7 @@ Vue.prototype._init = function(options) {
 
 - **initLifecycle(vm)**: 主要作用是确认组件的父子关系（定位非抽象父级）和初始化某些实例属性。找到父组件实例赋值给`vm.$parent`，将自己`push`给父组件的`$children`；
 
-- ![image-20230308115942545](assets/vue初始化流程分析/image-20230308115942545.png)
+- ![image-20230308115942545](assets/vue/image-20230308115942545.png)
 
 - **initEvents(vm)**: 主要作用是将父组件使用`v-on`或`@`注册的自定义事件添加到子组件的私有属性`vm._events`中；
 
@@ -59,7 +60,7 @@ Vue.prototype._init = function(options) {
 
   > 等以上操作全部完成，就会执行`beforeCreate`钩子函数，此时用户可以在函数中通过`this`访问到`vm.$parent`和`vm.$createElement` `$attrs` `$listeners` `$slots` `$scopedSlots`等有限的属性和方法。
   >
-  > ![image-20220118205925251](assets/vue初始化流程分析/image-20220118205925251.png)
+  > ![image-20220118205925251](assets/vue/image-20220118205925251.png)
 
 - **触发beforeCreate**
 
@@ -640,11 +641,11 @@ export default {
 
 我们在控制台打印一下vm，先看一下_data，可见每一个对象类型均持有一个`__ob__`即Oberver实例
 
-![image-20210909153539012](assets/vue初始化流程分析/image-20210909153539012.png)
+![image-20210909153539012](assets/vue/image-20210909153539012.png)
 
 然后看一下water，其中有两个watcher相关的属性
 
-![image-20210909153816298](assets/vue初始化流程分析/image-20210909153816298.png)
+![image-20210909153816298](assets/vue/image-20210909153816298.png)
 
 - _watcher属性指向的就是render watcher，每个组件有且仅有一个（真实渲染到页面上的）
 - _wathers属性是组件相关的所有watcher
@@ -757,11 +758,11 @@ methodsToPatch.forEach(function (method) {
 
 #### 生命周期
 
-![img](assets/vue初始化流程分析/44114780-3aca-11eb-85f6-6fac77c0c9b3-20220215152913357.png)
+![img](assets/vue/44114780-3aca-11eb-85f6-6fac77c0c9b3-20220215152913357.png)
 
 ##### 要掌握每个生命周期什么时候被调用
 
-![Snipaste_2021-09-06_20-27-19](assets/vue初始化流程分析/Snipaste_2021-09-06_20-27-19.png)
+![Snipaste_2021-09-06_20-27-19](assets/vue/Snipaste_2021-09-06_20-27-19.png)
 
 1. beforeCreate 在实例初始化之后，数据观测(data observer) 之前被调用。
    1. initLifecycle(vm): 主要作用是确认组件的父子关系和初始化某些实例属性。找到父组件实例赋值给`vm.$parent`，将自己`push`给父组件的`$children`；

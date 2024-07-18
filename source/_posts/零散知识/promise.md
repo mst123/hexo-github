@@ -1,9 +1,9 @@
 ---
-title: Promise详细介绍
+title: Promise A+规范
 date: 2021-03-17
-categories: 
+categories:
   - 零散知识
-tags: 
+tags:
   - Promise
 ---
 # promiseA+规范
