@@ -2,9 +2,9 @@
 title: css中重要的概念
 date: 2021-05-28
 categories: 
-  - CSS
+  - css
 tags: 
-  - CSS
+  - css
   - 层叠上下文
   - BFC
 ---

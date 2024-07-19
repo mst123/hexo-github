@@ -8,14 +8,12 @@ subtitle: ''
 description: '学习记录'
 keywords: 
 author: 马农
-language: zh-Hans
+language: zh-CN
 timezone: ''
 
 # URL
-## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://mst123.github.io/
-root: /
-# permalink: :year/:month/:day/:title/
 permalink: :category/:name/
 permalink_defaults:
 pretty_urls:
@@ -43,15 +41,21 @@ external_link:
 filename_case: 0
 render_drafts: false
 post_asset_folder: true
+marked:
+  prependRoot: true
+  postAsset: true
+
 relative_link: false
 future: true
+syntax_highlighter: highlight.js
 highlight:
-  enable: true
   line_number: true
   auto_detect: false
   tab_replace: ''
   wrap: true
   hljs: false
+  prismjs:
+  preprocess: true
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -77,8 +81,8 @@ meta_generator: true
 ## http://momentjs.com/docs/#/displaying/format/
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
-## Use post's date for updated date unless set in front-matter
-use_date_for_updated: false
+## updated_option supports 'mtime', 'date', 'empty'
+updated_option: 'mtime'
 
 # Pagination
 ## Set per_page to 0 to disable pagination
@@ -88,24 +92,28 @@ pagination_dir: page
 # Include / Exclude file(s)
 ## include:/exclude: options only apply to the 'source/' folder
 include:
+  - '**/assets/**'
 exclude:
 ignore:
   - '**/.obsidian/**'
+
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: next
 
 # Deployment
+## Docs: https://hexo.io/docs/one-command-deployment
+# Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
   repo: https://github.com/mst123/mst123.github.io.git
   branch: master
-# 第三方搜索
+
+# 搜索
 search:
   path: search.xml
   field: post
+  content: true
   format: html
-  limit: 10000
-  

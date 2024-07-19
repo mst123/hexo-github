@@ -2,9 +2,9 @@
 title: CSS变量
 date: 2020-07-28
 categories: 
-  - CSS
+  - css
 tags: 
-  - CSS
+  - css
 ---
 ## 变量的声明
 
