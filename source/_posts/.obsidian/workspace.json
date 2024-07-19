@@ -11,12 +11,8 @@
             "id": "3f88fd4a4a0611e6",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "计算机基础/git.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "graph",
+              "state": {}
             }
           }
         ]
@@ -85,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "计算机基础/git.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "计算机基础/git.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "计算机基础/git.md"
-              }
+              "state": {}
             }
           }
         ],
@@ -148,8 +140,25 @@
   },
   "active": "3f88fd4a4a0611e6",
   "lastOpenFiles": [
-    "计算机基础/计算机基础.md",
+    "markdown/图片资源的处理.md",
+    "assets/图片资源的处理/image-20240719164530109.png.md",
+    "assets/图片资源的处理",
+    "assets",
+    "markdown/assets文件夹处理.md",
+    "vue/源码分析/vue.md",
+    "markdown/assets/assets文件夹处理/image-20240719164530109.png",
+    "markdown/assets/assets文件夹处理",
+    "设计模式/设计模式.md",
+    "网络/https加密过程.md",
+    "网络/assets/https加密过程/image-20240719093630815.png",
+    "网络/assets/https加密过程",
+    "计算机基础/assets/git/image-20240719093549833.png",
+    "网络/http的发展史.md",
+    "网络/cache.md",
+    "网络/网络协议.md",
+    "网络/三次握手四次挥手.md",
     "计算机基础/git.md",
+    "计算机基础/计算机基础.md",
     "零散知识/运算符优先级.md",
     "零散知识/运算符.md",
     "零散知识/事件循环及消息队列.md",
@@ -161,7 +170,6 @@
     "网络/图解HTTP/http3.md",
     "网络/图解HTTP/http1~.md",
     "网络/图解HTTP/http2~.md",
-    "网络/三次握手四次挥手.md",
     "网络/assets.md",
     "网络/网络协议/image-20210714153451934.png",
     "网络/网络协议/image-20210714152647756.png",
@@ -171,29 +179,13 @@
     "网络/网络协议/49fcab711e4f43beb72f1b2d297bbf0f~tplv-k3u1fbpfcp-watermark-20211220150611420.gif",
     "网络/网络协议/170723f106ff0306~tplv-t2oaga2asx-watermark.gif",
     "网络/网络协议",
-    "网络/http的发展史/image-20230216173807167.png",
-    "网络/http的发展史/image-20210805145256682.png",
-    "网络/http的发展史/image-20210805145222668.png",
     "网络/http的发展史",
-    "网络/https加密过程.md",
     "浏览器原理/浏览器原理.md",
     "网络/assets/http的发展史",
     "javascript/深入执行上下文.md",
-    "网络/http的发展史.md",
-    "javascript/变量提升的本质.md",
-    "javascript/作用域.md",
-    "javascript/闭包.md",
     "javascript/assets/闭包",
-    "javascript/原型链.md",
-    "网络/网络协议.md",
     "网络/assets/网络协议",
     "网络/图解HTTP/assets/http1",
-    "网络/http.md",
-    "网络/图解HTTP/http.md",
-    "网络/图解HTTP/assets/http3",
-    "网络/图解HTTP/assets/http2",
-    "网络/图解HTTP/assets/http",
-    "网络/图解HTTP/assets",
     "零散知识/未命名.canvas",
     "未命名 2.canvas",
     "未命名.canvas",

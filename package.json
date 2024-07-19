@@ -7,7 +7,7 @@
     "rename": "node rename.js",
     "build": "npm run hexo:generate && npm run rename",
     "clean": "hexo clean",
-    "deploy": "node deploy.js",
+    "deploy": "hexo deploy",
     "server": "hexo server"
   },
   "hexo": {
