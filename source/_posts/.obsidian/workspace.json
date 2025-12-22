@@ -8,11 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "3f88fd4a4a0611e6",
+            "id": "7403ee1a6d72f430",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "性能优化/webpack.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "webpack"
             }
           }
         ]
@@ -34,8 +40,11 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
-              }
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
             }
           },
           {
@@ -44,13 +53,15 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "xss",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical"
-              }
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
             }
           },
           {
@@ -58,7 +69,9 @@
             "type": "leaf",
             "state": {
               "type": "bookmarks",
-              "state": {}
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
             }
           }
         ]
@@ -81,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "数据类型/类型判断.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -88,7 +102,9 @@
                 "searchQuery": "",
                 "backlinkCollapsed": false,
                 "unlinkedCollapsed": false
-              }
+              },
+              "icon": "links-coming-in",
+              "title": "类型判断 的反向链接列表"
             }
           },
           {
@@ -97,9 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "数据类型/类型判断.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
-              }
+              },
+              "icon": "links-going-out",
+              "title": "类型判断 的出链列表"
             }
           },
           {
@@ -110,7 +129,9 @@
               "state": {
                 "sortOrder": "frequency",
                 "useHierarchy": true
-              }
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
             }
           },
           {
@@ -118,7 +139,14 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "性能优化/webpack.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "webpack 的大纲"
             }
           }
         ],
@@ -138,57 +166,57 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "3f88fd4a4a0611e6",
+  "active": "7403ee1a6d72f430",
   "lastOpenFiles": [
-    "markdown/图片资源的处理.md",
-    "assets/图片资源的处理/image-20240719164530109.png.md",
+    "性能优化/render.md",
+    "性能优化/rail.md",
+    "性能优化/prefetch和preload.md",
+    "性能优化/js的开销与优化.md",
+    "性能优化/html&css优化.md",
+    "性能优化/CLS.md",
+    "性能优化/阻塞关系.md",
+    "性能优化/字体优化.md",
+    "性能优化/预加载和懒加载.md",
+    "性能优化/优化案例.md",
+    "性能优化/渲染层合并.md",
+    "性能优化/性能指标.md",
+    "性能优化/性能调试工具.md",
+    "性能优化/图片优化.md",
+    "性能优化/基础调试.md",
+    "性能优化/回流重绘与优化.md",
+    "性能优化/传输优化.md",
+    "性能优化/webpack.md",
+    "javascript/js的内存空间.md",
+    "javascript/JavaScript代码风格.md",
+    "设计模式/设计模式.md",
+    "零散知识/箭头函数.md",
+    "javascript/闭包.md",
+    "vue/vue问题记录.md",
+    "未命名.canvas",
+    "vue/diff算法.md",
+    "nodejs/circle-load.md",
+    "浏览器原理/assets/浏览器原理/image-20240723104420789.png",
+    "浏览器原理/assets/浏览器原理/image-20240723104411034.png",
     "assets/图片资源的处理",
     "assets",
-    "markdown/assets文件夹处理.md",
-    "vue/源码分析/vue.md",
     "markdown/assets/assets文件夹处理/image-20240719164530109.png",
     "markdown/assets/assets文件夹处理",
-    "设计模式/设计模式.md",
-    "网络/https加密过程.md",
     "网络/assets/https加密过程/image-20240719093630815.png",
     "网络/assets/https加密过程",
     "计算机基础/assets/git/image-20240719093549833.png",
-    "网络/http的发展史.md",
-    "网络/cache.md",
-    "网络/网络协议.md",
-    "网络/三次握手四次挥手.md",
-    "计算机基础/git.md",
-    "计算机基础/计算机基础.md",
-    "零散知识/运算符优先级.md",
-    "零散知识/运算符.md",
-    "零散知识/事件循环及消息队列.md",
-    "零散知识/前端安全.md",
-    "零散知识/箭头函数.md",
-    "零散知识/垃圾回收.md",
-    "网络/图解HTTP/http1.md",
-    "网络/图解HTTP/http2.md",
-    "网络/图解HTTP/http3.md",
-    "网络/图解HTTP/http1~.md",
-    "网络/图解HTTP/http2~.md",
-    "网络/assets.md",
     "网络/网络协议/image-20210714153451934.png",
     "网络/网络协议/image-20210714152647756.png",
     "网络/网络协议/b20e3fe2fd2a486498a8683ff92fb69d~tplv-k3u1fbpfcp-watermark-20211220150615293.gif",
     "网络/网络协议/HTTP权威指南第六章IP分组.jpeg",
     "网络/网络协议/6b87668471004dffbe71ee14b7bd8c8d~tplv-k3u1fbpfcp-watermark.gif",
-    "网络/网络协议/49fcab711e4f43beb72f1b2d297bbf0f~tplv-k3u1fbpfcp-watermark-20211220150611420.gif",
-    "网络/网络协议/170723f106ff0306~tplv-t2oaga2asx-watermark.gif",
     "网络/网络协议",
     "网络/http的发展史",
-    "浏览器原理/浏览器原理.md",
     "网络/assets/http的发展史",
-    "javascript/深入执行上下文.md",
     "javascript/assets/闭包",
     "网络/assets/网络协议",
     "网络/图解HTTP/assets/http1",
     "零散知识/未命名.canvas",
     "未命名 2.canvas",
-    "未命名.canvas",
     "未命名 1.canvas"
   ]
 }
